@@ -93,7 +93,7 @@ Builder <- R6Class(
       #   msg<-paste(msg,"> for provider: <",private$.provider,">",sep = "")
       # }
 
-      cat(msg, " created", "\n", sep = "")
+      #cat(msg, " created", "\n", sep = "")
       invisible(self)
     }
   )

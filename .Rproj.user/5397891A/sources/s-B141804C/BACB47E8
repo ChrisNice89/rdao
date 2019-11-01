@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1594102379",
+    "hash" : "3037448614",
     "id" : "BACB47E8",
-    "lastKnownWriteTime" : 1572636633,
-    "last_content_update" : 1572636633383,
+    "lastKnownWriteTime" : 1572636734,
+    "last_content_update" : 1572636734837,
     "path" : "~/Dev/R/rdao/R/builder.R",
     "project_path" : "R/builder.R",
     "properties" : {
-        "cursorPosition" : "83,61",
+        "cursorPosition" : "94,0",
         "scrollLine" : "78"
     },
     "read_only" : false,
