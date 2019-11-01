@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572636623422.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1594102379",
+    "id" : "BACB47E8",
+    "lastKnownWriteTime" : 1572636633,
+    "last_content_update" : 1572636633383,
+    "path" : "~/Dev/R/rdao/R/builder.R",
+    "project_path" : "R/builder.R",
+    "properties" : {
+        "cursorPosition" : "83,61",
+        "scrollLine" : "78"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
