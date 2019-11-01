@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1696573376",
+    "hash" : "0",
     "id" : "5856221A",
     "lastKnownWriteTime" : 1572635688,
     "last_content_update" : 1572635688942,
     "path" : "~/Dev/R/Starter.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "22,0",
+        "cursorPosition" : "19,13",
         "scrollLine" : "11"
     },
     "read_only" : false,
