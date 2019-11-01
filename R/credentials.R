@@ -1,0 +1,57 @@
+#' Class providing methods for creating a credential instance
+#'
+#' @docType class
+#' @importFrom R6 R6Class
+#' @keywords data
+#' @family sql
+#' @return Object of \code{\link{R6Class}} with methods user specified credentials (server)
+#' @format \code{\link{R6Class}} object.
+#' @examples
+#' c<-Credentials$new(username = "Admin",password = "SesameOpen")
+#'
+#' @field username Readonly: Returns user name.
+#' @field password Readonly: Returns user password.
+#'
+#' @section Methods:
+#' \describe{}
+#'
+#' @include utils.R
+
+Credentials <- R6Class(
+  classname = "Credentials",
+  private = list(
+    .validator = NULL,
+
+    .make.readonly = function(...) {
+      for (class.attr in list(...)) {
+        lockBinding(sym = class.attr,  env = self)
+      }
+    }
+  ),
+  public = list(
+    username = "",
+
+    password = "",
+
+    initialize = function(username = "",
+                          password = "") {
+      private$.validator <- Validator$new(self)
+      self$username = username
+      self$password = password
+
+      private$.make.readonly("username", "password")
+      invisible(self$print())
+    },
+
+    print = function(...) {
+      cat("<",
+          class(self)[1],
+          "> for User: <",
+          self$username,
+          "> created",
+          "\n",
+          sep = "")
+      invisible(self)
+    }
+  )
+)
