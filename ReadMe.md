@@ -12,15 +12,15 @@ Object orientated framework around database actions
 
 [![Project Status:
 WIP.](https://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-<a href="https://travis-ci.org/chrisnice89/rorm">
-<img src="https://api.travis-ci.org/chrisnice89/rorm.svg?branch=master">
-<a/> <a href="https://cran.r-project.org/package=rorm">
-<img src="http://www.r-pkg.org/badges/version/rorm"> </a> [![cran
+<a href="https://travis-ci.org/chrisnice89/rdao">
+<img src="https://api.travis-ci.org/chrisnice89/rdao.svg?branch=master">
+<a/> <a href="https://cran.r-project.org/package=rdao">
+<img src="http://www.r-pkg.org/badges/version/rdao"> </a> [![cran
 checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.org/web/checks/check_results_reshape.html)
-<a href="https://codecov.io/gh/chrisnice89/rorm">
-<img src="https://codecov.io/gh/chrisnice89/rorm/branch/master/graph/badge.svg" alt="Codecov" />
-</a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rorm">
-<img src="http://cranlogs.r-pkg.org/badges/rorm">
+<a href="https://codecov.io/gh/chrisnice89/rdao">
+<img src="https://codecov.io/gh/chrisnice89/rdao/branch/master/graph/badge.svg" alt="Codecov" />
+</a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
+<img src="http://cranlogs.r-pkg.org/badges/rdao">
 
 *lines of R code:* 352, *lines of test code:* 0
 
@@ -29,7 +29,7 @@ Package Info
 
 **Version**
 
-0.1.0 ( 2019-11-01 16:21:44 )
+0.1.0 ( 2019-11-01 16:59:44 )
 
 **Description**
 
@@ -78,7 +78,7 @@ Usage
     # packages
     library(RSQLite)
     library(R6)
-    library(rorm)
+    library(rdao)
 
     ## This package ist created,developed and copyrighted by Christoph Nitz.
     ## Interested parties may contact <Christoph.Nitz89@gmail.com>
@@ -105,11 +105,8 @@ Usage
     b$build()
 
     ## <Validator> for parent class: <SqlConnection> created
-    ## [1] "hier"
-    ## [1] "hier2"
     ## <SqlConnection> created
 
-    ## [1] "hier2"
     ## <SqlConnection> created
 
 ### Get Connection Infos
