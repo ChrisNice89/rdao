@@ -1,0 +1,49 @@
+# helper
+installer <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg))
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+packages<- c("devtools", "roxygen2","R6","rmarkdown")
+installer(packages)
+
+# roxygen2 dmake documentation
+setwd("~/Dev/R/rdao")
+library(devtools)
+document()
+
+# devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
+# LightningR::Lightning
+remove.packages("rdao")
+devtools::install_github("ChrisNice89/rdao",force = TRUE)
+library(rdao)
+f<-factory()
+b<-f$msAccess(path = "mypath_AccessDB")
+b$addCredentials(username = "Admin",password = "SesameOpen")
+cnn<-b$build()
+
+
+getOption("devtools.name")
+rorm::factory()
+rorm::diamonds
+df<- as.data.frame(rorm::diamonds,row.names = NULL)
+# add autoincrement field "ID" to the front
+df <- data.frame(ID = seq.int(nrow(df)), df)
+row.names(df)
+
+
+rows<-paste(as.vector(df[,1]))
+rows
+hm<-HashMap$new("rows")
+hm$put(key = rows,value = as.vector(df[,1]))
+hm$get("1000")
+
+f<-rorm::Factory(provider = "MySql",path = "test")$credentials("name","pw")
+c<-f$build()
+cnn<-rorm::Connection()
+class(c)
+cnn<-rorm::sqlConnection$new(connectionstring = "test")
+v<-rorm::Validator$new()
+
+l

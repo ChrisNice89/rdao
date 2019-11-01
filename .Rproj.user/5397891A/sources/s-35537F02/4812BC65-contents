@@ -25,7 +25,7 @@ Collate:
     'builder.R'
     'credentials.R'
     'data.R'
-    'package_rdao.R'
+    'package_rorm.R'
     'sqlConnection.R'
     'zzz.R'
     'sqlFactory.R'

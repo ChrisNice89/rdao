@@ -1,4 +1,4 @@
-#' rorm
+#' rdao
 #'
 #' @section Classes:
 #'
@@ -8,5 +8,5 @@
 #' }
 #'
 #' @docType package
-#' @name rorm
+#' @name rdao
 NULL
