@@ -93,7 +93,7 @@ cat(tmp$Author)
 Latest development version from Github:
 
 ```{r, eval=FALSE}
-devtools::install_github("chrisnice89/rorm")
+devtools::install_github("chrisnice89/rdao")
 ```
 
 
