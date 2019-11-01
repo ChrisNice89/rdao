@@ -45,7 +45,7 @@ All rights reserved by the respective owner <br>Christoph Nitz
 
 Latest development version from Github:
 
-    devtools::install_github("chrisnice89/rorm")
+    devtools::install_github("chrisnice89/rdao")
 
 ------------------------------------------------------------------------
 
@@ -102,11 +102,9 @@ Usage
     ## <Credentials> for User: <Admin> created
 
     # create
-    b$build()
+    cnn<-b$build()
 
     ## <Validator> for parent class: <SqlConnection> created
-    ## <SqlConnection> created
-
     ## <SqlConnection> created
 
 ### Get Connection Infos
