@@ -1,12 +1,12 @@
--   [Object orientated framework around database
-    actions](#object-orientated-framework-around-database-actions)
+-   [Data Access Object (DAO) framework for
+    R](#data-access-object-dao-framework-for-r)
     -   [Package Info](#package-info)
     -   [Classes](#classes)
     -   [Usage](#usage)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Object orientated framework around database actions
-===================================================
+Data Access Object (DAO) framework for R
+========================================
 
 **Status**
 
@@ -22,20 +22,24 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*lines of R code:* 352, *lines of test code:* 0
+*lines of R code:* 357, *lines of test code:* 0
 
 Package Info
 ------------
 
 **Version**
 
-0.1.0 ( 2019-11-01 16:59:44 )
+0.1.0 ( 2019-11-01 20:27:40 )
 
 **Description**
 
-A object orientated (R6 classes) framework around databases that
+A object-oriented (R6 classes) framework around database actions that
 provides classes for simple CRUD actions (methods around SQL verbs) …
-and many more.
+and many more. A data access object (DAO) is an object that provides an
+abstract interface to some type of database or other persistence
+mechanism. By mapping application calls to the persistence layer, the
+DAO provides some specific data operations without exposing details of
+the database.
 
 **License**
 
@@ -85,15 +89,16 @@ Usage
 
 ### Creating New Connection Object
 
-    # creating SqlConnection object
+    # creating factory
     f<-factory()
 
-    ## <Validator> for parent class: <sqlFactory> created
-    ## <sqlFactory> created
+    ## <Validator> for parent class: <SqlFactory> created
+    ## <SqlFactory> created
 
     b<-f$msAccess(path = "mypath_AccessDB")
 
-    ## <Builder> created
+    ## <Validator> for parent class: <Builder> created
+    ## <Builder>> for provider: <msAccess> created
 
     # some optional arguments for db access if required
     b$addCredentials(username = "Admin",password = "SesameOpen")
@@ -101,7 +106,7 @@ Usage
     ## <Validator> for parent class: <Credentials> created
     ## <Credentials> for User: <Admin> created
 
-    # create
+    # create connection and get interface
     cnn<-b$build()
 
     ## <Validator> for parent class: <SqlConnection> created
