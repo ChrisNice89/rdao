@@ -134,14 +134,14 @@ library(rdao)
 ### Creating New Connection Object
 
 ```{r}
-# creating SqlConnection object
+# creating factory
 f<-factory()
 b<-f$msAccess(path = "mypath_AccessDB")
 
 # some optional arguments for db access if required
 b$addCredentials(username = "Admin",password = "SesameOpen")
 
-# create
+# create connection and get interface
 cnn<-b$build()
 ```
 

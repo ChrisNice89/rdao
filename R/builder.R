@@ -23,7 +23,7 @@
 #'   \item{\code{addCredendials(username="",password="")}}{This method is used to create object of user specified credentials}
 #'   \item{\code{build()}}{Creates specified connection to the database (server)}}
 #'
-#' @include utils.R
+#' @include sqlFactory.R
 
 Builder <- R6Class(
   classname = "Builder",
@@ -88,7 +88,7 @@ Builder <- R6Class(
 
     print = function(...) {
       msg <- paste("<", class(self)[1], ">", sep = "")
-
+      print("hier")
       if(private$.validator$isCharacter(private$.provider) && private$.provider!=""){
         msg<-paste(msg,"> for provider: <",private$.provider,">",sep = "")
       }
