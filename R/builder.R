@@ -95,7 +95,7 @@ Builder <- R6Class(
       # }
 
       #cat(msg, " created", "\n", sep = "")
-      invisible(self)
+      #invisible(self)
     }
   )
 )
