@@ -25,8 +25,8 @@ cnn<-b$build()
 
 
 getOption("devtools.name")
-rorm::factory()
-rorm::diamonds
+rdao::factory()
+rdao::diamonds
 df<- as.data.frame(rorm::diamonds,row.names = NULL)
 # add autoincrement field "ID" to the front
 df <- data.frame(ID = seq.int(nrow(df)), df)
