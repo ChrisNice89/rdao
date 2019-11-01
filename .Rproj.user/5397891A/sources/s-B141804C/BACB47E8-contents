@@ -30,6 +30,7 @@ Builder <- R6Class(
   inherit = NULL,
   portable = TRUE,
   private = list(
+    .validator = NULL,
     .provider = "",
     .path = "",
     .dbpassword = "",
@@ -39,11 +40,12 @@ Builder <- R6Class(
   public = list(
     initialize = function(provider, path, dbpassword = "")
     {
+      private$.validator <- Validator$new(self)
       private$.path <- path
       private$.provider <- provider
       private$.dbpassword <- dbpassword
-      self$print()
-      invisible(self)
+
+      invisible(self$print())
     },
 
     intialCatalog = "",
@@ -89,13 +91,15 @@ Builder <- R6Class(
 
     print = function(...) {
       msg <- paste("<", class(self)[1], ">", sep = "")
-      print("hier")
-      # if(private$.validator$isCharacter(private$.provider) && private$.provider!=""){
-      #   msg<-paste(msg,"> for provider: <",private$.provider,">",sep = "")
-      # }
 
-      #cat(msg, " created", "\n", sep = "")
-      #invisible(self)
+      if (private$.validator$isCharacter(private$.provider)) {
+        msg <- paste(msg, "> for provider: <", private$.provider, ">", sep = "")
+      }
+
+      cat(msg, " created", "\n", sep = "")
+      invisible(self)
     }
   )
 )
+
+
