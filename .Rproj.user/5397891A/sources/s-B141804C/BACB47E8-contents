@@ -42,7 +42,8 @@ Builder <- R6Class(
       private$.path <- path
       private$.provider <- provider
       private$.dbpassword <- dbpassword
-      invisible(self$print())
+      self$print()
+      invisible(self)
     },
 
     intialCatalog = "",
