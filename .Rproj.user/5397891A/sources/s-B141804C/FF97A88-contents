@@ -1,0 +1,99 @@
+#' Class providing some methods to manage db connection
+#'
+#' @docType class
+#' @importFrom R6 R6Class
+#' @keywords connectoion
+#' @section Construction:
+#' ```
+#' sqlConnection$new()
+#' ```
+#' @return Object of \code{\link{R6Class}} with methods for communication with a database (server)
+#' @format \code{\link{R6Class}} object.
+#' @examples
+#' # cnn<-sqlConnection$new(connectionstring = "myconnectionstring")
+#
+#' @field
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
+#'   \item{\code{new()}}{This method creates a sqlConnection \code{instance}.}
+#'   \item{\code{isString((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}
+#'   \item{\code{isNumeric((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}}
+#' @family sql
+#' @include utils.R
+
+sqlConnection <- R6Class(
+  classname = "SqlConnection",
+  inherit = NULL,
+  portable = TRUE,
+  private = list(
+    .validator = NULL,
+    .connection = NULL,
+    .provider = NULL,
+    .make.readonly = function(...) {
+      for (class.attr in list(...)) {
+        lockBinding(sym = class.attr,  env = self)
+      }
+    },
+
+    .make.readwrite = function(...) {
+      for (class.attr in list(...)) {
+        unlockBinding(sym = class.attr,  env = self)
+      }
+    },
+
+    .validate = function(...) {
+
+      print(length(list(...)))
+
+      if (!(missing(connectionstring))) {
+        #stopifnot(is.character(connectionstring),length(connectionstring) == 1)
+      } else{
+        private$.validator$throwError("some error")
+      }
+    }
+  ),
+
+  # active = list(
+  #   isconnect = function() {
+  #     return(FALSE)
+  #   }
+  # ),
+
+  public = list(
+    provider = "",
+    connectionstring = "",
+
+    initialize = function(Iconnection) {
+      private$.validator <- Validator$new(self)
+
+      ##function.pointer <- list(...)
+      ##self$provider <- provider
+      ##private$.validate(function.pointer)
+      private$.make.readonly("connectionstring", "provider")
+
+      invisible(self$print())
+    },
+
+    #methods
+    connect = function() {
+      invisible(self)
+    },
+
+    disconnect = function() {
+      invisible(self)
+    },
+
+    print = function(...) {
+      msg <- paste("<", class(self)[1], ">", sep = "")
+
+      if (private$.validator$isCharacter(private$.provider)) {
+        msg <-paste(msg, "> for provider: <", private$.provider, ">", sep = "")
+      }
+
+      cat(msg, " created", "\n", sep = "")
+      invisible(self)
+    }
+  )
+)

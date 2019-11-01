@@ -1,0 +1,16 @@
+library(R6)
+ClassyClass <- R6Class("ClassyClass",
+                       active = list(
+                         classy_word = function(value){
+                           if (missing(value)) sample(c("Classy","Modish", "High-Class","Dashing","Posh"), 1)
+                           else cat(paste("Your classy word is", value))
+                         }
+                       ))
+classy_object <- ClassyClass$new()
+classy_object$classy_word
+
+classy_object$classy_word
+
+
+classy_object$classy_word <- "Mod"
+

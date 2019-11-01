@@ -1,0 +1,31 @@
+
+get <- function(x = list()) {
+  class <- R6::R6Class(classname = "class")
+
+  lapply(names(x), function(name) {
+
+    fn <- eval(substitute(function() subst_name, list(subst_name = name)))
+
+    attr(fn, "srcref") <- NULL
+    class$set("public", name, fn)
+  })
+  class
+}
+x <- get(x = list(a = 10, b = 20))$new()
+
+x$a()
+
+
+# helper
+installer <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg))
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+
+# checkr required packages
+packages<- c("devtools", "roxygen2","R6")
+installer(packages)
+remove.packages("ORM")
+devtools::install_github("ChrisNice89/ORM/ORM/")

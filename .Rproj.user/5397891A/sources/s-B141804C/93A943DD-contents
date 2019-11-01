@@ -1,0 +1,42 @@
+#Baseclass class
+sqlTable<- R6Class(
+  classname = "sqlDataTable",
+  inherit = NULL,
+  portable = TRUE,
+  private = list(
+    .dataframe=NULL,
+    .col=NULL,
+    .row=NULL,
+
+    make.readonly = function(...) {
+      for (class.attr in list(...)) {
+        lockBinding(sym = class.attr,  env = self)
+      }
+    }
+  ),
+  public = list(
+    #constructor
+    initialize = function(dataframe=NULL){
+
+      private$.col<-HashMap$new()
+      private$.row<-HashMap$new()
+      private$.dataframe<-dataframe
+
+      #private$make.readonly("username","password")
+      invisible(self)
+    },
+
+    print = function(...) {
+      cat("sqlTable: \n")
+      cat("  rows: ", "self$name", "\n", sep = "")
+      cat("  colums:  ", "self$", "\n", sep = "")
+      invisible(self)
+    }
+  )
+)
+
+
+
+
+# B <- R6::R6Class("Middle", inherit = A)
+# C <- R6::R6Class("Top", inherit = B)
