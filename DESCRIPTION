@@ -25,11 +25,11 @@ RoxygenNote: 6.1.1
 Encoding: UTF-8
 LazyData: true
 Collate: 
+    'zzz.R'
     'utils.R'
+    'sqlFactory.R'
     'builder.R'
     'credentials.R'
     'data.R'
     'package_rdao.R'
     'sqlConnection.R'
-    'zzz.R'
-    'sqlFactory.R'
