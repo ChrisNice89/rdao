@@ -48,7 +48,7 @@ sqlFactory <- R6Class(
     initialize = function()
     {
       private$.validator<-Validator$new(self)
-      invisible(self$print())
+      #invisible(self$print())
     },
 
     mySql= function(path,dbpassword=""){
@@ -74,6 +74,4 @@ sqlFactory <- R6Class(
     }
   )
 )
-
-
 
