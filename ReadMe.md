@@ -57,7 +57,8 @@ Latest development version from Github:
 Documentation
 -------------
 
-[Framework](https://github.com/ChrisNice89/rdao/tree/master/docs/articles/Framework.html)
+See the [Introduction](https://r6.r-lib.org/articles/Introduction.html)
+article for usage examples.
 
 Classes
 -------
