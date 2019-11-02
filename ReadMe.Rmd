@@ -101,7 +101,7 @@ devtools::install_github("chrisnice89/rdao")
 
 
 ## Documentation
-See the [Introduction](https://r6.r-lib.org/articles/Introduction.html) article for usage examples.
+See the [Framework](https://github.com/ChrisNice89/rdao/docs/articles/Framework.html) article for usage examples.
 
 
 ## Classes
