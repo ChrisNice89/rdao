@@ -3,4 +3,5 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   Framework: Framework.html
+  Framework1: Framework1.html
 

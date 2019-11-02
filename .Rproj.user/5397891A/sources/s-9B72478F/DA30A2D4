@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572657966765.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2227212639",
+    "id" : "DA30A2D4",
+    "lastKnownWriteTime" : 1572652786,
+    "last_content_update" : 1572652786,
+    "path" : "~/Dev/R/rdao/.gitignore",
+    "project_path" : ".gitignore",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "gitignore"
+}

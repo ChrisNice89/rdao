@@ -1,6 +1,12 @@
 ---
 title: "Framework"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Framework}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
 
 ```{r global_options, echo = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
