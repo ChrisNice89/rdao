@@ -18,7 +18,9 @@ Imports:
     DBI (>= 1.0.0),
     R6 (>= 2.2.2)
 Suggests: 
-    RSQLite
+    RSQLite,
+    knitr,
+    rmarkdown
 URL: https://github.com/ChrisNice89/rdao
 BugReports: https://github.com/ChrisNice89/rdao
 RoxygenNote: 6.1.1
@@ -33,3 +35,4 @@ Collate:
     'data.R'
     'package_rdao.R'
     'sqlConnection.R'
+VignetteBuilder: knitr

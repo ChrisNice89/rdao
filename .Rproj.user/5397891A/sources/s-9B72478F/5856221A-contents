@@ -13,6 +13,8 @@ setwd("~/Dev/R/rdao")
 library(devtools)
 document()
 
+use_vignette("Introduction")
+
 # devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
 # LightningR::Lightning
 remove.packages("rdao")

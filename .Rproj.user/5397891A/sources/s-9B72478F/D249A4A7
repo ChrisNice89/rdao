@@ -5,7 +5,7 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "28940370",
+    "hash" : "0",
     "id" : "D249A4A7",
     "lastKnownWriteTime" : 1572636972,
     "last_content_update" : 1572636972803,
@@ -13,7 +13,7 @@
     "project_path" : "R/sqlFactory.R",
     "properties" : {
         "cursorPosition" : "40,17",
-        "scrollLine" : "35"
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
