@@ -7,11 +7,13 @@
     "folds" : "",
     "hash" : "2708567950",
     "id" : "1691BD8B",
-    "lastKnownWriteTime" : 1572627399,
-    "last_content_update" : 1572627399,
+    "lastKnownWriteTime" : 1572658019,
+    "last_content_update" : 1572658019332,
     "path" : "~/Dev/R/rdao/.Rbuildignore",
     "project_path" : ".Rbuildignore",
     "properties" : {
+        "cursorPosition" : "2,0",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
