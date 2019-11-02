@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1572627650413.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2139991120",
     "id" : "5856221A",
-    "lastKnownWriteTime" : 1572656121,
-    "last_content_update" : 1572656137380,
+    "lastKnownWriteTime" : 1572656435,
+    "last_content_update" : 1572656435485,
     "path" : "~/Dev/R/Starter.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "22,0",
-        "scrollLine" : "17"
+        "cursorPosition" : "23,0",
+        "scrollLine" : "16"
     },
     "read_only" : false,
     "read_only_alternatives" : [

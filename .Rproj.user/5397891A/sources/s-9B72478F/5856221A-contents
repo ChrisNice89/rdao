@@ -18,9 +18,8 @@ devtools::install_githb("hadley/pkgdown")
 library(pkgdown)
 build_site()
 #build vignette
-use_vignette("Framework")
-#create "doc" folder manuel
-rmarkdown::render("vignettes/Framework.Rmd",output_file = "doc/Framework.html")
+#use_vignette("Framework")
+rmarkdown::render("vignettes/Framework.Rmd",output_file = "docs/articles/Framework.html")
 
 
 # devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
