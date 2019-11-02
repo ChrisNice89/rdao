@@ -57,9 +57,8 @@ Latest development version from Github:
 Documentation
 -------------
 
-See the
-[Framework](https://github.com/ChrisNice89/rdao/docs/articles/Framework.html)
-article for usage examples.
+See the [Framework](docs/articles/Framework.html) article for usage
+examples.
 
 Classes
 -------
