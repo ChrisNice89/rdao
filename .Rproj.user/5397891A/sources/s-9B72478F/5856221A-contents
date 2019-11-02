@@ -5,15 +5,20 @@ installer <- function(pkg){
     install.packages(new.pkg, dependencies = TRUE)
   sapply(pkg, require, character.only = TRUE)
 }
-packages<- c("devtools", "roxygen2","R6","rmarkdown")
+packages<- c("devtools", "roxygen2","R6","rmarkdown","pryr")
 installer(packages)
 
 # roxygen2 dmake documentation
 setwd("~/Dev/R/rdao")
 library(devtools)
 document()
-
+#build vignette
 use_vignette("Introduction")
+
+devtools::install_githb("hadley/pkgdown")
+library(pkgdown)
+build_site()
+
 
 # devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
 # LightningR::Lightning
@@ -27,7 +32,7 @@ cnn<-b$build()
 
 
 getOption("devtools.name")
-rdao::factory()
+
 rdao::diamonds
 df<- as.data.frame(rorm::diamonds,row.names = NULL)
 # add autoincrement field "ID" to the front
@@ -40,12 +45,5 @@ rows
 hm<-HashMap$new("rows")
 hm$put(key = rows,value = as.vector(df[,1]))
 hm$get("1000")
-
-f<-rorm::Factory(provider = "MySql",path = "test")$credentials("name","pw")
-c<-f$build()
-cnn<-rorm::Connection()
-class(c)
-cnn<-rorm::sqlConnection$new(connectionstring = "test")
-v<-rorm::Validator$new()
 
 l
