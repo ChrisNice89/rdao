@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "210899615",
+    "hash" : "0",
     "id" : "93A943DD",
     "lastKnownWriteTime" : 1572540577,
     "last_content_update" : 1572540577,
     "path" : "~/Dev/R/baseclass.R",
     "project_path" : null,
     "properties" : {
+        "cursorPosition" : "2,20",
+        "scrollLine" : "10"
     },
     "read_only" : false,
     "read_only_alternatives" : [
