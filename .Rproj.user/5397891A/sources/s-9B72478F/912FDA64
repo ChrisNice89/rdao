@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1293795216",
+    "hash" : "0",
     "id" : "912FDA64",
     "lastKnownWriteTime" : 1572654760,
     "last_content_update" : 1572654760347,
     "path" : "~/Dev/R/rdao/vignettes/Framework.Rmd",
     "project_path" : "vignettes/Framework.Rmd",
     "properties" : {
-        "cursorPosition" : "4,35",
+        "cursorPosition" : "8,267",
         "scrollLine" : "0"
     },
     "read_only" : false,

@@ -1,6 +1,7 @@
 -   [Data Access Object (DAO) framework for
     R](#data-access-object-dao-framework-for-r)
     -   [Package Info](#package-info)
+    -   [Documentation](#documentation)
     -   [Classes](#classes)
     -   [Usage](#usage)
 
@@ -52,6 +53,11 @@ Latest development version from Github:
     devtools::install_github("chrisnice89/rdao")
 
 ------------------------------------------------------------------------
+
+Documentation
+-------------
+
+[Introduction to R6](https://r6.r-lib.org/articles/Introduction.html)
 
 Classes
 -------

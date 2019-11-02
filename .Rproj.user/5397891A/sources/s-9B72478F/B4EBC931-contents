@@ -97,8 +97,12 @@ devtools::install_github("chrisnice89/rdao")
 ```
 
 
-
 ------------------------------------------------------------------------
+
+
+## Documentation
+[Framework](https://r6.r-lib.org/articles/Introduction.html)
+
 
 ## Classes
 
