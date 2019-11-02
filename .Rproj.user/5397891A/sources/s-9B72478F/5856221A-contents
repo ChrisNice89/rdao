@@ -8,16 +8,19 @@ installer <- function(pkg){
 packages<- c("devtools", "roxygen2","R6","rmarkdown","pryr")
 installer(packages)
 
-# roxygen2 dmake documentation
+# roxygen2 make documentation
 setwd("~/Dev/R/rdao")
 library(devtools)
 document()
-#build vignette
-use_vignette("Introduction")
 
+# vignettes
 devtools::install_githb("hadley/pkgdown")
 library(pkgdown)
 build_site()
+#build vignette
+use_vignette("Framework")
+#create "doc" folder manuel
+rmarkdown::render("vignettes/Framework.Rmd",output_file = "doc/Framework.html")
 
 
 # devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)

@@ -57,7 +57,7 @@ Latest development version from Github:
 Documentation
 -------------
 
-[Introduction to R6](https://r6.r-lib.org/articles/Introduction.html)
+[Framework](https://r6.r-lib.org/articles/Introduction.html)
 
 Classes
 -------
