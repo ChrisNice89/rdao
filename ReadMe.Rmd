@@ -101,7 +101,7 @@ devtools::install_github("chrisnice89/rdao")
 
 
 ## Documentation
-[Framework](https://rdao.r-lib.org/articles/Framework.html)
+[Framework](https://github.com/ChrisNice89/rdao/blob/master/docs/articles/Framework.html)
 
 
 ## Classes
