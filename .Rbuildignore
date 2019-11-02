@@ -1,4 +1,6 @@
+^docs$
+^_pkgdown\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^docs$
-^docs/acticles/Vignette.html$
+^\.github$
+^vignettes$
