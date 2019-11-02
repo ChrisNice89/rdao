@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1248944924",
     "id" : "B4EBC931",
-    "lastKnownWriteTime" : 1572657073,
-    "last_content_update" : 1572657073302,
+    "lastKnownWriteTime" : 1572658759,
+    "last_content_update" : 1572658759766,
     "path" : "~/Dev/R/rdao/ReadMe.Rmd",
     "project_path" : "ReadMe.Rmd",
     "properties" : {
-        "cursorPosition" : "108,15",
-        "scrollLine" : "62"
+        "cursorPosition" : "103,35",
+        "scrollLine" : "99"
     },
     "read_only" : false,
     "read_only_alternatives" : [
