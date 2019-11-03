@@ -24,11 +24,9 @@ rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "d
 
 # devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
 # LightningR::Lightning
-remove.packages("rdao")
-devtools::install_github("ChrisNice89/rdao",force = TRUE)
-library(rdao)
 f<-factory()
-b<-f$msAccess(path = path = "mypath_AccessDB")
+b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
+
 b$addCredentials(username = "Admin",password = "SesameOpen")
 cnn<-b$build()
 

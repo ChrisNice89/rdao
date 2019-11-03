@@ -68,7 +68,7 @@ sqlFactory <- R6Class(
     },
 
     msAccess= function(path,dbpassword=""){
-      b<-Builder$new("msAccess")
+      b<-Builder$new(provider = "msAccess")
       b$path <- path
       return(b)
     },
