@@ -3,14 +3,24 @@ library(DBI)
 library(RSQLite)
 
 path<-"/Users/cnitz/Dev/R/rorm/data/diamonds.Rda"
-path<-"/Users/cnitz/Dev/R/rorm/data/kredit.Rdata"
-load(path)
+#path<-"/Users/cnitz/Dev/R/rorm/data/kredit.Rdata"
+df<-data.frame(get(load(path)))
+
 df<-data.frame(diamonds)
 
+drv=
+con <- dbConnect(RSQLite::SQLite(),"Diamonds.db")
 
-con <- dbConnect(RSQLite::SQLite(),"Diamonds")
 dbWriteTable(con, "diamonds",  df)
 dbListTables(con)
+dbDisconnect(con)
+
+path<-"/Users/cnitz/Dev/R/rdao/Diamonds.sqlite"
+con <- dbConnect(RSQLite::SQLite(),path)
+dbListTables(con)
+dbDisconnect(con)
+
+
 
 con <- dbConnect(RSQLite::SQLite(), "./mtcars.db")
 data(mtcars)

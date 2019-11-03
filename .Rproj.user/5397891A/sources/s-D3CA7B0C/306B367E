@@ -5,20 +5,20 @@
     "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1070400823",
     "id" : "306B367E",
-    "lastKnownWriteTime" : 1572809656,
-    "last_content_update" : 1572811372190,
+    "lastKnownWriteTime" : 1572812886,
+    "last_content_update" : 1572813648479,
     "path" : "~/Dev/R/SQLITE.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "35,0",
-        "scrollLine" : "25"
+        "cursorPosition" : "9,0",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
     ],
-    "relative_order" : 7,
+    "relative_order" : 5,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"

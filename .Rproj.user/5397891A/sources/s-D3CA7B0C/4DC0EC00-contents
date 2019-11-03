@@ -72,7 +72,7 @@ Builder <- R6Class(
 
       if (!private$.validator.isNullString(self$path)){
         if (!file.exists(self$path)) {
-          msg<- paste("Datenbank nicht gefunden",self$path)
+          msg<- paste("Ungültiger Pfad",self$path)
           private$.validator$throwError(msg,prc)
         }
       }
@@ -84,15 +84,14 @@ Builder <- R6Class(
           dbq<- paste0("DBQ=", self$path)
           driver <- "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
           #.dbiDriver<-odbc::odbc()
-          connectionstring <- paste0(driver, dbq)
+          connectionstring<- paste0(driver, dbq)
+
         },
 
-        rData= {
+        sqlite= {
 
-
-
-          #.dbiDriver<-odbc::odbc()
-          connectionstring <- "MySql"
+          .dbiDriver<-RSQLite::SQLite()
+          connectionstring<-  ":memory:"
         },
 
         mySql = {

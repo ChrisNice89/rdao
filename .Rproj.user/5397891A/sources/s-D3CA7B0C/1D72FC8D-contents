@@ -31,31 +31,26 @@ sqlConnection <- R6Class(
     .validator = NULL,
     .connection = NULL,
     .provider = NULL,
-
-    .validate = function(...) {
-
-      print(length(list(...)))
-
-      if (!(missing(connectionstring))) {
-        #stopifnot(is.character(connectionstring),length(connectionstring) == 1)
-      } else{
-        private$.validator$throwError("some error")
-      }
-    }
+    .driver=NULL,
+    .connectionstring="",
   ),
-
-  # active = list(
-  #   isconnect = function() {
-  #     return(FALSE)
-  #   }
-  # ),
 
   public = list(
     provider = "",
     connectionstring = "",
 
-    initialize = function(connectionstring) {
+    initialize = function(dbiDriver,connectionstring) {
       private$.validator <- Validator$new(self)
+      print(class(dbidriver))
+
+      if (!is.function(dbiDriver)){
+        private$.validator$throwError("DBI driver nicht erkannt","initialize")
+      } else {
+        private$.driver<-dbiDriver
+      }
+
+      #private$.connection<-dbConnect(drv =driver, connectionstring)
+
       make.readonly("connectionstring", "provider")
 
       invisible(self$print())
