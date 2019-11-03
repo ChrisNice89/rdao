@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "F0B361B8",
-    "lastKnownWriteTime" : 1572796800,
-    "last_content_update" : 1572796800039,
+    "lastKnownWriteTime" : 1572801646,
+    "last_content_update" : 1572801646860,
     "path" : "~/Dev/R/rdao/R/utils.R",
     "project_path" : "R/utils.R",
     "properties" : {
-        "cursorPosition" : "306,0",
-        "scrollLine" : "183"
+        "cursorPosition" : "91,0",
+        "scrollLine" : "69"
     },
     "read_only" : false,
     "read_only_alternatives" : [

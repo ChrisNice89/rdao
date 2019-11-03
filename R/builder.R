@@ -61,7 +61,7 @@ Builder <- R6Class(
                               password = "") {
 
       make.readwrite(self,"credentials")
-      private$.credentials <- Credentials$new(username = username, password = password)
+      self$credentials <- Credentials$new(username = username, password = password)
       make.readonly(self,"credentials")
       invisible(self)
     },
