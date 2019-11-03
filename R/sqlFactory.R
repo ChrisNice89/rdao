@@ -74,7 +74,7 @@ sqlFactory <- R6Class(
     },
 
     dbFile=function(path){
-      b<-Builder$new(provider = "msAccess")
+      b<-Builder$new(provider = "sqlite")
       b$path <- path
       return(b)
     },
