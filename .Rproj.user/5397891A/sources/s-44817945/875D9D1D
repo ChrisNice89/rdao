@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "3307713663",
     "id" : "875D9D1D",
-    "lastKnownWriteTime" : 1572798916,
-    "last_content_update" : 1572798916811,
+    "lastKnownWriteTime" : 1572799288,
+    "last_content_update" : 1572799288224,
     "path" : "~/Dev/R/rdao/R/builder.R",
     "project_path" : "R/builder.R",
     "properties" : {
-        "cursorPosition" : "114,0",
-        "scrollLine" : "45"
+        "cursorPosition" : "120,0",
+        "scrollLine" : "102"
     },
     "read_only" : false,
     "read_only_alternatives" : [
