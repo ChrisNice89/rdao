@@ -20,7 +20,7 @@
 Credentials <- R6Class(
   classname = "Credentials",
   private = list(
-    .validator = NULL,
+    .validator = NULL
   ),
   public = list(
     username = "",
