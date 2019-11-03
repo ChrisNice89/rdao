@@ -133,17 +133,4 @@ Builder <- R6Class(
   )
 )
 
-# v<-Validator$new(b)
-# if(v$isNullString(NULL)){
-#   print(TRUE)
-# } else {
-#   print(FALSE)
-# }
-b <- Builder$new("sqlite")
-b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
-cnn <- b$build()
-cnn$connect()
-cnn$isConnected()
-cnn$getTables()
-cnn$isConnected()
-cnn$disconnect()
+

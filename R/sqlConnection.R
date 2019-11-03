@@ -95,13 +95,3 @@ sqlConnection <- R6Class(
   )
 )
 
-
-
-
-# b<-Builder$new("sqlite")
-# b$path<-"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
-# cnn<-b$build()
-# cnn$connect()
-# cnn$isConnected()
-#
-# cnn$disconnect()
