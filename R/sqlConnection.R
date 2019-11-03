@@ -31,6 +31,7 @@ sqlConnection <- R6Class(
     .validator = NULL,
     .connection = NULL,
     .provider = NULL,
+
     .validate = function(...) {
 
       print(length(list(...)))

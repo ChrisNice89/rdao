@@ -28,7 +28,6 @@
 #'   \item{\code{msAccess(path,dbpassword="")}}{This method is used to create a builder instance for \code{sqlConnection}.}}
 #'
 #' @include utils.R
-#' @include sqlFactory.R
 #' @include zzz.R
 #' @export
 

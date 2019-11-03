@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "3488985742",
     "id" : "AB50CEEA",
-    "lastKnownWriteTime" : 1572716738,
-    "last_content_update" : 1572716738,
+    "lastKnownWriteTime" : 1572799651,
+    "last_content_update" : 1572799651540,
     "path" : "~/Dev/R/rdao/R/sqlFactory.R",
     "project_path" : "R/sqlFactory.R",
     "properties" : {
-        "cursorPosition" : "44,3",
-        "scrollLine" : "37"
+        "cursorPosition" : "29,19",
+        "scrollLine" : "27"
     },
     "read_only" : false,
     "read_only_alternatives" : [
