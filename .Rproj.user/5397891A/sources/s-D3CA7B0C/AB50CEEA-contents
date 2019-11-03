@@ -73,6 +73,12 @@ sqlFactory <- R6Class(
       return(b)
     },
 
+    rDataFile(path)= function(path){
+      b<-Builder$new(provider = "rData")
+      b$path <- path
+      return(b)
+    }
+
     oracle= function(path,dbpassword=""){
       return(Builder$new("oracle",path = path))
     },
@@ -81,7 +87,7 @@ sqlFactory <- R6Class(
       return(Builder$new("msSql",path = path))
     },
 
-    print=function(...) {
+    print=function() {
       msg<-paste("<",class(self)[1],">",sep = "")
       cat(msg," created", "\n", sep = "")
       invisible(self)

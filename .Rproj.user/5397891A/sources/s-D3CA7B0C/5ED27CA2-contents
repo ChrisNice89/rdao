@@ -28,6 +28,11 @@ f<-factory()
 b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
 
 b$addCredentials(username = NULL,password = "SesameOpen")
+b$addCredentials(username = "Admin",password = "SesameOpen")
+c<-b$credentials
+c$username
+c$username<-"New name"
+
 cnn<-b$build()
 
 

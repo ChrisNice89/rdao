@@ -69,18 +69,30 @@ Builder <- R6Class(
     #actual implementation
     build = function() {
       prc<-"build()"
+
+      if (!private$.validator.isNullString(self$path)){
+        if (!file.exists(self$path)) {
+          msg<- paste("Datenbank nicht gefunden",self$path)
+          private$.validator$throwError(msg,prc)
+        }
+      }
+
       switch(
         self$builderProvider,
         msAccess = {
-          if (!file.exists(self$path)) {
-            msg<- paste("Datenbank nicht gefunden",self$path)
-            private$.validator$throwError(msg,prc)
-          }
 
           dbq<- paste0("DBQ=", self$path)
           driver <- "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
           #.dbiDriver<-odbc::odbc()
           connectionstring <- paste0(driver, dbq)
+        },
+
+        rData= {
+
+
+
+          #.dbiDriver<-odbc::odbc()
+          connectionstring <- "MySql"
         },
 
         mySql = {
