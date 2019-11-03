@@ -32,7 +32,7 @@ sqlConnection <- R6Class(
     .connection = NULL,
     .provider = NULL,
     .driver=NULL,
-    .connectionstring="",
+    .connectionstring=""
   ),
 
   public = list(
