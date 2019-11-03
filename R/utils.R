@@ -33,7 +33,7 @@ Validator = R6::R6Class(
     .parentClass = "",
     .errorMsg = "",
     .isDefined = NULL,
-    .getObjName=deparse(substitute(x))
+    .getObjName=function(x){deparse(substitute(x))}
     ),
 
   public = list(
@@ -55,10 +55,10 @@ Validator = R6::R6Class(
       invisible(self)
     },
 
-    isNumeric = function(x, objnm = deparse(substitute(x))) {
+    isNumeric = function(x, throwError=FALSE) {
       if (!all(is.numeric(x))) {
         if(throwError){
-          self$throwError(sprintf("'%s' muss einem numerischen Wert entsprechen", private.getObjName(x)), "isNumeric()")
+          self$throwError(sprintf("'%s' muss einem numerischen Wert entsprechen", private$.getObjName(x)), "isNumeric()")
         } else{
           return(FALSE)
         }
@@ -76,7 +76,7 @@ Validator = R6::R6Class(
     isCharacter = function(x,throwError=FALSE) {
       if (!all(is.character(x))) {
         if(throwError){
-          self$throwError(sprintf("'%s' muss einer Zeichenkette entsprechen", private.getObjName(x)), "isCharacter()")
+          self$throwError(sprintf("'%s' muss einer Zeichenkette entsprechen", private$.getObjName(x)), "isCharacter()")
         } else{
           return(FALSE)
         }

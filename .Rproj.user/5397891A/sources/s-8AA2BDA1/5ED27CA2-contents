@@ -27,7 +27,7 @@ library(rdao)
 f<-factory()
 b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
 
-b$addCredentials(username = "Admin",password = "SesameOpen")
+b$addCredentials(username = NULL,password = "SesameOpen")
 cnn<-b$build()
 
 
