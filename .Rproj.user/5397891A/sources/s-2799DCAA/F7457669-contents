@@ -12,7 +12,7 @@ installer(packages)
 setwd("~/Dev/R/rdao")
 library(devtools)
 document()
-# 
+#
 # # vignettes
 # devtools::install_github("hadley/pkgdown")
 # library(pkgdown)

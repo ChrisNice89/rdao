@@ -88,7 +88,7 @@ Builder <- R6Class(
         sqlite = {
           dbiDriver <- RSQLite::SQLite()
           connectionstring <-  ":memory:"
-          connection <- dbConnect(RSQLite::SQLite(),  self$path)
+          connection <- DBI::dbConnect(RSQLite::SQLite(),  self$path)
         },
 
         mySql = {
