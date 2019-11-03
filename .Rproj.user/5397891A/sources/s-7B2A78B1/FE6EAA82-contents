@@ -32,7 +32,7 @@ Credentials <- R6Class(
       self$username = username
       self$password = password
 
-      make.readonly("username", "password")
+      make.readonly(self,"username", "password")
       invisible(self$print())
     },
 

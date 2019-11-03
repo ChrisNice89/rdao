@@ -14,7 +14,7 @@ library(devtools)
 document()
 
 # vignettes
-devtools::install_githb("hadley/pkgdown")
+devtools::install_github("hadley/pkgdown")
 library(pkgdown)
 build_site()
 #build vignette
@@ -22,8 +22,8 @@ use_vignette("Test")
 rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
 
 
-# devtools::install_github("Ermlab/lightning-rstat/LightningR/",force = TRUE)
-# LightningR::Lightning
+devtools::install_github("Chrisnice89/rdao")
+library(rdao)
 f<-factory()
 b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
 
