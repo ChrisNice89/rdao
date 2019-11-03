@@ -12,20 +12,22 @@ installer(packages)
 setwd("~/Dev/R/rdao")
 library(devtools)
 document()
-
-# vignettes
-devtools::install_github("hadley/pkgdown")
-library(pkgdown)
-build_site()
-#build vignette
-use_vignette("Test")
-rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
+# 
+# # vignettes
+# devtools::install_github("hadley/pkgdown")
+# library(pkgdown)
+# build_site()
+# #build vignette
+# use_vignette("Test")
+# rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
 
 remove.packages("rdao")
 devtools::install_github("Chrisnice89/rdao")
 library(rdao)
+
 f<-factory()
-b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
+b<-f$msAccess(path = "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db",dbpassword = "SesameOpen")
+b$build()
 
 b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 b$addCredentials(username = NULL,password = "SesameOpen")

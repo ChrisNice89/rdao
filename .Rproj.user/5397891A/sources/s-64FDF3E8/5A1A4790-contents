@@ -76,7 +76,7 @@ sqlFactory <- R6Class(
     dbFile=function(path){
       b<-Builder$new(provider = "msAccess")
       b$path <- path
-      return(Builder$new("sqlite"))
+      return(b)
     },
 
     oracle= function(path,dbpassword=""){
