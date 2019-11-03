@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572801912335.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "596596589",
+    "id" : "6F1FA9B7",
+    "lastKnownWriteTime" : 1572802802,
+    "last_content_update" : 1572802802234,
+    "path" : "~/Dev/R/rdao/R/credentials.R",
+    "project_path" : "R/credentials.R",
+    "properties" : {
+        "cursorPosition" : "32,40",
+        "scrollLine" : "13"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

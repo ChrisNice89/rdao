@@ -32,8 +32,9 @@ Validator = R6::R6Class(
   private = list(
     .parentClass = "",
     .errorMsg = "",
-    .isDefined = NULL
-  ),
+    .isDefined = NULL,
+    .getObjName=deparse(substitute(x))
+    ),
 
   public = list(
     initialize = function(parentClass = NULL) {
@@ -56,17 +57,29 @@ Validator = R6::R6Class(
 
     isNumeric = function(x, objnm = deparse(substitute(x))) {
       if (!all(is.numeric(x))) {
-        private$.errorMsg <- sprintf("'%s' must be numeric", objnm)
-        return(FALSE)
+        if(throwError){
+          self$throwError(sprintf("'%s' muss einem numerischen Wert entsprechen", private.getObjName(x)), "isNumeric()")
+        } else{
+          return(FALSE)
+        }
       } else {
         return(TRUE)
       }
     },
 
-    isCharacter = function(x, objnm = deparse(substitute(x))) {
-      if (!all(is.character(x)) | ("" %in% x)) {
-        private$.errorMsg <- sprintf("'%s' must be character", objnm)
-        return(FALSE)
+    isNullString=function(x,throwError=FALSE){
+      if(self$isCharacter(x,throwError)){
+        return(("" %in% x))
+      }
+    },
+
+    isCharacter = function(x,throwError=FALSE) {
+      if (!all(is.character(x))) {
+        if(throwError){
+          self$throwError(sprintf("'%s' muss einer Zeichenkette entsprechen", private.getObjName(x)), "isCharacter()")
+        } else{
+          return(FALSE)
+        }
       } else {
         return(TRUE)
       }
@@ -76,13 +89,17 @@ Validator = R6::R6Class(
       return(private$.isDefined(x) %in% c("logical", "numeric", "complex", "character"))
     },
 
-    throwError = function(message, proc) {
+    throwError = function(message="", proc) {
 
       if (self$isCharacter(message,proc)) {
         prc<-paste("Proc: <",proc,">",sep="")
         dscr<-paste("Beschreibung: <",message,">",sep="")
-        private$.errorMsg <- paste(prc,dscr,sep="\n")
+      } else {
+        prc<-paste("Proc: <",proc,">",sep="")
+        dscr<-paste("Beschreibung: <",private$.errorMsge,">",sep="")
       }
+
+      private$.errorMsg <- paste(prc,dscr,sep="\n")
 
       if (self$isCharacter(private$.parentClass)) {
         header<-paste( "<",private$.parentClass,">",sep="")

@@ -29,6 +29,8 @@ Credentials <- R6Class(
     initialize = function(username = "",
                           password = "") {
       private$.validator <- Validator$new(self)
+
+      if (private$.validator(c(username))))
       self$username = username
       self$password = password
 
