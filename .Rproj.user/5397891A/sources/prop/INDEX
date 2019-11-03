@@ -1,4 +1,5 @@
 ~%2FDev%2FR%2FORM%2FORM%2FR%2Ftest.R="B968E537"
+~%2FDev%2FR%2FSQLITE.R="B357CF63"
 ~%2FDev%2FR%2FStarter.R="67ED13CA"
 ~%2FDev%2FR%2Fbaseclass.R="F54C9B42"
 ~%2FDev%2FR%2Fhack%20R6%20instances.R="27DFFCAC"
@@ -7,6 +8,7 @@
 ~%2FDev%2FR%2Frdao%2FDESCRIPTION="A098A2FA"
 ~%2FDev%2FR%2Frdao%2FNAMESPACE="EDAEBCFD"
 ~%2FDev%2FR%2Frdao%2FR%2Fbuilder.R="F25632A9"
+~%2FDev%2FR%2Frdao%2FR%2Fcredentials.R="BE30A03C"
 ~%2FDev%2FR%2Frdao%2FR%2Fpackage_rdao.R="7744AC2"
 ~%2FDev%2FR%2Frdao%2FR%2Fpackage_rorm.R="EAF9A988"
 ~%2FDev%2FR%2Frdao%2FR%2FsqlConnection.R="38AD67C1"

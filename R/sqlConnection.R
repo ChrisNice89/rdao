@@ -31,18 +31,6 @@ sqlConnection <- R6Class(
     .validator = NULL,
     .connection = NULL,
     .provider = NULL,
-    .make.readonly = function(...) {
-      for (class.attr in list(...)) {
-        lockBinding(sym = class.attr,  env = self)
-      }
-    },
-
-    .make.readwrite = function(...) {
-      for (class.attr in list(...)) {
-        unlockBinding(sym = class.attr,  env = self)
-      }
-    },
-
     .validate = function(...) {
 
       print(length(list(...)))
@@ -65,13 +53,9 @@ sqlConnection <- R6Class(
     provider = "",
     connectionstring = "",
 
-    initialize = function(Iconnection) {
+    initialize = function(connectionstring) {
       private$.validator <- Validator$new(self)
-
-      ##function.pointer <- list(...)
-      ##self$provider <- provider
-      ##private$.validate(function.pointer)
-      private$.make.readonly("connectionstring", "provider")
+      make.readonly("connectionstring", "provider")
 
       invisible(self$print())
     },
