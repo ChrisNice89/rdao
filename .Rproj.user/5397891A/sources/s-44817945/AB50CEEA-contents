@@ -68,7 +68,9 @@ sqlFactory <- R6Class(
     },
 
     msAccess= function(path,dbpassword=""){
-      return(Builder$new("msAccess",path = path))
+      b<-Builder$new("msAccess")
+      b$path <- path
+      return(b)
     },
 
     oracle= function(path,dbpassword=""){

@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2937632568",
     "id" : "5ED27CA2",
-    "lastKnownWriteTime" : 1572703147,
-    "last_content_update" : 1572703147,
+    "lastKnownWriteTime" : 1572800106,
+    "last_content_update" : 1572800106112,
     "path" : "~/Dev/R/Starter.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "10,0",
-        "scrollLine" : "8"
+        "cursorPosition" : "29,12",
+        "scrollLine" : "18"
     },
     "read_only" : false,
     "read_only_alternatives" : [
