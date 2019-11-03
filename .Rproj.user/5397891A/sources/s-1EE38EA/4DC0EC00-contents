@@ -73,7 +73,7 @@ Builder <- R6Class(
         self$builderProvider,
         msAccess = {
           if (!file.exists(self$path)) {
-            msg<- paste0("Datenbank nicht gefunden",self$path)
+            msg<- paste("Datenbank nicht gefunden",self$path)
             private$.validator$throwError(msg,prc)
           }
 
