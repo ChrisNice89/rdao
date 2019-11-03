@@ -5,7 +5,7 @@ installer <- function(pkg){
     install.packages(new.pkg, dependencies = TRUE)
   sapply(pkg, require, character.only = TRUE)
 }
-packages<- c("devtools", "roxygen2","R6","rmarkdown","pryr")
+packages<- c("devtools", "roxygen2","R6","rmarkdown","pryr","DBI")
 installer(packages)
 
 # roxygen2 make documentation
@@ -27,6 +27,7 @@ library(rdao)
 f<-factory()
 b<-f$msAccess(path = "testpath",dbpassword = "SesameOpen")
 
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 b$addCredentials(username = NULL,password = "SesameOpen")
 b$addCredentials(username = "Admin",password = "SesameOpen")
 c<-b$credentials

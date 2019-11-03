@@ -39,30 +39,47 @@ sqlConnection <- R6Class(
     provider = "",
     connectionstring = "",
 
-    initialize = function(dbiDriver,connectionstring) {
+    initialize = function(connection) {
       private$.validator <- Validator$new(self)
-      print(class(dbidriver))
+      print(class(connection))
 
-      if (!is.function(dbiDriver)){
-        private$.validator$throwError("DBI driver nicht erkannt","initialize")
-      } else {
-        private$.driver<-dbiDriver
+      if(DBI::dbIsValid(connection)){
+        private$.connection<-connection
+      } else{
+        msg<-paste("Invalid connection: <",class(connection[1],">",sep=""))
+        private$.validator$throwError(msg,"initialize()")
       }
 
-      #private$.connection<-dbConnect(drv =driver, connectionstring)
-
-      make.readonly("connectionstring", "provider")
-
-      invisible(self$print())
+      make.readonly(self,"connectionstring", "provider")
+      #invisible(self$print())
     },
 
     #methods
     connect = function() {
-      invisible(self)
+      if (!DBI::dbIsValid(private$.connection)) {
+        dbConnect(private$.connection)
+      }
+      return(self$isConnected())
     },
 
     disconnect = function() {
-      invisible(self)
+      if (DBI::dbIsValid(private$.connection)) {
+        DBI::dbDisconnect(private$.connection)
+      }
+      return(!self$isConnected())
+    },
+
+    finalize =function(){
+        self$disconnect()
+      },
+
+    isConnected=function(){
+      return(DBI::dbIsValid(private$.connection))
+    },
+
+    getTables=function(){
+
+      dbListTables(private$.connection)
     },
 
     print = function(...) {
@@ -77,3 +94,14 @@ sqlConnection <- R6Class(
     }
   )
 )
+
+
+
+
+# b<-Builder$new("sqlite")
+# b$path<-"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
+# cnn<-b$build()
+# cnn$connect()
+# cnn$isConnected()
+#
+# cnn$disconnect()

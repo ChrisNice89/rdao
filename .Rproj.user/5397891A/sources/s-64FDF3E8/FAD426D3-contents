@@ -29,99 +29,102 @@ Builder <- R6Class(
   classname = "Builder",
   inherit = NULL,
   portable = TRUE,
-  parent_env   = asNamespace("rdao"),
+  # parent_env   = asNamespace("rdao"),
   cloneable    = FALSE,
-  private = list(
-    .validator = NULL,
-    .dbiDriver = NULL,
-    .dbpassword = ""
-  ),
+  private = list(.validator = NULL,
+                 .dbpassword = ""),
 
   public = list(
-    builderProvider="",
-    driver="",
-    path="",
-    dsn="",
-    database="",
-    server="",
-    host="",
-    port=0,
+    builderProvider = "",
+    driver = "",
+    path = "",
+    dsn = "",
+    database = "",
+    server = "",
+    host = "",
+    port = 0,
     credentials = NULL,
 
-    initialize = function(provider){
+    initialize = function(provider) {
       private$.validator <- Validator$new(self)
 
       self$builderProvider <- provider
-      make.readonly(self,"builderProvider")
+      make.readonly(self, "builderProvider")
 
       invisible(self$print())
     },
 
     addCredentials = function(username = "",
                               password = "") {
-
-      make.readwrite(self,"credentials")
-      self$credentials <- Credentials$new(username = username, password = password)
-      make.readonly(self,"credentials")
+      make.readwrite(self, "credentials")
+      self$credentials <-
+        Credentials$new(username = username, password = password)
+      make.readonly(self, "credentials")
       invisible(self)
     },
 
     #actual implementation
     build = function() {
-      prc<-"build()"
+      prc <- "build()"
 
-      if (!private$.validator.isNullString(self$path)){
+      if (!private$.validator$isNullString(self$path)) {
         if (!file.exists(self$path)) {
-          msg<- paste("Ungültiger Pfad",self$path)
-          private$.validator$throwError(msg,prc)
+          msg <- paste("Ungültiger Pfad", self$path)
+          private$.validator$throwError(msg, prc)
         }
       }
 
       switch(
         self$builderProvider,
         msAccess = {
-
-          dbq<- paste0("DBQ=", self$path)
-          driver <- "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
-          #.dbiDriver<-odbc::odbc()
-          connectionstring<- paste0(driver, dbq)
-
+          dbq <- paste0("DBQ=", self$path)
+          driver <-
+            "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
+          dbiDriver <- odbc::odbc()
+          connectionstring <- paste0(driver, dbq)
+          connection <- dbConnect(dbiDriver, connectionstring)
         },
 
-        sqlite= {
-
-          .dbiDriver<-RSQLite::SQLite()
-          connectionstring<-  ":memory:"
+        sqlite = {
+          dbiDriver <- RSQLite::SQLite()
+          connectionstring <-  ":memory:"
+          connection <- dbConnect(RSQLite::SQLite(),  self$path)
         },
 
         mySql = {
-
           connectionstring <- "MySql"
         },
 
         msSql = {
-
           connectionstring <- "msSql"
         },
 
         {
-          msg<-paste("Provider: <",self$builderProvider,"> nicht implementiert",sep="")
-          private$.validator$throwError(msg,prc)
+          msg <-
+            paste("Provider: <",
+                  self$builderProvider,
+                  "> nicht implementiert",
+                  sep = "")
+          private$.validator$throwError(msg, prc)
         }
       )
 
-       if (!is.function(private$.dbiDriver)){
-         private$.validator$throwError("DBI driver nicht erkannt",prc)
-       }
+      # print(class(dbiDriver))
+      #  if (!is.function(dbiDriver)){
+      #    private$.validator$throwError("DBI driver nicht erkannt",prc)
+      #  } else {
+      #    private$.dbiDriver<-dbiDriver
+      #  }
 
-        return (sqlConnection$new(connectionstring))
-      },
+      return (sqlConnection$new(connection))
+    },
 
     print = function(...) {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
       if (private$.validator$isCharacter(self$builderProvider)) {
-        msg <-paste(msg, "> for provider: <", self$builderProvider, ">", sep = "")
+        msg <-
+          paste(msg, "> for provider: <", self$builderProvider, ">", sep = "")
       }
 
       cat(msg, " created", "\n", sep = "")
@@ -129,8 +132,5 @@ Builder <- R6Class(
     }
   )
 )
-
-
-
 
 

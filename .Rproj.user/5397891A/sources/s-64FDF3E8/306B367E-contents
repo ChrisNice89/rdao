@@ -15,7 +15,7 @@ dbWriteTable(con, "diamonds",  df)
 dbListTables(con)
 dbDisconnect(con)
 
-path<-"/Users/cnitz/Dev/R/rdao/Diamonds.sqlite"
+path<-"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
 con <- dbConnect(RSQLite::SQLite(),path)
 dbListTables(con)
 dbDisconnect(con)

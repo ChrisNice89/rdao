@@ -70,6 +70,8 @@ Validator = R6::R6Class(
     isNullString=function(x,throwError=FALSE){
       if(self$isCharacter(x,throwError)){
         return(("" %in% x))
+      } else {
+        return(FALSE)
       }
     },
 
