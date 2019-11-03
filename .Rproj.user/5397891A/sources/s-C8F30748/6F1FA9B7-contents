@@ -22,6 +22,7 @@ Credentials <- R6Class(
   private = list(
     .validator = NULL
   ),
+
   public = list(
     username = "",
     password = "",
@@ -30,9 +31,13 @@ Credentials <- R6Class(
                           password = "") {
       private$.validator <- Validator$new(self)
 
-      if (private$.validator(c(username))))
-      self$username = username
-      self$password = password
+      if (!private$.validator$isNullString(username,throwError=TRUE)){
+        self$username = username
+      }
+
+      if (!private$.validator$isNullString(password,throwError=TRUE)){
+        self$password = password
+      }
 
       make.readonly(self,"username", "password")
       invisible(self$print())

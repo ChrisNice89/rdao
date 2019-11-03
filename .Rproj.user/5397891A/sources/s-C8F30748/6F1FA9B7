@@ -1,19 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1572795556160.000,
+    "created" : 1572801912335.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3157321130",
-    "id" : "F0B361B8",
-    "lastKnownWriteTime" : 1572802802,
-    "last_content_update" : 1572802802255,
-    "path" : "~/Dev/R/rdao/R/utils.R",
-    "project_path" : "R/utils.R",
+    "hash" : "0",
+    "id" : "6F1FA9B7",
+    "lastKnownWriteTime" : 1572803080,
+    "last_content_update" : 1572803080305,
+    "path" : "~/Dev/R/rdao/R/credentials.R",
+    "project_path" : "R/credentials.R",
     "properties" : {
-        "cursorPosition" : "63,9",
-        "scrollLine" : "52"
+        "cursorPosition" : "57,0",
+        "scrollLine" : "25"
     },
     "read_only" : false,
     "read_only_alternatives" : [
