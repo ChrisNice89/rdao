@@ -16,8 +16,7 @@ Depends:
     R (>= 3.0.0)
 Imports: 
     DBI (>= 1.0.0),
-    R6 (>= 2.2.2),
-    RSQLite
+    R6 (>= 2.2.2)
 Suggests:
     ODCB,
     RSQLite,

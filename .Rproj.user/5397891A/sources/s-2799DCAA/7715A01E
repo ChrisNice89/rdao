@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2669879287",
+    "hash" : "3833955715",
     "id" : "7715A01E",
-    "lastKnownWriteTime" : 1572821698,
-    "last_content_update" : 1572821698245,
+    "lastKnownWriteTime" : 1572821864,
+    "last_content_update" : 1572821864650,
     "path" : "~/Dev/R/rdao/DESCRIPTION",
     "project_path" : "DESCRIPTION",
     "properties" : {
-        "cursorPosition" : "19,11",
-        "scrollLine" : "1"
+        "cursorPosition" : "18,17",
+        "scrollLine" : "3"
     },
     "read_only" : false,
     "read_only_alternatives" : [
