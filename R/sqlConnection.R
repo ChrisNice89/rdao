@@ -45,7 +45,7 @@ sqlConnection <- R6Class(
   public = list(
     provider = "",
 
-    initialize = function(...,provider) {
+    initialize = function(..., provider) {
       private$.validator <- Validator$new(self)
       private$.credentials$params <- list(...)
       self$provider <- provider
@@ -55,23 +55,30 @@ sqlConnection <- R6Class(
     },
 
     createQuery = function(sql) {
-      return(sqlQuery$new(
-        connection =  self,
-        sql = sql
-      ))
+      return(sqlQuery$new(connection =  self,
+                          sql = sql))
     },
 
-    execute = function(query,disconnectAfter=TRUE) {
+    execute = function(query, disconnectAfter = TRUE) {
       prc <- "execute()"
 
       if (inherits(query, "SqlCommand")) {
         switch(query$type,
-               "1" = {
+               "fetch" = {
                  if (self$connect()) {
-                   result<-DBI::dbGetQuery(private$.connection, query$sql)
+                   result <-
+                     DBI::dbGetQuery(conn = private$.connection,
+                                     statement = query$sql)
                  }
                },
 
+               "exec" = {
+                 if (self$connect()) {
+                   result <-
+                     DBI::dbExecute(conn = private$.connection,
+                                    statement = query$sql)
+                 }
+               },
                {
                  msg <-
                    paste("Commantype: <",
@@ -84,7 +91,7 @@ sqlConnection <- R6Class(
         private$.validator$throwError("Command ist vom falschen Datentyp", prc)
       }
 
-      if (disconnectAfter){
+      if (disconnectAfter) {
         self$disconnect()
       }
       return(result)
@@ -141,8 +148,8 @@ dbFileConnection <- R6Class(
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(driverGenerator, path,provider = provider) {
-      super$initialize(driverGenerator, path,provider = provider)
+    initialize = function(driverGenerator, path, provider = provider) {
+      super$initialize(driverGenerator, path, provider = provider)
       invisible(self)
     }
     # CreateCommand=function(){
@@ -159,12 +166,8 @@ msAccessFileConnection <- R6Class(
     initialize = function(provider = provider,
                           driverGenerator,
                           connectionstring) {
-      super$initialize(driverGenerator, connectionstring,provider = provider)
+      super$initialize(driverGenerator, connectionstring, provider = provider)
       invisible(self)
     }
   )
 )
-
-
-
-

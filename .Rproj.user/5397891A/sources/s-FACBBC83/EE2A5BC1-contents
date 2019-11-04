@@ -28,8 +28,9 @@ sqlCommand <- R6Class(
   classname = "Abstrakt SqlCommand",
   inherit = NULL,
   portable = TRUE,
-  private = list(.validator = NULL,
-                 .connection = sqlConnection),
+  private = list(
+    .validator = NULL,
+    .connection = sqlConnection),
 
   public = list(
     provider = "",
@@ -56,8 +57,13 @@ sqlCommand <- R6Class(
       invisible(self$print())
     },
 
+    fetch  = function(disconnect = TRUE) {
+      self$type <- "fetch"
+      return(private$.connection$execute(self,disconnect))
+    },
+
     execute = function(disconnect = TRUE) {
-      self$type <- "1"
+      self$type <- "exec"
       return(private$.connection$execute(self,disconnect))
     },
 
