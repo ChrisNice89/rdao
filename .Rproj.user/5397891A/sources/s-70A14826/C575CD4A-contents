@@ -63,7 +63,7 @@ sqlConnection <- R6Class(
     },
 
     execute = function(command) {
-      prc < "execute()"
+      prc <- "execute()"
       if (inherits(command, "SqlCommand")) {
         switch(command$type,
                "1" = {
