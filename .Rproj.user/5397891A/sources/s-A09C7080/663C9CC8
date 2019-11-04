@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "663C9CC8",
-    "lastKnownWriteTime" : 1572832291,
-    "last_content_update" : 1572832291248,
+    "lastKnownWriteTime" : 1572833842,
+    "last_content_update" : 1572833842636,
     "path" : "~/Dev/R/rdao/R/builder.R",
     "project_path" : "R/builder.R",
     "properties" : {
-        "cursorPosition" : "84,48",
-        "scrollLine" : "74"
+        "cursorPosition" : "94,92",
+        "scrollLine" : "80"
     },
     "read_only" : false,
     "read_only_alternatives" : [

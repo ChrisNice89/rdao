@@ -82,12 +82,17 @@ Builder <- R6Class(
             "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
           dbiDriver <- odbc::odbc
           connectionstring <- paste0(driver, dbq)
-          return (msAccessConnection$new(provider = self$builderProvider, dbiDriver,connectionstring))
+          return (msAccessConnection$new(provider = self$builderProvider,dbiDriver,connectionstring))
         },
 
-        sqlite = {
+        dbFile = {
           dbiDriver <- RSQLite::SQLite
-          return (sqliteConnection$new(provider = self$builderProvider, dbiDriver,self$path))
+          return (dbFileConnection$new(provider = self$builderProvider, dbiDriver,self$path))
+        },
+
+        dataFrame = {
+          dbiDriver <- RSQLite::SQLite
+          return (sqliteConnection$new(provider = self$builderProvider, ":memory:",dbiDriver))
         },
 
         mySql = {

@@ -74,10 +74,15 @@ sqlFactory <- R6Class(
     },
 
     dbFile=function(path){
-      b<-Builder$new(provider = "sqlite")
+      b<-Builder$new(provider = "dbFile")
       b$path <- path
       return(b)
     },
+
+    dataFrame=function(){
+      b<-Builder$new(provider = "dataFrame")
+      return(b)
+    }
 
     oracle= function(path,dbpassword=""){
       return(Builder$new("oracle",path = path))

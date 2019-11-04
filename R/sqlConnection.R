@@ -100,14 +100,14 @@ sqlConnection <- R6Class(
   )
 )
 
-# quasi interface
+# Provider interface
 dbFileConnection <- R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
     initialize = function(provider,driverGenerator, path) {
-      super$initialize(provider, ...=driverGenerator, path)
+      super$initialize(provider=provider, driverGenerator, path)
       invisible(self)
     }
   )
@@ -119,13 +119,25 @@ msAccessFileConnection <- R6Class(
   portable = TRUE,
   public = list(
     initialize = function(provider, driverGenerator,connectionstring) {
-      super$initialize(provider, ...=driverGenerator,connectionstring)
+      super$initialize(provider=provider, driverGenerator,connectionstring)
       invisible(self)
     }
   )
 )
 
-# b <- Builder$new("sqlite")
+dataFrameConnection <- R6Class(
+  classname = "SqlConnection",
+  inherit = sqlConnection,
+  portable = TRUE,
+  public = list(
+    initialize = function(provider, driverGenerator,connectionstring) {
+      super$initialize(provider=provider, driverGenerator,connectionstring)
+      invisible(self)
+    }
+  )
+)
+
+# b <- Builder$new("dbFile")
 # b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
 # cnn <- b$build()
 # cnn$connect()

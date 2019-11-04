@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572832574092.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7CEB8F43",
+    "lastKnownWriteTime" : 1572833819,
+    "last_content_update" : 1572833819255,
+    "path" : "~/Dev/R/rdao/R/sqlFactory.R",
+    "project_path" : "R/sqlFactory.R",
+    "properties" : {
+        "cursorPosition" : "82,44",
+        "scrollLine" : "65"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
