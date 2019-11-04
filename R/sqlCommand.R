@@ -83,7 +83,6 @@ sqlCommand <- R6Class(
   )
 )
 
-
 sqlQuery <- R6Class(
   classname = "SqlCommand",
   inherit = sqlCommand,

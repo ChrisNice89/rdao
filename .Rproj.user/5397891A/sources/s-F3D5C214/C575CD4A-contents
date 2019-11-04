@@ -66,7 +66,7 @@ sqlConnection <- R6Class(
       prc <- "execute()"
 
       print(inherits(command, "SqlCommand"))
-      if (inherits(command, "SqlCommand")) {
+      if (TRUE) {
         print("hier")
         switch(command$type,
                "1" = {

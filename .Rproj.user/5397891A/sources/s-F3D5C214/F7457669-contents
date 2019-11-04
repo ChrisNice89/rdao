@@ -24,6 +24,14 @@ document()
 remove.packages("rdao")
 devtools::install_github("Chrisnice89/rdao")
 library(rdao)
+f<-factory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+cnn<-b$build()
+cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
+result<-cmd$execute()
+
+
+
 
 f<-factory()
 b<-f$msAccess(path = "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db",dbpassword = "SesameOpen")
@@ -37,7 +45,7 @@ c$username
 c$username<-"New name"
 
 cnn<-b$build()
-cmd<-cnn$CreateCommand(sql = "Select * FROM diamonds")
+cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
 result<-cmd$execute()
 
 cnn$isConnected()
