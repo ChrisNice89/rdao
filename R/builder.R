@@ -82,12 +82,12 @@ Builder <- R6Class(
             "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
           dbiDriver <- odbc::odbc
           connectionstring <- paste0(driver, dbq)
-          return (sqlConnection$new(provider = self$builderProvider, dbiDriver,connectionstring))
+          return (msAccessConnection$new(provider = self$builderProvider, dbiDriver,connectionstring))
         },
 
         sqlite = {
           dbiDriver <- RSQLite::SQLite
-          return (sqlite$new(provider = self$builderProvider, dbiDriver,self$path))
+          return (sqliteConnection$new(provider = self$builderProvider, dbiDriver,self$path))
         },
 
         mySql = {

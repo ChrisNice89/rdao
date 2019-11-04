@@ -40,20 +40,6 @@ sqlConnection <- R6Class(
       } else {
         private$.validator$throwError("Driver generator ist ungültig", "connect()")
       }
-    },
-
-    .checkConnection = function(proc) {
-      if (is.null(private$.connection)) {
-        private$.validator$throwError(
-          paste(
-            "Connection ist NULL und kann in <",
-            proc,
-            "> nicht verwendet werden",
-            sep = ""
-          ),
-          "checkConnection()"
-        )
-      }
     }
   ),
 
@@ -114,18 +100,30 @@ sqlConnection <- R6Class(
   )
 )
 
-sqlite <- R6Class(
+dbFileConnection <- R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(provider, ...) {
-      super$initialize(provider, ...)
-      super$print()
+    initialize = function(provider,driverGenerator, path) {
+      super$initialize(provider, ...=driverGenerator, path)
       invisible(self)
     }
   )
 )
+
+msAccessFileConnection <- R6Class(
+  classname = "SqlConnection",
+  inherit = sqlConnection,
+  portable = TRUE,
+  public = list(
+    initialize = function(provider, driverGenerator,connectionstring) {
+      super$initialize(provider, ...=driverGenerator,connectionstring)
+      invisible(self)
+    }
+  )
+)
+
 # b <- Builder$new("sqlite")
 # b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
 # cnn <- b$build()

@@ -117,7 +117,9 @@ Validator = R6::R6Class(
       if (is.null(obj)) {
         return(FALSE)
       } else {
-        return(class(obj)[2] == "R6")
+        cls<-class(obj)
+        i<-length(cls)
+        return(cls[i] == "R6")
       }
     },
 
