@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3329269731",
+    "hash" : "3693553412",
     "id" : "FEA0B06B",
-    "lastKnownWriteTime" : 1572828011,
-    "last_content_update" : 1572828011632,
+    "lastKnownWriteTime" : 1572828166,
+    "last_content_update" : 1572828166589,
     "path" : "~/Dev/R/rdao/R/zzz.R",
     "project_path" : "R/zzz.R",
     "properties" : {
-        "cursorPosition" : "4,0",
-        "scrollLine" : "3"
+        "cursorPosition" : "37,22",
+        "scrollLine" : "15"
     },
     "read_only" : false,
     "read_only_alternatives" : [

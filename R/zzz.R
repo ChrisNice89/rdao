@@ -35,7 +35,7 @@
     sapply(pkg, require, character.only = TRUE)
   }
   packages<- c("R6","DBI","ODCB")
-  installer(packages)
+  #installer(packages)
 
   invisible()
 }
