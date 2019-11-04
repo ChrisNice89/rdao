@@ -28,10 +28,20 @@ sqlConnection <- R6Class(
   inherit = NULL,
   portable = TRUE,
   private = list(
+    .intitilized = FALSE,
     .validator = NULL,
     .connection = NULL,
     .driver = NULL,
     .credentials = list(),
+
+    .dbiConnect <- function(driverGenerator, ...) {
+      if (is.function(driverGenerator)) {
+        DBI::dbConnect(driverGenerator(), ...)
+      } else {
+        private$.validator$throwError("Driver generator ist ungültig", "connect()")
+      }
+    },
+
     .checkConnection = function(proc) {
       if (is.null(private$.connection)) {
         private$.validator$throwError(
@@ -55,21 +65,15 @@ sqlConnection <- R6Class(
       private$.credentials$params <- list(...)
       self$provider <- provider
       make.readonly(self, "provider")
+
       invisible(self$print())
     },
 
     connect = function() {
-      dbiConnect <- function(driverGenerator, ...) {
-        if (is.function(driverGenerator)) {
-          DBI::dbConnect(driverGenerator(), ...)
-        } else {
-          private$.validator$throwError("Driver generator ist ungültig", "connect()")
-        }
+      if(!self$isConnected()){
+        private$.connection <-
+          do.call(private$.dbiConnect, private$.credentials$params)
       }
-
-      private$.connection <-
-        do.call(dbiConnect, private$.credentials$params)
-
       return(self$isConnected())
     },
 
@@ -85,8 +89,11 @@ sqlConnection <- R6Class(
     },
 
     isConnected = function() {
-      private$.checkConnection("isConnected()")
-      return(DBI::dbIsValid(private$.connection))
+      if (!is.null(private$.connection)) {
+        return(DBI::dbIsValid(private$.connection))
+      } else {
+        return(FALSE)
+      }
     },
 
     getTables = function() {
@@ -96,9 +103,9 @@ sqlConnection <- R6Class(
     print = function(...) {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
-      if (private$.validator$isCharacter(private$.provider)) {
+      if (!private$.validator$isNullString(self$provider)) {
         msg <-
-          paste(msg, "> for provider: <", private$.provider, ">", sep = "")
+          paste(msg, "> for provider: <", self$provider, ">", sep = "")
       }
 
       cat(msg, " created", "\n", sep = "")
