@@ -55,8 +55,7 @@ sqlConnection <- R6Class(
     },
 
     createCommand = function(sql) {
-      return(sqlCommand$new(
-        caller = "mother",
+      return(sqlQuery$new(
         connection =  self,
         sql = sql
       ))
@@ -67,11 +66,9 @@ sqlConnection <- R6Class(
 
       print(inherits(command, "SqlCommand"))
       if (TRUE) {
-        print("hier")
         switch(command$type,
                "1" = {
                  if (self$connect()) {
-                   print("hier")
                    return (DBI::dbGetQuery(private$.connection, command$sql))
                  }
                },
@@ -85,7 +82,6 @@ sqlConnection <- R6Class(
                  private$.validator$throwError(msg, prc)
                })
       } else {
-        print("error")
         private$.validator$throwError("Command ist vom falschen Datentyp", prc)
       }
     },

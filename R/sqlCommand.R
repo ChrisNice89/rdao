@@ -39,7 +39,7 @@ sqlCommand <- R6Class(
     initialize = function(caller, connection, sql) {
       private$.validator <- Validator$new(self)
 
-      #print(caller)
+      print(caller)
       if (inherits(connection, "SqlConnection")) {
         private$.connection <- connection
         self$provider <- private$.connection$provider
