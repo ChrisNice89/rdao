@@ -166,11 +166,5 @@ msAccessFileConnection <- R6Class(
 )
 
 
-f<-factory()
-b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
-cnn<-b$build()
-cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
-result<-cmd$execute()
-
 
 
