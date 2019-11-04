@@ -33,7 +33,7 @@ c<-Credentials$new(username = "Admin",password = "SesameOpen")
 }
 \seealso{
 Other sql: \code{\link{Builder}}, \code{\link{factory}},
-  \code{\link{sqlConnection}}
+  \code{\link{sqlCommand}}, \code{\link{sqlConnection}}
 }
 \concept{sql}
 \keyword{data}

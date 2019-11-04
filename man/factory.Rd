@@ -47,7 +47,8 @@ b<-f$mySql(path,dbpassword="")
 }
 \seealso{
 Other sql: \code{\link{Builder}},
-  \code{\link{Credentials}}, \code{\link{sqlConnection}}
+  \code{\link{Credentials}}, \code{\link{sqlCommand}},
+  \code{\link{sqlConnection}}
 }
 \concept{sql}
 \keyword{data}

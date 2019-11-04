@@ -41,7 +41,8 @@ cnn<-b$addCredentials(username = "Admin",password = "SesameOpen")$build()
 }
 \seealso{
 Other sql: \code{\link{Credentials}},
-  \code{\link{factory}}, \code{\link{sqlConnection}}
+  \code{\link{factory}}, \code{\link{sqlCommand}},
+  \code{\link{sqlConnection}}
 }
 \concept{sql}
 \keyword{data}
