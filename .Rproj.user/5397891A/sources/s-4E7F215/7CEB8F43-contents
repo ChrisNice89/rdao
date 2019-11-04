@@ -79,11 +79,6 @@ sqlFactory <- R6Class(
       return(b)
     },
 
-    dataFrame=function(){
-      b<-Builder$new(provider = "dataFrame")
-      return(b)
-    }
-
     oracle= function(path,dbpassword=""){
       return(Builder$new("oracle",path = path))
     },

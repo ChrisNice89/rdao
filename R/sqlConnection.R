@@ -28,7 +28,6 @@ sqlConnection <- R6Class(
   inherit = NULL,
   portable = TRUE,
   private = list(
-    .intitilized = FALSE,
     .validator = NULL,
     .connection = NULL,
     .driver = NULL,
@@ -55,8 +54,38 @@ sqlConnection <- R6Class(
       invisible(self$print())
     },
 
+    CreateCommand = function(sql) {
+      return(sqlCommand$new(caller = "mother",connection =  self,sql = sql))
+    },
+
+    execute = function(command) {
+      prc<"execute()"
+      if (inherits(command, "SqlCommand")) {
+        switch(
+          command$type,
+          1 = {
+            if (self$connect()){
+              return (DBI::dbGetQuery(private$.connection, command$sql))
+            }
+          },
+
+          {
+          msg <- paste(
+            "Commantype: <",
+            command$type,
+            "> nicht implementiert",
+             sep = ""
+            )
+            private$.validator$throwError(msg, prc)
+          }
+        )
+      } else {
+        private$.validator$throwError("Command ist vom falschen Datentyp", prc)
+      }
+    },
+
     connect = function() {
-      if(!self$isConnected()){
+      if (!self$isConnected()) {
         private$.connection <-
           do.call(private$.dbiConnect, private$.credentials$params)
       }
@@ -86,7 +115,7 @@ sqlConnection <- R6Class(
       dbListTables(private$.connection)
     },
 
-    print = function(...) {
+    print = function() {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
       if (!private$.validator$isNullString(self$provider)) {
@@ -106,10 +135,13 @@ dbFileConnection <- R6Class(
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(provider,driverGenerator, path) {
-      super$initialize(provider=provider, driverGenerator, path)
+    initialize = function(provider, driverGenerator, path) {
+      super$initialize(provider = provider, driverGenerator, path)
       invisible(self)
-    }
+    },
+    # CreateCommand=function(){
+    #   return(sqlCommand$new(self))
+    # }
   )
 )
 
@@ -118,34 +150,17 @@ msAccessFileConnection <- R6Class(
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(provider, driverGenerator,connectionstring) {
-      super$initialize(provider=provider, driverGenerator,connectionstring)
+    initialize = function(provider,
+                          driverGenerator,
+                          connectionstring) {
+      super$initialize(provider = provider, driverGenerator, connectionstring)
       invisible(self)
     }
   )
 )
 
-dataFrameConnection <- R6Class(
-  classname = "SqlConnection",
-  inherit = sqlConnection,
-  portable = TRUE,
-  public = list(
-    initialize = function(provider, driverGenerator,connectionstring) {
-      super$initialize(provider=provider, driverGenerator,connectionstring)
-      invisible(self)
-    }
-  )
-)
-
-# b <- Builder$new("dbFile")
-# b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
-# cnn <- b$build()
-# cnn$connect()
-# cnn$getTables()
-# cnn$isConnected()
-# cnn$disconnect()
-# cnn$isConnected()
-# cnn$connect()
-# cnn$isConnected()
-# cnn$disconnect()
-# cnn$isConnected()
+b <- Builder$new("dbFile")
+b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
+cnn <- b$build()
+#cnn$connect()
+cmd <- cnn$CreateCommand(sql = "SELECT * FROM diamonds")

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572837062905.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "32744527",
+    "id" : "EE2A5BC1",
+    "lastKnownWriteTime" : 1572842311,
+    "last_content_update" : 1572842311891,
+    "path" : "~/Dev/R/rdao/R/sqlCommand.R",
+    "project_path" : "R/sqlCommand.R",
+    "properties" : {
+        "cursorPosition" : "11,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

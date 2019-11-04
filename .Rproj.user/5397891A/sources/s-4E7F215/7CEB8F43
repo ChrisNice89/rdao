@@ -7,18 +7,18 @@
     "folds" : "",
     "hash" : "0",
     "id" : "7CEB8F43",
-    "lastKnownWriteTime" : 1572833819,
-    "last_content_update" : 1572833819255,
+    "lastKnownWriteTime" : 1572837023,
+    "last_content_update" : 1572837023899,
     "path" : "~/Dev/R/rdao/R/sqlFactory.R",
     "project_path" : "R/sqlFactory.R",
     "properties" : {
-        "cursorPosition" : "82,44",
-        "scrollLine" : "65"
+        "cursorPosition" : "97,0",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
     ],
-    "relative_order" : 5,
+    "relative_order" : 7,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"
