@@ -34,7 +34,7 @@ sqlConnection <- R6Class(
     .driver = NULL,
     .credentials = list(),
 
-    .dbiConnect <- function(driverGenerator, ...) {
+    .dbiConnect = function(driverGenerator, ...) {
       if (is.function(driverGenerator)) {
         DBI::dbConnect(driverGenerator(), ...)
       } else {
