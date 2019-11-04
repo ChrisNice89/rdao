@@ -61,22 +61,22 @@ sqlConnection <- R6Class(
       ))
     },
 
-    execute = function(command) {
+    execute = function(query,disconnectAfter=TRUE) {
       prc <- "execute()"
 
-      print(inherits(command, "SqlCommand"))
-      if (TRUE) {
-        switch(command$type,
+      print(inherits(query, "SqlCommand"))
+      if (inherits(query, "SqlCommand")) {
+        switch(query$type,
                "1" = {
                  if (self$connect()) {
-                   return (DBI::dbGetQuery(private$.connection, command$sql))
+                   result<-DBI::dbGetQuery(private$.connection, query$sql)
                  }
                },
 
                {
                  msg <-
                    paste("Commantype: <",
-                         command$type,
+                         query$type,
                          "> nicht implementiert",
                          sep = "")
                  private$.validator$throwError(msg, prc)
@@ -84,6 +84,11 @@ sqlConnection <- R6Class(
       } else {
         private$.validator$throwError("Command ist vom falschen Datentyp", prc)
       }
+
+      if (disconnectAfter){
+        self$disconnect()
+      }
+      return(result)
     },
 
     connect = function() {

@@ -36,10 +36,9 @@ sqlCommand <- R6Class(
     type = "",
     sql = "",
 
-    initialize = function(caller, connection, sql) {
+    initialize = function(connection, sql) {
       private$.validator <- Validator$new(self)
 
-      print(caller)
       if (inherits(connection, "SqlConnection")) {
         private$.connection <- connection
         self$provider <- private$.connection$provider
@@ -57,14 +56,9 @@ sqlCommand <- R6Class(
       invisible(self$print())
     },
 
-    execute = function(closeAfter = TRUE) {
+    execute = function(disconnect = TRUE) {
       self$type <- "1"
-      result <- private$.connection$execute(self)
-
-      if (closeAfter) {
-        private$.connection$disconnect()
-      }
-      return(result)
+      return(private$.connection$execute(self,disconnect))
     },
 
     print = function(...) {
@@ -90,9 +84,8 @@ sqlQuery <- R6Class(
   public = list(
     initialize = function(connection, sql) {
       private$.validator <- Validator$new(self)
-      super$initialize(class(self)[1],connection, sql)
-      make.readonly(self,  "sql")
-      invisible(self$print())
+      super$initialize(connection, sql)
+      invisible(self)
     }
   )
   )
