@@ -72,7 +72,7 @@ sqlCommand <- R6Class(
 
       if (!private$.validator$isNullString(self$provider)) {
         msg <-
-          paste(msg, "Commandtext: <", self$sql, ">", sep = "\n")
+          paste(msg, ":: <", self$sql, ">", sep = "")
         msg <-
           paste(msg, paste("for provider: <", self$provider, ">",sep=""), sep = "\n")
       }

@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3604809335",
+    "hash" : "319249811",
     "id" : "EE2A5BC1",
-    "lastKnownWriteTime" : 1572843810,
-    "last_content_update" : 1572843810923,
+    "lastKnownWriteTime" : 1572844063,
+    "last_content_update" : 1572844063315,
     "path" : "~/Dev/R/rdao/R/sqlCommand.R",
     "project_path" : "R/sqlCommand.R",
     "properties" : {
-        "cursorPosition" : "74,64",
+        "cursorPosition" : "74,23",
         "scrollLine" : "67",
         "tempName" : "Untitled1"
     },
