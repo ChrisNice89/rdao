@@ -58,8 +58,8 @@ sqlCommand <- R6Class(
     },
 
     execute = function(closeAfter = TRUE) {
-      self$type <- 1
-      result <- private$.connection$execute(self, 1)
+      self$type <- "1"
+      result <- private$.connection$execute(self)
 
       if (closeAfter) {
         private$.connection$disconnect()
@@ -72,7 +72,9 @@ sqlCommand <- R6Class(
 
       if (!private$.validator$isNullString(self$provider)) {
         msg <-
-          paste(msg, "> for provider: <", self$provider, ">", sep = "")
+          paste(msg, "> commandtext: <", self$sql, ">", sep = "")
+        msg <-
+          paste(msg, "> for provider: <", self$provider, ">", sep = "\n")
       }
 
       cat(msg, " created", "\n", sep = "")

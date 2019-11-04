@@ -73,10 +73,11 @@ sqlConnection <- R6Class(
                },
 
                {
-                 msg <- paste("Commantype: <",
-                              command$type,
-                              "> nicht implementiert",
-                              sep = "")
+                 msg <-
+                   paste("Commantype: <",
+                         command$type,
+                         "> nicht implementiert",
+                         sep = "")
                  private$.validator$throwError(msg, prc)
                })
       } else {
@@ -158,3 +159,7 @@ msAccessFileConnection <- R6Class(
     }
   )
 )
+
+
+
+

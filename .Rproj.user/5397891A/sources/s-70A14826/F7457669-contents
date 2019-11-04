@@ -37,6 +37,9 @@ c$username
 c$username<-"New name"
 
 cnn<-b$build()
+cmd<-cnn$CreateCommand(sql = "Select * FROM diamonds")
+result<-cmd$execute()
+
 cnn$isConnected()
 cnn$connect()
 cnn$disconnect()
