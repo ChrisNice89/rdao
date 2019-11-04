@@ -8,7 +8,7 @@ aClass <- R6Class(
 
   public = list(
     name = NULL,
-
+    number=NULL,
     initialize = function(x) {
       self$name<-x
       private$.x <- x
@@ -19,7 +19,7 @@ aClass <- R6Class(
 
 bClass <- R6Class(
   classname = "aClass",
-  inherit = NULL,
+  inherit = aClass,
   portable = TRUE,
 
   private = list(.x = NULL),
@@ -41,5 +41,6 @@ class(a)
 
 b <- bClass$new("bname")
 class(b)
+b$number
 
 

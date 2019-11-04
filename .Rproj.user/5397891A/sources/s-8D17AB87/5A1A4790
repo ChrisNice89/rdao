@@ -12,8 +12,8 @@
     "path" : "~/Dev/R/rdao/R/sqlFactory.R",
     "project_path" : "R/sqlFactory.R",
     "properties" : {
-        "cursorPosition" : "8,25",
-        "scrollLine" : "0"
+        "cursorPosition" : "64,0",
+        "scrollLine" : "56"
     },
     "read_only" : false,
     "read_only_alternatives" : [

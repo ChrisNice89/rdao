@@ -24,7 +24,7 @@
 #' @include utils.R
 
 sqlConnection <- R6Class(
-  classname = "SqlConnection",
+  classname = "Abstrakt SqlConnection",
   inherit = NULL,
   portable = TRUE,
   private = list(
@@ -114,6 +114,18 @@ sqlConnection <- R6Class(
   )
 )
 
+sqlite <- R6Class(
+  classname = "SqlConnection",
+  inherit = sqlConnection,
+  portable = TRUE,
+  public = list(
+    initialize = function(provider, ...) {
+      super$initialize(provider, ...)
+      super$print()
+      invisible(self)
+    }
+  )
+)
 # b <- Builder$new("sqlite")
 # b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
 # cnn <- b$build()

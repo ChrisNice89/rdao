@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1572818176025.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2149863592",
+    "hash" : "0",
     "id" : "94277C8D",
-    "lastKnownWriteTime" : 1572829281,
-    "last_content_update" : 1572829281403,
+    "lastKnownWriteTime" : 1572830022,
+    "last_content_update" : 1572830038653,
     "path" : "~/Dev/R/rdao/R/sqlConnection.R",
     "project_path" : "R/sqlConnection.R",
     "properties" : {
-        "cursorPosition" : "31,22",
-        "scrollLine" : "13"
+        "cursorPosition" : "110,41",
+        "scrollLine" : "103"
     },
     "read_only" : false,
     "read_only_alternatives" : [
