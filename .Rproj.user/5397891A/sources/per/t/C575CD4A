@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "3734073108",
     "id" : "C575CD4A",
-    "lastKnownWriteTime" : 1572844130,
-    "last_content_update" : 1572844130874,
+    "lastKnownWriteTime" : 1572844783,
+    "last_content_update" : 1572844783271,
     "path" : "~/Dev/R/rdao/R/sqlConnection.R",
     "project_path" : "R/sqlConnection.R",
     "properties" : {
-        "cursorPosition" : "67,42",
-        "scrollLine" : "61"
+        "cursorPosition" : "120,38",
+        "scrollLine" : "114"
     },
     "read_only" : false,
     "read_only_alternatives" : [

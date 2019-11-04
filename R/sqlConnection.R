@@ -65,10 +65,13 @@ sqlConnection <- R6Class(
     execute = function(command) {
       prc <- "execute()"
 
+      print(inherits(command, "SqlCommand"))
       if (inherits(command, "SqlCommand")) {
+        print("hier")
         switch(command$type,
                "1" = {
                  if (self$connect()) {
+                   print("hier")
                    return (DBI::dbGetQuery(private$.connection, command$sql))
                  }
                },
@@ -82,6 +85,7 @@ sqlConnection <- R6Class(
                  private$.validator$throwError(msg, prc)
                })
       } else {
+        print("error")
         private$.validator$throwError("Command ist vom falschen Datentyp", prc)
       }
     },
@@ -161,6 +165,12 @@ msAccessFileConnection <- R6Class(
   )
 )
 
+
+f<-factory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+cnn<-b$build()
+cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
+result<-cmd$execute()
 
 
 

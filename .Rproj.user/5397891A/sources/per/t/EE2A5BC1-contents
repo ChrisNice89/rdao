@@ -72,7 +72,7 @@ sqlCommand <- R6Class(
 
       if (!private$.validator$isNullString(self$provider)) {
         msg <-
-          paste(msg, ":: <", self$sql, ">", sep = "")
+          paste(msg, " :: <", self$sql, ">", sep = "")
         msg <-
           paste(msg, paste("for provider: <", self$provider, ">",sep=""), sep = "\n")
       }
@@ -82,4 +82,20 @@ sqlCommand <- R6Class(
     }
   )
 )
+
+
+sqlQuery <- R6Class(
+  classname = "SqlCommand",
+  inherit = sqlCommand,
+  portable = TRUE,
+  public = list(
+    initialize = function(connection, sql) {
+      private$.validator <- Validator$new(self)
+      super$initialize(class(self)[1],connection, sql)
+      make.readonly(self,  "sql")
+      invisible(self$print())
+    }
+  )
+  )
+
 
