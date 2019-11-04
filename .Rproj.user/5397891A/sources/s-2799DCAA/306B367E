@@ -7,12 +7,12 @@
     "folds" : "",
     "hash" : "0",
     "id" : "306B367E",
-    "lastKnownWriteTime" : 1572820157,
-    "last_content_update" : 1572820157697,
+    "lastKnownWriteTime" : 1572825073,
+    "last_content_update" : 1572825073149,
     "path" : "~/Dev/R/SQLITE.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "16,0",
+        "cursorPosition" : "14,9",
         "scrollLine" : "0"
     },
     "read_only" : false,

@@ -30,55 +30,66 @@ sqlConnection <- R6Class(
   private = list(
     .validator = NULL,
     .connection = NULL,
-    .provider = NULL,
-    .driver=NULL,
-    .connectionstring=""
+    .driver = NULL,
+    .credentials = list(),
+    .checkConnection = function(proc) {
+      if (is.null(private$.connection)) {
+        private$.validator.throwError(
+          paste(
+            "Connection ist NULL und kann in <",
+            proc,
+            "> nicht verwendet werden",
+            sep = ""
+          ),
+          "checkConnection()"
+        )
+      }
+    }
   ),
 
   public = list(
     provider = "",
-    connectionstring = "",
 
-    initialize = function(connection) {
+    initialize = function(provider, ...) {
       private$.validator <- Validator$new(self)
-      print(class(connection))
-
-      if(DBI::dbIsValid(connection)){
-        private$.connection<-connection
-      } else{
-        msg<-paste("Invalid connection: <",class(connection[1],">",sep=""))
-        private$.validator$throwError(msg,"initialize()")
-      }
-
-      make.readonly(self,"connectionstring", "provider")
-      #invisible(self$print())
+      private$.credentials$params <- list(...)
+      self$provider <- provider
+      make.readonly(self, "provider")
+      invisible(self$print())
     },
 
-    #methods
     connect = function() {
-      if (!DBI::dbIsValid(private$.connection)) {
-        dbConnect(private$.connection)
+      dbiConnect <- function(driverGenerator, ...) {
+        if (is.function(driverGenerator)) {
+          DBI::dbConnect(driverGenerator(), ...)
+        } else {
+          private$.validator$throwError("Driver generator ist ungültig", "connect()")
+        }
       }
+
+      private$.connection <-
+        do.call(dbiConnect, private$.credentials$params)
+
       return(self$isConnected())
     },
 
     disconnect = function() {
-      if (DBI::dbIsValid(private$.connection)) {
+      if (self$isConnected()) {
         DBI::dbDisconnect(private$.connection)
       }
       return(!self$isConnected())
     },
 
-    finalize =function(){
-        self$disconnect()
-      },
+    finalize = function() {
+      self$disconnect()
+    },
 
-    isConnected=function(){
+    isConnected = function() {
+      private$.checkConnection("isConnected()")
       return(DBI::dbIsValid(private$.connection))
     },
 
-    getTables=function(){
-
+    getTables = function() {
       dbListTables(private$.connection)
     },
 
@@ -86,7 +97,8 @@ sqlConnection <- R6Class(
       msg <- paste("<", class(self)[1], ">", sep = "")
 
       if (private$.validator$isCharacter(private$.provider)) {
-        msg <-paste(msg, "> for provider: <", private$.provider, ">", sep = "")
+        msg <-
+          paste(msg, "> for provider: <", private$.provider, ">", sep = "")
       }
 
       cat(msg, " created", "\n", sep = "")
@@ -95,3 +107,15 @@ sqlConnection <- R6Class(
   )
 )
 
+# b <- Builder$new("sqlite")
+# b$path <- "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
+# cnn <- b$build()
+# cnn$connect()
+# cnn$getTables()
+# cnn$isConnected()
+# cnn$disconnect()
+# cnn$isConnected()
+# cnn$connect()
+# cnn$isConnected()
+# cnn$disconnect()
+# cnn$isConnected()

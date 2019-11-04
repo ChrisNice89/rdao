@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572827960388.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3329269731",
+    "id" : "FEA0B06B",
+    "lastKnownWriteTime" : 1572828011,
+    "last_content_update" : 1572828011632,
+    "path" : "~/Dev/R/rdao/R/zzz.R",
+    "project_path" : "R/zzz.R",
+    "properties" : {
+        "cursorPosition" : "4,0",
+        "scrollLine" : "3"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -37,7 +37,10 @@ c$username
 c$username<-"New name"
 
 cnn<-b$build()
-
+cnn$isConnected()
+cnn$connect()
+cnn$disconnect()
+cnn$isConnected()
 
 getOption("devtools.name")
 

@@ -8,18 +8,19 @@ df<-data.frame(get(load(path)))
 
 df<-data.frame(diamonds)
 
-drv=
-con <- dbConnect(RSQLite::SQLite(),"Diamonds.db")
-
 dbWriteTable(con, "diamonds",  df)
 dbListTables(con)
 dbDisconnect(con)
 
 path<-"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
 con <- dbConnect(RSQLite::SQLite(),path)
+print(dbCanConnect(RSQLite::SQLite(),path))
 dbListTables(con)
 dbDisconnect(con)
-
+dbConnect(con)
+dbIsValid(con)
+dbDisconnect(con)
+dbIsValid(con)
 
 
 con <- dbConnect(RSQLite::SQLite(), "./mtcars.db")

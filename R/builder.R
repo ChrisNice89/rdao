@@ -80,15 +80,14 @@ Builder <- R6Class(
           dbq <- paste0("DBQ=", self$path)
           driver <-
             "Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
-          dbiDriver <- odbc::odbc()
+          dbiDriver <- odbc::odbc
           connectionstring <- paste0(driver, dbq)
-          connection <- dbConnect(dbiDriver, connectionstring)
+          return (sqlConnection$new(provider = self$builderProvider, dbiDriver,connectionstring))
         },
 
         sqlite = {
-          dbiDriver <- RSQLite::SQLite()
-          connectionstring <-  ":memory:"
-          connection <- DBI::dbConnect(RSQLite::SQLite(),  self$path)
+          dbiDriver <- RSQLite::SQLite
+          return (sqlConnection$new(provider = self$builderProvider, dbiDriver,self$path))
         },
 
         mySql = {
@@ -108,15 +107,6 @@ Builder <- R6Class(
           private$.validator$throwError(msg, prc)
         }
       )
-
-      # print(class(dbiDriver))
-      #  if (!is.function(dbiDriver)){
-      #    private$.validator$throwError("DBI driver nicht erkannt",prc)
-      #  } else {
-      #    private$.dbiDriver<-dbiDriver
-      #  }
-
-      return (sqlConnection$new(connection))
     },
 
     print = function(...) {
