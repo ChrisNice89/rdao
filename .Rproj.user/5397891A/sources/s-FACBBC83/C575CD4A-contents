@@ -54,7 +54,7 @@ sqlConnection <- R6Class(
       invisible(self$print())
     },
 
-    createCommand = function(sql) {
+    createQuery = function(sql) {
       return(sqlQuery$new(
         connection =  self,
         sql = sql
@@ -64,7 +64,6 @@ sqlConnection <- R6Class(
     execute = function(query,disconnectAfter=TRUE) {
       prc <- "execute()"
 
-      print(inherits(query, "SqlCommand"))
       if (inherits(query, "SqlCommand")) {
         switch(query$type,
                "1" = {

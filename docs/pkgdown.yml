@@ -1,6 +1,6 @@
 pandoc: 2.3.1
-pkgdown: 1.4.1
-pkgdown_sha: ~
+pkgdown: 1.4.1.9000
+pkgdown_sha: ee5b75b6f4455613fa72811a7f4fdf790b5a61b8
 articles:
   Framework: Framework.html
   Test: Test.html

@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "C575CD4A",
-    "lastKnownWriteTime" : 1572845839,
-    "last_content_update" : 1572845839479,
+    "lastKnownWriteTime" : 1572846121,
+    "last_content_update" : 1572846121673,
     "path" : "~/Dev/R/rdao/R/sqlConnection.R",
     "project_path" : "R/sqlConnection.R",
     "properties" : {
-        "cursorPosition" : "89,7",
-        "scrollLine" : "64"
+        "cursorPosition" : "66,26",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [

@@ -15,11 +15,11 @@ document()
 #
 # # vignettes
 # devtools::install_github("hadley/pkgdown")
-# library(pkgdown)
-# build_site()
+library(pkgdown)
+build_site()
 # #build vignette
 # use_vignette("Test")
-# rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
+ rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
 
 remove.packages("rdao")
 devtools::install_github("Chrisnice89/rdao")
@@ -27,10 +27,11 @@ library(rdao)
 f<-factory()
 b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 cnn<-b$build()
-cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
+cmd<-cnn$createQuery(sql = "Select * FROM diamonds")
 result<-cmd$execute()
 
-
+result<-cnn$createCommand(sql = "Select * FROM diamonds")
+cnn$isConnected()
 
 
 f<-factory()
