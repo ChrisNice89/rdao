@@ -34,7 +34,7 @@ sqlConnection <- R6Class(
     .credentials = list(),
     .checkConnection = function(proc) {
       if (is.null(private$.connection)) {
-        private$.validator.throwError(
+        private$.validator$throwError(
           paste(
             "Connection ist NULL und kann in <",
             proc,
