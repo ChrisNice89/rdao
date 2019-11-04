@@ -100,6 +100,7 @@ sqlConnection <- R6Class(
   )
 )
 
+# quasi interface
 dbFileConnection <- R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
