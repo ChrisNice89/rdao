@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*lines of R code:* 357, *lines of test code:* 0
+*lines of R code:* 556, *lines of test code:* 0
 
 Package Info
 ------------
 
 **Version**
 
-0.1.0 ( 2019-11-01 20:27:40 )
+0.1.0 ( 2019-11-04 05:42:01 )
 
 **Description**
 
@@ -102,10 +102,10 @@ Usage
     ## <Validator> for parent class: <SqlFactory> created
     ## <SqlFactory> created
 
-    b<-f$msAccess(path = "mypath_AccessDB")
+    b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 
     ## <Validator> for parent class: <Builder> created
-    ## <Builder>> for provider: <msAccess> created
+    ## <Builder>> for provider: <dbFile> created
 
     # some optional arguments for db access if required
     b$addCredentials(username = "Admin",password = "SesameOpen")
@@ -117,7 +117,16 @@ Usage
     cnn<-b$build()
 
     ## <Validator> for parent class: <SqlConnection> created
-    ## <SqlConnection> created
+    ## <SqlConnection>> for provider: <dbFile> created
+
+    qry<-cnn$createQuery(sql = "Select * FROM diamonds")
+
+    ## <Validator> for parent class: <SqlCommand> created
+    ## <Validator> for parent class: <SqlCommand> created
+    ## <SqlCommand> :: <Select * FROM diamonds>
+    ## for provider: <dbFile> created
+
+    result<-qry$execute()
 
 ### Get Connection Infos
 
