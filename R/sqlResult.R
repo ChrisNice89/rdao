@@ -71,6 +71,9 @@ sqlResult <- R6::R6Class(
       entities<-list()
 
       for(r in 1:nrow(private$.df)){
+        if((r%%10000)==0){
+          print("is executing...")
+        }
         entities[[r]]<-businessobject$new(index=r,private$.df)
       }
       return(entities)
