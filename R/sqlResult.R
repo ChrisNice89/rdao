@@ -60,16 +60,18 @@ sqlResult <- R6::R6Class(
       }else{
         private$.validator$throwError("Keine gültige Verbindung","initialize()")
       }
+
       self$data<-private$.df
       private$.validator$makeReadonly("data")
     },
 
-    Override=function(businessobject){
-      super$implement(businessobject,self$data)
+    override=function(businessobject){
+
+      super$implement(businessobject,private$.df)
       entities<-list()
 
-      for(r in nrow(self$data){
-        entities[[r]]<-businessobject$new(r,self$data)
+      for(r in 1:nrow(private$.df)){
+        entities[[r]]<-businessobject$new(index=r,private$.df)
       }
       return(entities)
     }
