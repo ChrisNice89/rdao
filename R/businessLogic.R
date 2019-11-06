@@ -303,9 +303,3 @@ diamondsFactory = function(connection) {
   return(IDiamonds$new(connection))
 }
 
-# cnn <-factory()$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")$build()
-# diamonds <- diamondsFactory(connection = cnn)
-# #result <- diamonds$loadDiamonds()
-# result <- diamonds$loadAll()$data
-# head(result)
-# head(result[[1]]$carat)

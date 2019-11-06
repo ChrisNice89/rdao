@@ -22,6 +22,23 @@ Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmust
 ## Vorwort
 
 
+
+
+
+```{r}
+# helper
+installer <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg))
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+packages<- c("devtools","R6","DBI")
+installer(packages)
+devtools::install_github("Chrisnice89/rdao")
+```
+
+
 ## Basics
 
 Laden des Pakets
@@ -45,8 +62,7 @@ class(f)
 ```
 
 Die `connectionFactory()` Funktion instanziert intern ein Objekt der Klasse 'SqlFactory'.
-Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen.
-Im weiteren Verlauf wird statt von Objekten auch der Begriff der Klasse benutzt.
+Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden um ein korrespondierendes Objekt zu erstellen.
 Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
 
 ```{r}
@@ -270,8 +286,7 @@ Im einfachsten Fall werden Klassen auf Tabellen abgebildet, jedes Objekt entspri
 ```{r}
 diamonds<-business$loadDiamonds()
 
-class(diamonds)
+class(diamonds[[1]])
 
-head(diamonds[[1]]$carat)
 ```
 

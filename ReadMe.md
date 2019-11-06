@@ -23,31 +23,30 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 849, *Zeilen Test code:* 0
+*Zeilen R code:* 843, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-06 01:18:33 )
+0.1.0 ( 2019-11-06 04:50:17 )
 
 **Beschreibung**
 
-Ein objektorientierter Ansatz f<c3><bc>r Datenbanken operationen. Data
-Access Object (DAO, englisch f<c3><bc>r Datenzugriffsobjekt) ist ein
+Data Access Object (DAO, englisch fuer Datenzugriffsobjekt) ist ein
 Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von
 Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die
 angesprochene Datenquelle ausgetauscht werden kann, ohne dass der
-aufrufende Code ge<c3><a4>ndert werden muss. Dadurch soll die
-eigentliche Programmlogik von technischen Details der Datenspeicherung
-befreit werden und flexibler einsetzbar sein. Ziel des OOP-Paradigmas
-soll eine verbesserte Wartbarkeit und Wiederverwendbarkeit des
-statischen Quellcodes sein.
+aufrufende Code geändert werden muss. Dadurch soll die eigentliche
+Programmlogik von technischen Details der Datenspeicherung befreit
+werden und flexibler einsetzbar sein. Ziel des OOP-Paradigmas soll eine
+verbesserte Wartbarkeit und Wiederverwendbarkeit des statischen
+Quellcodes sein.
 
 **Lizenz**
 
-<br>Christoph Nitz
+All rights reserved by the respective owner <br>Christoph Nitz
 
 **Installation**
 
@@ -60,22 +59,22 @@ Aktuelle Entwicklerversion auf Github:
 Dokumentation
 -------------
 
-Für weiterführende Informationen
-[Framework](docs/articles/Framework.html) und konkrete Anwendungen.
+Für weiterführende Informationen und konkrete Anwendungen:
+[Framework](docs/articles/Framework.html)
 
 Klassen
 -------
 
-**SqlConnection** : Das Herz und Arbeitstier aller Sql Objekte im
-Framework.
+**SqlConnection** : Das Herz des Frameworks. Steuert die Verbindung und
+Abfragen
 
-**SqlCommand** : x
+**SqlCommand** : Interface für CRUD Operationen
 
-**SqlResult** : x
+**SqlResult** : Ergebnis einer Abfrage
 
-**IDiamonds** : Interface zur Businesslogic
+**IDiamonds** : Interface zur Geschäftslgik (exemplarisch)
 
-**Diamond** : Konkrete Entity
+**Diamond** : Business entity (exemplarisch)
 
 ------------------------------------------------------------------------
 
@@ -104,7 +103,7 @@ Anwendung
     b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 
     ## <Validator> for parent class: <Builder> created
-    ## <Builder>> for provider: <dbFile> created
+    ## <Builder> for provider: <dbFile> created
 
     # Optionale Verbindungsparameter einstellen
     b$addCredentials(username = "Admin",password = "SesameOpen")
