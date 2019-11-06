@@ -53,7 +53,8 @@ Other sql: \code{\link{Builder}},
   \code{\link{Validator}}, \code{\link{businessLogic}},
   \code{\link{connectionFactory}},
   \code{\link{diamondsFactory}}, \code{\link{diamond}},
-  \code{\link{sqlCommand}}, \code{\link{sqlConnection}}
+  \code{\link{sqlCommand}}, \code{\link{sqlConnection}},
+  \code{\link{sqlInterface}}
 }
 \concept{sql}
 \keyword{data}

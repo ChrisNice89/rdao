@@ -40,5 +40,6 @@ Collate:
     'data.R'
     'package_rdao.R'
     'sqlFactory.R'
+    'sqlInterface.R'
     'zzz.R'
 VignetteBuilder: knitr

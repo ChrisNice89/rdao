@@ -1,3 +1,35 @@
+#' Abstrakte Klasse implementiert Interface
+#' 
+#' 
+#' @docType class
+#' @importFrom R6 R6Class
+#' @keywords data
+#' @family sql
+#'
+#' @section Construction:
+#' ```
+#' xxxxxxxxxxxxxxxxxxxxxx
+#' ```
+#'
+#' @return Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
+#' @format \code{\link{R6Class}} object.
+#' @examples
+#' xxxxxxxxxxxxxxxxxxxxxx
+#'
+#'
+#' @field x blabla.
+#' @field y blabla.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+#'   \item{\code{new()}}{xxx \code{Factory}.}
+#'   \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+#'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
+#'
+#' @include utils.R
+#'
+#'
 sqlInterface <- R6::R6Class(
   classname = "Abstarkt SqlResult Interface",
   inherit = NULL,
