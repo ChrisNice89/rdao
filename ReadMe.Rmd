@@ -101,18 +101,18 @@ devtools::install_github("chrisnice89/rdao")
 
 
 ## Dokumentation
-Für weiterführende Informationen und konkrete Anwendungen: [Framework](docs/articles/Framework.html)
+Für weiterführende Informationen und konkrete Anwendungen: [Framework](file:///rdao/vignettes/Framework.html)
 
 
 ## Klassen
 
-**SqlConnection** : Das Herz des Frameworks. Steuert die Verbindung und Abfragen
+**SqlConnection** : Steuert Verbindung und ist Basis des SqlCommands
 
 **SqlCommand** : Interface für CRUD Operationen
 
 **SqlResult** : Ergebnis einer Abfrage
 
-**IDiamonds** : Interface zur Geschäftslgik (exemplarisch) 
+**IDiamonds** : Interface zur Geschäftslogik (exemplarisch) 
 
 **Diamond** : Business entity (exemplarisch) 
 

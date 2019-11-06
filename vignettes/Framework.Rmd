@@ -15,7 +15,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ## Vorwort
 
 Da ich am 01.10 eine neue Stelle als Java Entwickler bei einer Bank angetreten habe und mich beruflich mit Datenbank Anwendungen und ORM (englisch object-relational mapping) beschäftige, habe ich das Projekt genutzt, um mich dieser Thematik in R anzunehmen.
-Neben der reinen (Objektorientierten) Programmierung stand dabei die Softwarepaketierung im Fokus. Dafür habe ich das Projekt als eigenständiges Paket umgesetzt und für die Distribution auf Github hochgeladen. 
+Neben der reinen (Objektorientierten) Programmierung stand dabei die Softwarepaketierung im Fokus. Dafür habe ich das Projekt als eigenständiges Paket umgesetzt und für die weitere Distribution auf Github hochgeladen. 
 
 Die kommentierung von Code habe ich aus Übersichtsgründen weggelassen und dafür mehr Aufwand in die Benennung von (sprechenden) Variablen und grundlegender Paketarchitektur aufgebracht. 
 Des Weiteren kann mit ?rdao::DieKlasse die Hilfe aufgerufen werden. Zeitlich war es mir leider nicht möglich, die Hilfe der einzelnen Klassen inhaltlich zu füllen.
@@ -111,11 +111,15 @@ builder.dbFile$credentials$username
 
 Unter Method chaining (engl. chaining = Verkettung) wird in der Welt der objektorientierten Programmierung (OOP) eine spezielle Syntax verstanden, die das Ausführen einer Reihe von Methoden eines Objektes beschreibt.
 
-### Anwendung
+## Anwendung
 
 Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
 
-## Eigenschaften
+Die konkrete Implementierung der Objekte wurde mit Hilfe von R6 Klassen umgesetzt. Aus programmatischen Gründen wurde dabei gänzlich auf aktive Bindungen innerhalb der Klassen verzichtet.
+Des Weiteren wird im Kern für die Kommunikation zwischen Datenbank(en) und der Anwednung auf das DBI Interface zurückgegriffen.
+
+
+### Eigenschaften
 
 * DAOs abstrahieren den Zugriff auf Datenbanken nicht vollständig, da sie nicht für die Transformation der Daten in die Struktur der Datenbank verantwortlich sind.
 * DAOs sind jeweils für ein spezielles Speichermedium optimiert. Der Zugriff auf dieses Medium wird über das vom DAO vorgegebene bzw. zu implementierende API vorgenommen.
@@ -159,7 +163,7 @@ spätere Änderungen – etwa ein Mehrphasen-Konstruktionsprozess statt einer Ei
 Es besteht eine enge Kopplung zwischen Produkt, konkretem Erbauer und den am Konstruktionsprozess beteiligten Klassen (hier die `SqlFactory` als Direktor).
 
 
-## Die Verbindung steuern
+## Die Verbindung
 
 ```{r}
 connection.dbFile$isConnected()
@@ -306,4 +310,18 @@ class(diamonds)
 class(diamonds[[1]])
 
 ```
+
+### Fazit
+
+Mit dem DBI- und dem R6 Paket existieren in R mächtige Werkzeuge zum entwickeln von Objektorientierten Datenbanklösungen.
+
+Die Anwendung kann als Blaupause für weitere Implementierungen dienen und vermittelt einen ersten Eindruck wie eine Objektorientierte Programmstruktur in R aussehen könnte.
+
+Aufgrund der Komplexität des Themas und der im Rahmen einer Projektarbeit bemessenen Zeit verbleiben viele offene Fragen:
+
+Wie könnten tatsächliche Interface implementiert werden?
+Wie schreibt die Anwendung das gemappte Objekt (effizient) zurück in die Datenbank?
+Wie könnte das SqlResult noch weiter gekapselt werden?
+
+
 
