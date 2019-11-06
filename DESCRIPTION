@@ -2,15 +2,17 @@ Package: rdao
 Type: Package
 Title: Data Access Object (DAO) framework for R
 Version: 0.1.0
-Date: 2019-010-01
+Date: 2019-011-05
 Author: Christoph Nitz
 Maintainer: Christoph Nitz <Christoph.Nitz89@gmail.com>
-Description: A object-oriented (R6 classes) framework around database actions that provides classes 
-    for simple CRUD actions (methods around SQL verbs) ... and many more.
-    A data access object (DAO) is an object that provides an abstract interface to 
-    some type of database or other persistence mechanism. 
-    By mapping application calls to the persistence layer, the DAO provides some specific data operations 
-    without exposing details of the database.
+Description: Ein objektorientierter Ansatz für Datenbanken operationen. 
+            Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche 
+            Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle 
+            ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. 
+            Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und 
+            flexibler einsetzbar sein.
+            Ziel des  OOP-Paradigmas soll eine verbesserte Wartbarkeit und Wiederverwendbarkeit des statischen Quellcodes sein.
+          
 License: All rights reserved by the respective owner
 Depends:
     R (>= 3.0.0)
