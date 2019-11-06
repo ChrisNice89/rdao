@@ -50,18 +50,13 @@ sqlFactory <- R6::R6Class(
       invisible(self$print())
     },
 
-    postgreSql= function(database = "test_db",
-                            uid = "postgres",
-                            pwd = "password",
-                            host = "localhost",
-                            port = 5432){
+    mySql= function(database="testDB",
+                    uid = "mysql",
+                    pwd = "password",
+                    host = "localhost",
+                    port = 5432){
 
-      dbiDriver<-"odbc::odbc()"
-      driver <- "PostgreSQL Driver"
-    },
-
-    mySql= function(path,dbpassword=""){
-      return(Builder$new(provider = "mySql",path = path))
+      return(Builder$new(provider = "mySql"))
     },
 
     msAccess= function(path,dbpassword=""){

@@ -11,11 +11,10 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
+
 Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
 
 ## Eigenschaften
-
-Unlike many objects in R, instances (objects) of R6 classes have reference semantics. R6 classes also support:
 
 * DAOs abstrahieren den Zugriff auf Datenbanken nicht vollständig, da sie nicht für die Transformation der Daten in die Struktur der Datenbank verantwortlich sind.
 * DAOs sind jeweils für ein spezielles Speichermedium optimiert. Der Zugriff auf dieses Medium wird über das vom DAO vorgegebene bzw. zu implementierende API vorgenommen.
@@ -24,30 +23,52 @@ Unlike many objects in R, instances (objects) of R6 classes have reference seman
 
 ### Basics
 
-Here's how to create a simple DAO Connection. 
+Zugriff auf das Paket
 
 ```{r}
 library(rdao)
-
 ```
 
-To instantiate an object of this class, use `factory()`:
+Um ein Objekt aus dem Paket verwenden zu können, muss eine 'factory()' Funktion aufgerufen werden`:
 
 ```{r}
-f <- factory()
+f <- connectionFactory()
+class(f)
 ```
 
-The `factory()` function creates an SqlFactory instance and calls the `initialize()` method, if it exists.
-
-Once the Factory is instantiated, you can access values and methods with `$`:
+Die `connectionFactory()` Funktion instanziert intern ein Objekt vom Typ 'SqlFactory'.
+Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen. Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
 
 ```{r}
-f<-factory()
-b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
-cnn<-b$build()
-cmd<-cnn$createQuery(sql = "Select * FROM diamonds")
-result<-cmd$execute()
+#Für ein db File
+b.dbFile<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+class(b.dbFile)
+
+#Für eine MS Access Db
+b.Access<-f$msAccess("/dont exisist")
+
+#Für MySql / Nicht implementiert
+b.mySql<-f$mySql(database = "test_db",uid = "mySql",pwd = "password",host = "localhost",port = 5432)
 ```
+
+Methoden und Felder (properties)
+
+```{r}
+#Methode () ohne Parameterübergabe
+b.dbFile$addCredentials()
+
+#Methode () mitParameterübergabe
+b.dbFile$add$addCredentials(username = "Admin",password = "SesameOpen")
+
+#Feld zugriff ohne abschließende ()
+b.dbFile$Credentials
+
+```
+
+Die Methoden der `SqlFactory()` instanzieren intern ein Objekt vom Typ 'Builder'.
+
+Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen. Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
+
 
 Implementation note: The external face of an R6 object is basically an environment with the public members in it. This is also known as the *public environment*. An R6 object's methods have a separate *enclosing environment* which, roughly speaking, is the environment they "run in". This is where `self` binding is found, and it is simply a reference back to public environment.
 

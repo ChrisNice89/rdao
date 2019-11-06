@@ -119,12 +119,12 @@ Builder <- R6::R6Class(
       )
     },
 
-    print = function(...) {
+    print = function() {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
       if (private$.validator$isCharacter(self$builderProvider) ) {
         msg <-
-          paste(msg, "> for provider: <", self$builderProvider, ">", sep = "")
+          paste(msg, " for provider: <", self$builderProvider, ">", sep = "")
       }
 
       cat(msg, " created", "\n", sep = "")
