@@ -62,8 +62,7 @@ Builder <- R6::R6Class(
     addCredentials = function(username = "",
                               password = "") {
       private$.validator$makeReadwrite("credentials")
-      self$credentials <-
-        Credentials$new(username = username, password = password)
+      self$credentials <-Credentials$new(username = username, password = password)
       private$.validator$makeReadonly("credentials")
       invisible(self)
     },
@@ -101,19 +100,18 @@ Builder <- R6::R6Class(
         },
 
         mySql = {
-          connectionstring <- "MySql"
+          msg <- paste("Noch nicht implementiert:", self$builderProvider)
+          private$.validator$throwError(msg, prc)
         },
 
         msSql = {
-          connectionstring <- "msSql"
+          msg <- paste("Noch nicht implementiert:", self$builderProvider)
+          private$.validator$throwError(msg, prc)
         },
 
         {
           msg <-
-            paste("Provider: <",
-                  self$builderProvider,
-                  "> nicht implementiert",
-                  sep = "")
+            msg <- paste("Noch nicht implementiert:", self$builderProvider)
           private$.validator$throwError(msg, prc)
         }
       )
@@ -132,5 +130,4 @@ Builder <- R6::R6Class(
     }
   )
 )
-
 

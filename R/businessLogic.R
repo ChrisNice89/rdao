@@ -101,7 +101,7 @@ businessLogic <- R6::R6Class(
           "Nur folgende Qualitäten können abgefragt werden:",
           paste(private$.qualityMap$getKeys(), collapse = ";")
         ),
-        "loadColumns()")
+        "loadQuality()")
       } else{
         sql.raw <- "SELECT * FROM diamonds WHERE cut IN (%s)"
         sql <- sprintf(sql.raw, paste0("\"",paste(quality,collapse=","), "\"", collapse = ","))

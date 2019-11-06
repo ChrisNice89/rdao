@@ -11,7 +11,6 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-
 Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
 
 ## Eigenschaften
@@ -20,56 +19,259 @@ Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmust
 * DAOs sind jeweils für ein spezielles Speichermedium optimiert. Der Zugriff auf dieses Medium wird über das vom DAO vorgegebene bzw. zu implementierende API vorgenommen.
 * DAOs minimieren den Portierungsaufwand einer Anwendung beim Wechsel des Speichermediums.
 
+## Vorwort
 
-### Basics
 
-Zugriff auf das Paket
+## Basics
+
+Laden des Pakets
 
 ```{r}
 library(rdao)
 ```
 
-Um ein Objekt aus dem Paket verwenden zu können, muss eine 'factory()' Funktion aufgerufen werden`:
+Für den Testlauf des Paketes den Pfad zur db (Gitub-Ordner: "db files external/Diamonds.db") in einer Variablen ablegen:
+
+```{r}
+path<-"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"
+```
+
+Um eine Klasse aus dem Paket verwenden zu können, muss eine 'factory()' Funktion aufgerufen werden.
+Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten:
 
 ```{r}
 f <- connectionFactory()
 class(f)
 ```
 
-Die `connectionFactory()` Funktion instanziert intern ein Objekt vom Typ 'SqlFactory'.
-Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen. Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
+Die `connectionFactory()` Funktion instanziert intern ein Objekt der Klasse 'SqlFactory'.
+Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen.
+Im weiteren Verlauf wird statt von Objekten auch der Begriff der Klasse benutzt.
+Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
 
 ```{r}
 #Für ein db File
-b.dbFile<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
-class(b.dbFile)
+builder.dbFile<-f$dbFile(path)
+
+class(builder.dbFile)
 
 #Für eine MS Access Db
-b.Access<-f$msAccess("/dont exisist")
+builder.Access<-f$msAccess("/file doesnt exisist")
 
 #Für MySql / Nicht implementiert
-b.mySql<-f$mySql(database = "test_db",uid = "mySql",pwd = "password",host = "localhost",port = 5432)
+builder.mySql<-f$mySql(database = "test_db",uid = "mySql",pwd = "password",host = "localhost",port = 5432)
 ```
 
-Methoden und Felder (properties)
+Methoden und Felder (properties):
 
 ```{r}
-#Methode () ohne Parameterübergabe
-b.dbFile$addCredentials()
+#Methode ohne Parameterübergabe 
+builder.dbFile$addCredentials()
 
-#Methode () mitParameterübergabe
-b.dbFile$add$addCredentials(username = "Admin",password = "SesameOpen")
+#Methode mit Parameterübergabe
+builder.dbFile$addCredentials(username = "Admin",password = "SesameOpen")
 
-#Feld zugriff ohne abschließende ()
-b.dbFile$Credentials
+#Zugriff auf Felder ohne abschließende '()'
+builder.dbFile$path
+
+#Zuweisung eines Wertes zu einem Feld
+builder.dbFile$path<-"new path"
+builder.dbFile$path
+builder.dbFile$path<-path
+
+#Readonly Feld - Wert des Feldes kann nicht geändert werden #Error!
+builder.dbFile$builderProvider
+
+#builder.dbFile$builderProvider<-"msAccess"
+#Fehler in builder.dbFile$builderProvider <- "msAccess" : 
+#kann den Wert einer festgestellten Bindung für 'builderProvider' nicht ändern
+```
+
+Methoden Verkettung:
+
+```{r}
+class(builder.dbFile$credentials)
+builder.dbFile$credentials$username
+```
+
+Unter Method chaining (engl. chaining = Verkettung) wird in der Welt der objektorientierten Programmierung (OOP) eine spezielle Syntax verstanden, die das Ausführen einer Reihe von Methoden eines Objektes beschreibt.
+
+### Anwendung
+
+Die Methoden der `SqlFactory` instanzieren intern ein Objekt vom Typ 'Builder'.
+Der Erbauer (englisch builder) ist ein Entwurfsmuster (buildern pattern) aus dem Bereich der Softwareentwicklung. Es gehört zur Kategorie der Erzeugungsmuster und trennt die Konstruktion komplexer Objekte von deren Repräsentationen, wodurch dieselben Konstruktionsprozesse wiederverwendet werden können.
+
+Der Einsatz des Erbauer-Entwurfsmusters bietet sich an, wenn
+
+**1**
+Zu einem komplexen Objekt unterschiedliche Repräsentationen existieren sollen
+
+**2**
+Die Konstruktion eines komplexen Objekts unabhängig von der Erzeugung der Bestandteile sein soll
+
+**3**
+Der Konstruktionsablauf einen internen Zustand erfordert, der vor einem Klienten verborgen werden soll
+
+Erstellen einer Verbindung mit`builder$build()`
+
+```{r}
+connection.dbFile<-builder.dbFile$build()
+
+class(connection.dbFile)
+
+#connection.Accees<-builder.Access$build()
+#Fehler: <Builder>
+#Proc: <build()>
+#Beschreibung: <Ungültiger Pfad "/file doesnt exisist"> 
+
+#connection.dbFile<-builder.mySql$build()
+#Fehler: <Builder>
+#Proc: <build()>
+#Beschreibung: <Noch nicht implementiert: mySql> 
+```
+
+Der Konstruktionsprozess wird an einer dedizierten Stelle (im `Builder`) gesteuert; 
+spätere Änderungen – etwa ein Mehrphasen-Konstruktionsprozess statt einer Einphasen-Konstruktion – lassen sich ohne Änderung der Klienten realisieren.
+Es besteht eine enge Kopplung zwischen Produkt, konkretem Erbauer und den am Konstruktionsprozess beteiligten Klassen (hier die `SqlFactory` als Direktor).
+
+## Die Verbindung steuern
+
+```{r}
+connection.dbFile$isConnected()
+connection.dbFile$connect()
+connection.dbFile$isConnected()
+connection.dbFile$disconnect()
+connection.dbFile$isConnected()
+```
+
+Die SqlConnection Klasse verwendet in seinem Nucleus das R Paket DBI. Im Gegensatz zu diesem erzeugt der Builder aber per default eine geschlossene Verbindung.
+Diese kann explizit per `connect()` geöffnet oder `disconnect()` geschlossen werden. Weitere Details zum Verhalten der Connection Klasse werden nächsten Abschnitt näher erläutert.
+Die Methoden zum steuern der der Verbindung geben jeweils einen boolean Wert als Indikator zurück.
+
+## Abfragen
+
+```{r}
+query<-connection.dbFile$createQuery(sql = "SELECT * FROM diamonds")
+
+class(query)
+
+query$provider
+
+query$sql
+
+#query$sql<-"SELECT * FROM diamonds"
+#Fehler in query$sql <- "SELECT * FROM emeralds" : 
+#kann den Wert einer festgestellten Bindung für 'sql' nicht ändern
+```
+
+Mit `createQuery()` instanziiert die `SqlConnection` ein SqlCommand. Die Klasse dient als CRUD (Create, Read, Update, Delete) Interface.
+Die aktuelle Implementierung kann SQL Statements nur als Konkatenation verarbeiten. Um SQL-Injection (dt. SQL-Einschleusung) zu unterbinden sowie die Flexibilität zu erhöhen, könnte in einem zukünftigen Release parametrisierte Abfragen implementiert werden.
+
+Im Vergleich:
+
+```{r}
+quality<-"Premium"
+
+#quality<-"Premium"
+query.premium<-connection.dbFile$createQuery(sql = "SELECT * FROM diamonds WHERE cut=?")
+#qquery.premium$addParameter(name="quality", value= quality)
+query.premium$sql
+
+query.premium<-connection.dbFile$createQuery(sql = paste("SELECT * FROM diamonds WHERE cut='",quality,"'",sep=""))
+query.premium$sql
+```
+
+Mit `createQuery()` instanziiert die `SqlConnection` ein SqlCommand. Die Klasse dient als CRUD (Create, Read, Update, Delete) Interface.
+Die aktuelle Implementierung kann SQL Statements nur als Konkatenation verarbeiten. Um SQL-Injection (dt. SQL-Einschleusung) zu unterbinden sowie die Flexibilität zu erhöhen, könnte in einem zukünftigen Release parametrisierte Abfragen implementiert werden. Darauf aufbauend kann das SqlCommand dann um die Möglichkeit des Prepared Statements erweitert werden. Ein Prepared Statement ist eine sogenannte vorbereitete Anweisung für ein Datenbanksystem. Im Gegensatz zu gewöhnlichen Statements enthält es noch keine Parameterwerte. Stattdessen werden dem Datenbanksystem Platzhalter übergeben. Soll ein Statement mit unterschiedlichen Parametern mehrere Male (z. B. innerhalb einer Schleife) auf dem Datenbanksystem ausgeführt werden, können Prepared Statements einen Geschwindigkeitsvorteil bringen, da das Statement schon vorübersetzt im Datenbanksystem vorliegt und nur noch mit den neuen Parametern ausgeführt werden muss.
+
+## Ergebniss einer Abfrage
+
+Mit `fetch()` wird die Query ausgeführt und die `SqlConnection` liefert über das `SqlCommand` Interface ein Objekt der Klasse `SqlResult` zurück.
+Handelt es sich bei der Abfrage um eine SQL-Aktionsabfrage, bspw.ein "INSERT" oder "DELETE" wird die Query mit dem Befehl `execute()` ausgeführt und als Ergebnis wird die Anzahl der vom SQL-Statement betroffenen Datensätze zurück geliefert.
+
+```{r}
+result<-query$fetch()
+
+result$rows()
+
+class(result)
+```
+
+Mit `data` kann direkt auf die Daten zugegriffen werden:
+
+```{r}
+#(Achtung Feld Zugriff)
+head(result$data)
+
+#result$data<-NULL
+#Fehler in result$data <- NULL : 
+#kann den Wert einer festgestellten Bindung für 'data' nicht ändern
+```
+
+## Verhalten der Verbindung bei einer Abfrage
+
+```{r}
+connection.dbFile$isConnected()
+
+result.premium<-query.premium$fetch(disconnect = TRUE)
+
+connection.dbFile$isConnected()
+
+head(result.premium$data)
+```
+
+Die Verbindung wird nur für einen Task geöffnet und anschließend sofort wieder geschlossen. Der optionale Steuerungsparameter `disconnect` ist per default auf TRUE gesetzt.
+
+## Testlauf
+
+Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale Datenbanken Daten in Tabellen ab. Die beiden Paradigmen sind grundlegend verschieden. So kapseln Objekte ihren Zustand und ihr Verhalten hinter einer Schnittstelle und haben eine eindeutige Identität.
+
+
+## Geschäftslogik
+
+```{r}
+business<-diamondsFactory(connection.dbFile)
+
+class(business)
+
+diamonds.best<-business$loadBestQuality()
+
+head(diamonds.best$data)
+
+diamonds.selected<-business$loadColumns("carat","color")
+
+head(diamonds.selected$data)
 
 ```
 
-Die Methoden der `SqlFactory()` instanzieren intern ein Objekt vom Typ 'Builder'.
+Innerhalb der Businesslogik werden die relationen Zusammenhänge der zugrundeligenden Datenbank implementiert.
+Die Businesslogik kann um komplexe SQL-Abfragen über meherere Tabellen sowie weiterverarbeitende, Clientseitige Dunkelverabreitung erweitert werden.
+Beispiel: Kreditdaten kommen aus der Datenbank in der Businesslogik an, fließen in der Businesslogik in ein Prognosemodell und werden dann erst ans Frontend geliefert.
 
-Sobald die factory geladen wurde, kann diese jederzeit wieder verwendet werden, um ein korrespondierendes Objekt zu erstellen. Eigenschaften und Methoden der instanzierten Objekte können mit `$` aufgerufen werden:
+## Errorhandling
 
+```{r}
+diamonds.lowbudget<-business$loadQuality("Poor","Fair", "Good")
 
-Implementation note: The external face of an R6 object is basically an environment with the public members in it. This is also known as the *public environment*. An R6 object's methods have a separate *enclosing environment* which, roughly speaking, is the environment they "run in". This is where `self` binding is found, and it is simply a reference back to public environment.
+diamonds.lowbudget<-business$loadQuality("Fair", "Good")
 
-### Next section
+head(diamonds.lowbudget$data)
+```
+
+Das Errorhandling wird ebenfalls in der Businesslogik abgebildet.
+
+## Objektrelationale Abbildung
+
+Des Weiteren kann mit Hilfe von Objekt-orientierter Programmierung und dem `rdao` framework eine Objektrelationale Abbildung dagestellt werden.
+Eine Objektrelationale Abbildung (englisch object-relational mapping, ORM) ist eine Technik der Softwareentwicklung, mit der ein in einer objektorientierten Programmiersprache geschriebenes Anwendungsprogramm seine Objekte in einer relationalen Datenbank ablegen kann. Dem Programm erscheint die Datenbank dann als objektorientierte Datenbank, was die Programmierung erleichtert.
+
+Im einfachsten Fall werden Klassen auf Tabellen abgebildet, jedes Objekt entspricht einer Tabellenzeile und für jedes Attribut wird eine Tabellenspalte reserviert. Die Identität eines Objekts entspricht dem Primärschlüssel der Tabelle:
+
+```{r}
+diamonds<-business$loadDiamonds()
+
+class(diamonds)
+
+head(diamonds[[1]]$carat)
+```
+
