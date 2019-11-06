@@ -1,6 +1,6 @@
 -   [Data Access Object (DAO) framework for
     R](#data-access-object-dao-framework-for-r)
-    -   [Package Info](#package-info)
+    -   [Packet Info](#packet-info)
     -   [Dokumentation](#dokumentation)
     -   [Klassen](#klassen)
     -   [Anwendung](#anwendung)
@@ -23,28 +23,31 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*lines of R code:* 849, *lines of test code:* 0
+*Zeilen R code:* 849, *Zeilen Test code:* 0
 
-Package Info
-------------
+Packet Info
+-----------
 
 **Version**
 
-0.1.0 ( 2019-11-06 00:23:18 )
+0.1.0 ( 2019-11-06 01:18:33 )
 
-**Description**
+**Beschreibung**
 
-A object-oriented (R6 classes) framework around database actions that
-provides classes for simple CRUD actions (methods around SQL verbs) …
-and many more. A data access object (DAO) is an object that provides an
-abstract interface to some type of database or other persistence
-mechanism. By mapping application calls to the persistence layer, the
-DAO provides some specific data operations without exposing details of
-the database.
+Ein objektorientierter Ansatz f<c3><bc>r Datenbanken operationen. Data
+Access Object (DAO, englisch f<c3><bc>r Datenzugriffsobjekt) ist ein
+Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von
+Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die
+angesprochene Datenquelle ausgetauscht werden kann, ohne dass der
+aufrufende Code ge<c3><a4>ndert werden muss. Dadurch soll die
+eigentliche Programmlogik von technischen Details der Datenspeicherung
+befreit werden und flexibler einsetzbar sein. Ziel des OOP-Paradigmas
+soll eine verbesserte Wartbarkeit und Wiederverwendbarkeit des
+statischen Quellcodes sein.
 
-**License**
+**Lizenz**
 
-All rights reserved by the respective owner <br>Christoph Nitz
+<br>Christoph Nitz
 
 **Installation**
 

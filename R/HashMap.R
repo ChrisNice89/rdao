@@ -43,7 +43,7 @@
 #'   \item{\code{put(key = "", value = NA)}}{store key-value pair(s)}
 #'   \item{\code{get(key,unname=TRUE)}}{access item(s) with associated key(s)}}
 #' @family utils
-#' @export
+#'
 
 HashMap <- R6::R6Class(
   classname = "HashMap",

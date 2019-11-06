@@ -12,7 +12,6 @@ Description: Ein objektorientierter Ansatz für Datenbanken operationen.
             Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und 
             flexibler einsetzbar sein.
             Ziel des  OOP-Paradigmas soll eine verbesserte Wartbarkeit und Wiederverwendbarkeit des statischen Quellcodes sein.
-          
 License: All rights reserved by the respective owner
 Depends:
     R (>= 3.0.0)

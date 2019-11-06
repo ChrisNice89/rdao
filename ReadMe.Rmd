@@ -47,10 +47,10 @@ length.tests <- length(grep("(^\\s*$)|(^\\s*#)|(^\\s*//)", lines.tests,  value =
 length.cpp   <- length(grep("(^\\s*$)|(^\\s*#)|(^\\s*//)", lines.cpp,  value = TRUE, invert = TRUE))
 ```
 
-*lines of R code:* `r length.R`, *lines of test code:* `r length.tests`
+*Zeilen R code:* `r length.R`, *Zeilen Test code:* `r length.tests`
 
 
-## Package Info
+## Packet Info
 
 **Version**
 
@@ -73,14 +73,14 @@ cat(tmp$Version, "(",last_change,")")
 ```
 
 
-**Description**
+**Beschreibung**
 
 ```{r, results='asis', echo=FALSE}
 cat(tmp$Description)
 ```
 
 
-**License**
+**Lizenz**
 
 ```{r, results='asis', echo=FALSE}
 cat(tmp$License, "<br>")
