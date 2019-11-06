@@ -5,8 +5,7 @@ Version: 0.1.0
 Date: 2019-011-05
 Author: Christoph Nitz
 Maintainer: Christoph Nitz <Christoph.Nitz89@gmail.com>
-Description: Ein objektorientierter Ansatz für Datenbanken operationen. 
-            Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche 
+Description: Data Access Object (DAO, englisch fuer Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche 
             Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle 
             ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. 
             Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und 
