@@ -11,19 +11,18 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
-
-## Eigenschaften
-
-* DAOs abstrahieren den Zugriff auf Datenbanken nicht vollständig, da sie nicht für die Transformation der Daten in die Struktur der Datenbank verantwortlich sind.
-* DAOs sind jeweils für ein spezielles Speichermedium optimiert. Der Zugriff auf dieses Medium wird über das vom DAO vorgegebene bzw. zu implementierende API vorgenommen.
-* DAOs minimieren den Portierungsaufwand einer Anwendung beim Wechsel des Speichermediums.
 
 ## Vorwort
 
+Da ich am 01.10 eine neue Stelle als Java Entwickler bei einer Bank angetreten habe und mich beruflich mit Datenbank Anwendungen und ORM (englisch object-relational mapping) beschäftige, habe ich das Projekt genutzt, um mich dieser Thematik in R anzunehmen.
+Neben der reinen (Objektorientierten) Programmierung stand dabei die Softwarepaketierung im Fokus. Dafür habe ich das Projekt als eigenständiges Paket umgesetzt und für die Distribution auf Github hochgeladen. 
 
+Die kommentierung von Code habe ich aus Übersichtsgründen weggelassen und dafür mehr Aufwand in die Benennung von (sprechenden) Variablen und grundlegender Paketarchitektur aufgebracht. 
+Des Weiteren kann mit ?rdao::DieKlasse die Hilfe aufgerufen werden. Zeitlich war es mir leider nicht möglich, die Hilfe der einzelnen Klassen inhaltlich zu füllen.
 
+Aus technischen Gründen musste ich während der Entwicklung von einer Access Datenbank abweichen. Alternativ habe ich daher aus dem Diamond Datensatz eine .db Datei erstellt und diese unter "rdao/db files external/Diamonds.db" auf Github abgelegt. Der originale Datensatz kann dem Paket nach dem Laden mit rdao::diamonds (siehe ?rdao::diamonds) entnommen werden.
 
+## Installation
 
 ```{r}
 # helper
@@ -114,6 +113,14 @@ Unter Method chaining (engl. chaining = Verkettung) wird in der Welt der objekto
 
 ### Anwendung
 
+Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
+
+## Eigenschaften
+
+* DAOs abstrahieren den Zugriff auf Datenbanken nicht vollständig, da sie nicht für die Transformation der Daten in die Struktur der Datenbank verantwortlich sind.
+* DAOs sind jeweils für ein spezielles Speichermedium optimiert. Der Zugriff auf dieses Medium wird über das vom DAO vorgegebene bzw. zu implementierende API vorgenommen.
+* DAOs minimieren den Portierungsaufwand einer Anwendung beim Wechsel des Speichermediums.
+
 Die Methoden der `SqlFactory` instanzieren intern ein Objekt vom Typ 'Builder'.
 Der Erbauer (englisch builder) ist ein Entwurfsmuster (buildern pattern) aus dem Bereich der Softwareentwicklung. Es gehört zur Kategorie der Erzeugungsmuster und trennt die Konstruktion komplexer Objekte von deren Repräsentationen, wodurch dieselben Konstruktionsprozesse wiederverwendet werden können.
 
@@ -127,6 +134,7 @@ Die Konstruktion eines komplexen Objekts unabhängig von der Erzeugung der Besta
 
 **3**
 Der Konstruktionsablauf einen internen Zustand erfordert, der vor einem Klienten verborgen werden soll
+
 
 Erstellen einer Verbindung mit`builder$build()`
 
@@ -150,6 +158,7 @@ Der Konstruktionsprozess wird an einer dedizierten Stelle (im `Builder`) gesteue
 spätere Änderungen – etwa ein Mehrphasen-Konstruktionsprozess statt einer Einphasen-Konstruktion – lassen sich ohne Änderung der Klienten realisieren.
 Es besteht eine enge Kopplung zwischen Produkt, konkretem Erbauer und den am Konstruktionsprozess beteiligten Klassen (hier die `SqlFactory` als Direktor).
 
+
 ## Die Verbindung steuern
 
 ```{r}
@@ -161,8 +170,9 @@ connection.dbFile$isConnected()
 ```
 
 Die SqlConnection Klasse verwendet in seinem Nucleus das R Paket DBI. Im Gegensatz zu diesem erzeugt der Builder aber per default eine geschlossene Verbindung.
-Diese kann explizit per `connect()` geöffnet oder `disconnect()` geschlossen werden. Weitere Details zum Verhalten der Connection Klasse werden nächsten Abschnitt näher erläutert.
+Diese kann explizit per `connect()` geöffnet oder `disconnect()` geschlossen werden. Weitere Details zum Verhalten der Connection Klasse werden im nächsten Abschnitt näher erläutert.
 Die Methoden zum steuern der der Verbindung geben jeweils einen boolean Wert als Indikator zurück.
+
 
 ## Abfragen
 
@@ -238,9 +248,14 @@ head(result.premium$data)
 
 Die Verbindung wird nur für einen Task geöffnet und anschließend sofort wieder geschlossen. Der optionale Steuerungsparameter `disconnect` ist per default auf TRUE gesetzt.
 
+
 ## Testlauf
 
 Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale Datenbanken Daten in Tabellen ab. Die beiden Paradigmen sind grundlegend verschieden. So kapseln Objekte ihren Zustand und ihr Verhalten hinter einer Schnittstelle und haben eine eindeutige Identität.
+
+Für den Testlauf wird der diamonds Datensatz verwendet und beispielhaft eine einfache (fiktive) Geschäftslogik bestehend aus einer Tabelle sowie nur lesenden Aufgaben angenommen.
+
+Im Testlauf soll exemplarisch dargestellt werden, welche Möglichkeiten R im Bereich der Objektorientierten Programmierung bietet und wie eine größere Datenbank Anwendung strukturiert nach den Grundsätzen der Objektorientierung implementiert werden könnte.
 
 
 ## Geschäftslogik
@@ -285,6 +300,8 @@ Im einfachsten Fall werden Klassen auf Tabellen abgebildet, jedes Objekt entspri
 
 ```{r}
 diamonds<-business$loadDiamonds()
+
+class(diamonds)
 
 class(diamonds[[1]])
 
