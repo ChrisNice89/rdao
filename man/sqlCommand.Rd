@@ -3,46 +3,57 @@
 \docType{class}
 \name{sqlCommand}
 \alias{sqlCommand}
-\title{Class providing some methods to for CRUD actions}
+\title{SqlCommand
+Führt Anweisungen, gespeicherte Prozeduren und Aktionsabfragen aus.
+Dazu gehören unter anderem SELECT-,UPDATE- oder DELETE-Kommandos.}
 \format{\code{\link{R6Class}} object.}
 \usage{
 sqlCommand
 }
 \value{
-Object of \code{\link{R6Class}} with methods for communication with a database (server)
+Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
 }
 \description{
-Class providing some methods to for CRUD actions
+SqlCommand
+Führt Anweisungen, gespeicherte Prozeduren und Aktionsabfragen aus.
+Dazu gehören unter anderem SELECT-,UPDATE- oder DELETE-Kommandos.
 }
 \section{Fields}{
 
 \describe{
-\item{\code{}}{}
+\item{\code{x}}{blabla.}
+
+\item{\code{y}}{blabla.}
 }}
 
 \section{Construction}{
 
 ```
-sqlConnection$new()
+xxxxxxxxxxxxxxxxxxxxxx
 ```
 }
 
 \section{Methods}{
 
 \describe{
-  \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
-  \item{\code{new()}}{This method creates a sqlConnection \code{instance}.}
-  \item{\code{isString((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}
-  \item{\code{isNumeric((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}}
+  \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+  \item{\code{new()}}{xxx \code{Factory}.}
+  \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+  \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 }
 
 \examples{
-# cnn<-sqlConnection$new(connectionstring = "myconnectionstring")
+xxxxxxxxxxxxxxxxxxxxxx
+
+
 }
 \seealso{
 Other sql: \code{\link{Builder}},
-  \code{\link{Credentials}}, \code{\link{factory}},
-  \code{\link{sqlConnection}}
+  \code{\link{Credentials}}, \code{\link{IDiamonds}},
+  \code{\link{Validator}}, \code{\link{businessLogic}},
+  \code{\link{connectionFactory}},
+  \code{\link{diamondsFactory}}, \code{\link{diamond}},
+  \code{\link{sqlConnection}}, \code{\link{sqlResult}}
 }
 \concept{sql}
-\keyword{command}
+\keyword{data}

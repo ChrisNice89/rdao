@@ -29,16 +29,16 @@ Encoding: UTF-8
 LazyData: true
 Collate: 
     'HashMap.R'
-    'zzz.R'
     'utils.R'
-    'sqlFactory.R'
+    'sqlResult.R'
+    'sqlCommand.R'
+    'sqlConnection.R'
+    'credentials.R'
     'builder.R'
     'businessLogic.R'
-    'credentials.R'
     'crud.R'
     'data.R'
     'package_rdao.R'
-    'sqlConnection.R'
-    'sqlCommand.R'
-    'sqlResult.R'
+    'sqlFactory.R'
+    'zzz.R'
 VignetteBuilder: knitr

@@ -3,46 +3,56 @@
 \docType{class}
 \name{Validator}
 \alias{Validator}
-\title{Class providing some methods to validate data}
+\title{Validator für Checks und Fehlermeldungen.
+Exemplarischd implementierung. Sollte weiter ausgebaut werden.}
 \format{\code{\link{R6Class}} object.}
 \usage{
 Validator
 }
 \value{
-Object of \code{\link{R6Class}} with methods for communication with a database (server)
+Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
 }
 \description{
-Class providing some methods to validate data
+Validator für Checks und Fehlermeldungen.
+Exemplarischd implementierung. Sollte weiter ausgebaut werden.
 }
 \section{Fields}{
 
 \describe{
-\item{\code{sessionid}}{Stores id of your current session on the server.}
+\item{\code{x}}{blabla.}
+
+\item{\code{y}}{blabla.}
 }}
 
 \section{Construction}{
 
 ```
-Validator$new()
+xxxxxxxxxxxxxxxxxxxxxx
 ```
 }
 
 \section{Methods}{
 
 \describe{
-  \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
-  \item{\code{new()}}{This method creates a validator \code{instance}.}
-  \item{\code{isString((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}
-  \item{\code{isNumeric((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}}
+  \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+  \item{\code{new()}}{xxx \code{Factory}.}
+  \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+  \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 }
 
 \examples{
-validate<-Validator$new()
-validate$isNumerix("1") -> throws error
+xxxxxxxxxxxxxxxxxxxxxx
+
 
 }
 \seealso{
-Other utils: \code{\link{HashMap}}
+Other sql: \code{\link{Builder}},
+  \code{\link{Credentials}}, \code{\link{IDiamonds}},
+  \code{\link{businessLogic}},
+  \code{\link{connectionFactory}},
+  \code{\link{diamondsFactory}}, \code{\link{diamond}},
+  \code{\link{sqlCommand}}, \code{\link{sqlConnection}},
+  \code{\link{sqlResult}}
 }
-\concept{utils}
-\keyword{checks}
+\concept{sql}
+\keyword{data}
