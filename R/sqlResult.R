@@ -66,6 +66,12 @@ sqlResult <- R6::R6Class(
 
     Override=function(businessobject){
       super$implement(businessobject,self$data)
+      entities<-list()
+
+      for(r in nrow(self$data){
+        entities[[r]]<-businessobject$new(r,self$data)
+      }
+      return(entities)
     }
   )
 )

@@ -41,6 +41,8 @@ sqlInterface <- R6::R6Class(
   ),
   private = list(
     implement = function(businessObject, df) {
+      print(class(businessObject))
+      
       businessObject$set("private", ".df", NULL, overwrite = TRUE)
       businessObject$set("public", "index", NULL, overwrite = TRUE)
       
