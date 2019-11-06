@@ -141,7 +141,7 @@
         <td>
           <p><code><a href="Builder.html">Builder</a></code> </p>
         </td>
-        <td><p>Class providing methods for building connection object</p></td>
+        <td><p>Builder liefert die Bausteine zum erstellen einer Datenbankverbindung</p></td>
       </tr><tr>
         
         <td>
@@ -157,9 +157,34 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="IDiamonds.html">IDiamonds</a></code> </p>
+        </td>
+        <td><p>business interface</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="Validator.html">Validator</a></code> </p>
         </td>
-        <td><p>Class providing some methods to validate data</p></td>
+        <td><p>Validator für Checks und Fehlermeldungen.
+Exemplarischd implementierung. Sollte weiter ausgebaut werden.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="businessLogic.html">businessLogic</a></code> </p>
+        </td>
+        <td><p>Abstrakt business logic</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="connectionFactory.html">connectionFactory()</a></code> </p>
+        </td>
+        <td><p>SqlFactory liefert mehoden zum erstellen eines builders (Entwurfsmuster)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="diamond.html">diamond</a></code> </p>
+        </td>
+        <td><p>business entity</p></td>
       </tr><tr>
         
         <td>
@@ -169,10 +194,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="factory.html">factory()</a></code> </p>
+          <p><code><a href="diamondsFactory.html">diamondsFactory()</a></code> </p>
         </td>
-        <td><p>Class providing methods for creating a builder instance
-Factory methodes are the access to the implementation (Builder class)</p></td>
+        <td><p>Factory function liefert konkretes Interface zum Frontend</p></td>
       </tr><tr>
         
         <td>
@@ -190,13 +214,23 @@ Factory methodes are the access to the implementation (Builder class)</p></td>
         <td>
           <p><code><a href="sqlCommand.html">sqlCommand</a></code> </p>
         </td>
-        <td><p>Class providing some methods to for CRUD actions</p></td>
+        <td><p>SqlCommand
+Führt Anweisungen, gespeicherte Prozeduren und Aktionsabfragen aus.
+Dazu gehören unter anderem SELECT-,UPDATE- oder DELETE-Kommandos.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sqlConnection.html">sqlConnection</a></code> </p>
         </td>
-        <td><p>Class providing some methods to manage db connection</p></td>
+        <td><p>Abstrakte sqlConnection (wrapper um DBI)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sqlResult.html">sqlResult</a></code> </p>
+        </td>
+        <td><p>Aktuell wrapper um ein Dataframe aus einer Sql Abfrage
+Könnte in der Zukunft um CRUD-Funktionalitäten erweitert werden.
+Dataframe sollte komplett gekapselt werden um zb "AddColumn" zu verhindern.</p></td>
       </tr>
     </tbody>
     </table>

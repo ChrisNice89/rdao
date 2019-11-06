@@ -1,9 +1,9 @@
 -   [Data Access Object (DAO) framework for
     R](#data-access-object-dao-framework-for-r)
     -   [Package Info](#package-info)
-    -   [Documentation](#documentation)
-    -   [Classes](#classes)
-    -   [Usage](#usage)
+    -   [Dokumentation](#dokumentation)
+    -   [Klassen](#klassen)
+    -   [Anwendung](#anwendung)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 Data Access Object (DAO) framework for R
@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*lines of R code:* 556, *lines of test code:* 0
+*lines of R code:* 849, *lines of test code:* 0
 
 Package Info
 ------------
 
 **Version**
 
-0.1.0 ( 2019-11-04 05:42:01 )
+0.1.0 ( 2019-11-06 00:23:18 )
 
 **Description**
 
@@ -48,43 +48,38 @@ All rights reserved by the respective owner <br>Christoph Nitz
 
 **Installation**
 
-Latest development version from Github:
+Aktuelle Entwicklerversion auf Github:
 
     devtools::install_github("chrisnice89/rdao")
 
 ------------------------------------------------------------------------
 
-Documentation
+Dokumentation
 -------------
 
-See the [Framework](docs/articles/Framework.html) article for usage
-examples.
+Für weiterführende Informationen
+[Framework](docs/articles/Framework.html) und konkrete Anwendungen.
 
-Classes
+Klassen
 -------
 
-**SqlFactory** : Factory.
+**SqlConnection** : Das Herz und Arbeitstier aller Sql Objekte im
+Framework.
 
-**SqlCommand** : A representation of a database within R. The object
-allows to get information about the database and objects stored in it
-(tables and such), to retrieve objects from it, and to manipulate it via
-queries and convenience methods.
+**SqlCommand** : x
 
-**SqlConnection** : The heart and work horse of all Sql objects and
-responsible for the actual information flow between R and the database
-with methods for connect, disconnect, reconnect, querying, and
-manipulating the database.
+**SqlResult** : x
 
-**SqlTable** : A representation of a database table with particular
-methods to interact with tables - create, delete, append, copy,
-retrieve, filter, peak, and update.
+**IDiamonds** : Interface zur Businesslogic
+
+**Diamond** : Konkrete Entity
 
 ------------------------------------------------------------------------
 
-Usage
------
+Anwendung
+---------
 
-**loading packages**
+**Laden benötigter Pakete**
 
     # packages
     library(RSQLite)
@@ -94,46 +89,58 @@ Usage
     ## This package ist created,developed and copyrighted by Christoph Nitz.
     ## Interested parties may contact <Christoph.Nitz89@gmail.com>
 
-### Creating New Connection Object
+### Erstellen einer neuen Verbindung
 
-    # creating factory
-    f<-factory()
+    # erstellen einer factory
+    f<-connectionFactory()
 
     ## <Validator> for parent class: <SqlFactory> created
     ## <SqlFactory> created
 
+    # Auswahl der Datenquelle und erforderliche Arguemnte übergeben
     b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 
     ## <Validator> for parent class: <Builder> created
     ## <Builder>> for provider: <dbFile> created
 
-    # some optional arguments for db access if required
+    # Optionale Verbindungsparameter einstellen
     b$addCredentials(username = "Admin",password = "SesameOpen")
 
     ## <Validator> for parent class: <Credentials> created
     ## <Credentials> for User: <Admin> created
 
-    # create connection and get interface
+    # Verbindung erstellen
     cnn<-b$build()
 
     ## <Validator> for parent class: <SqlConnection> created
     ## <SqlConnection>> for provider: <dbFile> created
 
+### Abfrage erstellen
+
+    # Abfrage erstellen
     qry<-cnn$createQuery(sql = "Select * FROM diamonds")
 
-    ## <Validator> for parent class: <SqlCommand> created
     ## <Validator> for parent class: <SqlCommand> created
     ## <SqlCommand> :: <Select * FROM diamonds>
     ## for provider: <dbFile> created
 
-    result<-qry$execute()
+    #Abfrage ausführen
+    result<-qry$fetch()
 
-### Get Connection Infos
+    ## <Validator> for parent class: <SqlResult> created
+    ## <SqlCommand> :: <Select * FROM diamonds>
+    ## for provider: <dbFile> ausgeführt
 
-    # connection infos
-    # some code
+    class(result)
 
-### Creating New Command Object
+    ## [1] "SqlResult" "R6"
 
-    # create command
-    # some code
+    head(result$data)
+
+    ##   carat       cut color clarity depth table price    x    y    z
+    ## 1  0.23     Ideal     E     SI2  61.5    55   326 3.95 3.98 2.43
+    ## 2  0.21   Premium     E     SI1  59.8    61   326 3.89 3.84 2.31
+    ## 3  0.23      Good     E     VS1  56.9    65   327 4.05 4.07 2.31
+    ## 4  0.29   Premium     I     VS2  62.4    58   334 4.20 4.23 2.63
+    ## 5  0.31      Good     J     SI2  63.3    58   335 4.34 4.35 2.75
+    ## 6  0.24 Very Good     J    VVS2  62.8    57   336 3.94 3.96 2.48

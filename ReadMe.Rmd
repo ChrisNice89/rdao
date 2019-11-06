@@ -137,7 +137,7 @@ library(rdao)
 
 ```{r}
 # erstellen einer factory
-f<-factory()
+f<-connectionFactory()
 
 # Auswahl der Datenquelle und erforderliche Arguemnte übergeben
 b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
@@ -157,6 +157,7 @@ cnn<-b$build()
 qry<-cnn$createQuery(sql = "Select * FROM diamonds")
 
 #Abfrage ausführen
-result<-qry$execute()
+result<-qry$fetch()
+class(result)
 head(result$data)
 ```
