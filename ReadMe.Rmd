@@ -90,7 +90,7 @@ cat(tmp$Author)
 
 **Installation**
 
-Latest development version from Github:
+Aktuelle Entwicklerversion auf Github:
 
 ```{r, eval=FALSE}
 devtools::install_github("chrisnice89/rdao")
@@ -100,32 +100,30 @@ devtools::install_github("chrisnice89/rdao")
 ------------------------------------------------------------------------
 
 
-## Documentation
-See the [Framework](docs/articles/Framework.html) article for usage examples.
+## Dokumentation
+Für weiterführende Informationen [Framework](docs/articles/Framework.html) und konkrete Anwendungen.
 
 
-## Classes
+## Klassen
 
-**SqlFactory** : Factory. 
+**SqlConnection** : Das Herz und Arbeitstier aller Sql Objekte im Framework.
 
-**SqlCommand** : A representation of a database within R. The object allows to 
-get information about the database and objects stored in it (tables and such), 
-to retrieve objects from it, and to manipulate it via queries and convenience methods. 
+**SqlCommand** : x
 
-**SqlConnection** : The heart and work horse of all Sql objects and responsible for 
-the actual information flow between R and the database with methods for connect, 
-disconnect, reconnect, querying, and manipulating the database. 
+**SqlResult** : x 
 
-**SqlTable** : A representation of a database table with particular methods to interact with tables - create, delete, append, copy, retrieve, filter, peak, 
-and update.
+**IDiamonds** : Interface zur Businesslogic 
+
+**Diamond** : Konkrete Entity
+
 
 
 ------------------------------------------------------------------------
 
 
-## Usage
+## Anwendung
 
-**loading packages**
+**Laden benötigter Pakete**
 
 ```{r}
 # packages
@@ -135,37 +133,30 @@ library(rdao)
 ```
 
 
-### Creating New Connection Object
+### Erstellen einer neuen Verbindung
 
 ```{r}
-# creating factory
+# erstellen einer factory
 f<-factory()
+
+# Auswahl der Datenquelle und erforderliche Arguemnte übergeben
 b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 
-
-# some optional arguments for db access if required
+# Optionale Verbindungsparameter einstellen
 b$addCredentials(username = "Admin",password = "SesameOpen")
 
-# create connection and get interface
+# Verbindung erstellen
 cnn<-b$build()
+```
+
+
+### Abfrage erstellen
+
+```{r}
+# Abfrage erstellen
 qry<-cnn$createQuery(sql = "Select * FROM diamonds")
+
+#Abfrage ausführen
 result<-qry$execute()
-```
-
-
-
-### Get Connection Infos
-
-```{r}
-# connection infos
-# some code
-```
-
-
-
-### Creating New Command Object
-
-```{r}
-# create command
-# some code
+head(result$data)
 ```

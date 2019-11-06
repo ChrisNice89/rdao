@@ -94,7 +94,7 @@ sqlCommand <- R6::R6Class(
 )
 
 # Konkrete interface Klassen
-# Ermöglicht das implementieren von "views" auf dem Frontend
+# Ermöglicht das implementieren von "views" und "stored procedure" auf dem Frontend
 sqlQuery <- R6::R6Class(
   classname = "SqlCommand",
   inherit = sqlCommand,

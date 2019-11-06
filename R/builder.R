@@ -1,4 +1,4 @@
-#' SqlFactory liefert die Bausteine zum erstellen einer Datenbankverbindung
+#' Builder liefert die Bausteine zum erstellen einer Datenbankverbindung
 #'
 #'
 #' @docType class

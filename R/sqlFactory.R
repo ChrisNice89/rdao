@@ -31,7 +31,7 @@
 #' @include builder.R
 #' @export
 
-factory<-function(){
+connectionFactory<-function(){
   return (sqlFactory$new())
 }
 
