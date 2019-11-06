@@ -1,36 +1,47 @@
-#' Class providing some methods to for CRUD actions
+#' SqlCommand
+#' Führt Anweisungen, gespeicherte Prozeduren und Aktionsabfragen aus.
+#' Dazu gehören unter anderem SELECT-,UPDATE- oder DELETE-Kommandos.
 #'
 #' @docType class
 #' @importFrom R6 R6Class
-#' @keywords command
+#' @keywords data
+#' @family sql
+#'
 #' @section Construction:
 #' ```
-#' sqlConnection$new()
+#' xxxxxxxxxxxxxxxxxxxxxx
 #' ```
-#' @return Object of \code{\link{R6Class}} with methods for communication with a database (server)
+#'
+#' @return Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
 #' @format \code{\link{R6Class}} object.
 #' @examples
-#' # cnn<-sqlConnection$new(connectionstring = "myconnectionstring")
-#
-#' @field
+#' xxxxxxxxxxxxxxxxxxxxxx
+#'
+#'
+#' @field x blabla.
+#' @field y blabla.
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
-#'   \item{\code{new()}}{This method creates a sqlConnection \code{instance}.}
-#'   \item{\code{isString((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}
-#'   \item{\code{isNumeric((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}}
-#' @family sql
-#' @include utils.R
-#' @include sqlConnection.R
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+#'   \item{\code{new()}}{xxx \code{Factory}.}
+#'   \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+#'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 #'
-sqlCommand <- R6Class(
+#' @include utils.R
+#' @include sqlResult.R
+#'
+sqlCommand <- R6::R6Class(
   classname = "Abstrakt SqlCommand",
   inherit = NULL,
   portable = TRUE,
   private = list(
     .validator = NULL,
-    .connection = sqlConnection),
+    .connection = NULL,
+    validator=function(){
+      return(private$.validator)
+    }
+  ),
 
   public = list(
     provider = "",
@@ -40,7 +51,7 @@ sqlCommand <- R6Class(
     initialize = function(connection, sql) {
       private$.validator <- Validator$new(self)
 
-      if (inherits(connection, "SqlConnection")) {
+      if (private$.validator$isTrustedConnection(connection)) {
         private$.connection <- connection
         self$provider <- private$.connection$provider
       } else {
@@ -53,8 +64,8 @@ sqlCommand <- R6Class(
         private$.validator$throwError("Sql statement ist ungültig", "initialize()")
       }
 
-      make.readonly(self, "provider", "sql")
-      invisible(self$print())
+      private$.validator$makeReadonly("provider", "sql")
+      invisible(self$print("created"))
     },
 
     fetch  = function(disconnect = TRUE) {
@@ -67,7 +78,7 @@ sqlCommand <- R6Class(
       return(private$.connection$execute(self,disconnect))
     },
 
-    print = function(...) {
+    print = function(status="") {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
       if (!private$.validator$isNullString(self$provider)) {
@@ -76,24 +87,24 @@ sqlCommand <- R6Class(
         msg <-
           paste(msg, paste("for provider: <", self$provider, ">",sep=""), sep = "\n")
       }
-
-      cat(msg, " created", "\n", sep = "")
+      cat(paste(msg, status), "\n", sep = " ")
       invisible(self)
     }
   )
 )
 
-sqlQuery <- R6Class(
+# Konkrete interface Klassen
+# Ermöglicht das implementieren von "views" auf dem Frontend
+sqlQuery <- R6::R6Class(
   classname = "SqlCommand",
   inherit = sqlCommand,
   portable = TRUE,
   public = list(
     initialize = function(connection, sql) {
-      private$.validator <- Validator$new(self)
       super$initialize(connection, sql)
       invisible(self)
     }
   )
-  )
+)
 
 

@@ -45,6 +45,9 @@ c<-b$credentials
 c$username
 c$username<-"New name"
 
+
+f<-factory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 cnn<-b$build()
 cmd<-cnn$createCommand(sql = "Select * FROM diamonds")
 result<-cmd$execute()
@@ -56,15 +59,34 @@ cnn$isConnected()
 
 getOption("devtools.name")
 
-rdao::diamonds
-df<- as.data.frame(rorm::diamonds,row.names = NULL)
+# create database
+df<- as.data.frame(rdao::diamonds,row.names = NULL)
 # add autoincrement field "ID" to the front
 df <- data.frame(ID = seq.int(nrow(df)), df)
-row.names(df)
+cnn <- dbConnect(RSQLite::SQLite(),"test.db")
+dbListTables(cnn)
+dbWriteTable(cnn, "diamonds",  df)
+dbListTables(cnn)
+# Fetch all query results into a data frame:
+
+df<- dbGetQuery(cnn, 'SELECT * FROM diamonds')
+rs <- dbSendQuery(cnn, 'SELECT * FROM diamonds')
+
+while (!dbHasCompleted(rs)) {
+  df <- dbFetch(rs, n = 10)
+  print(df)
+}
+dbClearResult(rs)
+dbDisconnect(cnn)
+dbDisconnect(cnn)
+dbWriteTable(cnn, "diamonds",  df)
+dbDisconnect(cnn)
 
 
 rows<-paste(as.vector(df[,1]))
 rows
+
+
 hm<-HashMap$new("rows")
 hm$put(key = rows,value = as.vector(df[,1]))
 hm$get("1000")

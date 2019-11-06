@@ -1,29 +1,36 @@
-#' Class providing some methods to manage db connection
+#' Abstrakte sqlConnection (wrapper um DBI)
+#'
 #'
 #' @docType class
 #' @importFrom R6 R6Class
-#' @keywords connectoion
+#' @keywords data
+#' @family sql
+#'
 #' @section Construction:
 #' ```
-#' sqlConnection$new()
+#' xxxxxxxxxxxxxxxxxxxxxx
 #' ```
-#' @return Object of \code{\link{R6Class}} with methods for communication with a database (server)
+#'
+#' @return Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
 #' @format \code{\link{R6Class}} object.
 #' @examples
-#' # cnn<-sqlConnection$new(connectionstring = "myconnectionstring")
-#
-#' @field
+#' xxxxxxxxxxxxxxxxxxxxxx
+#'
+#'
+#' @field x blabla.
+#' @field y blabla.
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
-#'   \item{\code{new()}}{This method creates a sqlConnection \code{instance}.}
-#'   \item{\code{isString((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}
-#'   \item{\code{isNumeric((x, objnm = deparse(substitute(x))))}}{Check if x is numeric}}
-#' @family sql
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+#'   \item{\code{new()}}{xxx \code{Factory}.}
+#'   \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+#'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
+#'
 #' @include utils.R
+#' @include sqlCommand.R
 
-sqlConnection <- R6Class(
+sqlConnection <- R6::R6Class(
   classname = "Abstrakt SqlConnection",
   inherit = NULL,
   portable = TRUE,
@@ -39,6 +46,10 @@ sqlConnection <- R6Class(
       } else {
         private$.validator$throwError("Driver generator ist ungültig", "connect()")
       }
+    },
+
+    validator = function() {
+      return(private$.validator)
     }
   ),
 
@@ -49,7 +60,7 @@ sqlConnection <- R6Class(
       private$.validator <- Validator$new(self)
       private$.credentials$params <- list(...)
       self$provider <- provider
-      make.readonly(self, "provider")
+      private$.validator$makeReadonly("provider")
 
       invisible(self$print())
     },
@@ -66,9 +77,10 @@ sqlConnection <- R6Class(
         switch(query$type,
                "fetch" = {
                  if (self$connect()) {
+                   df <- DBI::dbGetQuery(conn = private$.connection,
+                                         statement = query$sql)
                    result <-
-                     DBI::dbGetQuery(conn = private$.connection,
-                                     statement = query$sql)
+                     sqlResult$new(self, df)
                  }
                },
 
@@ -94,6 +106,7 @@ sqlConnection <- R6Class(
       if (disconnectAfter) {
         self$disconnect()
       }
+      query$print("ausgeführt")
       return(result)
     },
 
@@ -125,7 +138,7 @@ sqlConnection <- R6Class(
     },
 
     getTables = function() {
-      dbListTables(private$.connection)
+      return(dbListTables(private$.connection))
     },
 
     print = function() {
@@ -142,8 +155,11 @@ sqlConnection <- R6Class(
   )
 )
 
-# Provider interface
-dbFileConnection <- R6Class(
+# Konkrete interface Klassen ("Provider")
+# Konstruktoren bieten schwache Typsicherheit für die aufrufende Klasse.
+# Ermöglichen das bauen von Verbindungen (DBI) die heterogene Parameter (je nach Datenprovider) benötigen
+
+dbFileConnection <- R6::R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,
@@ -152,13 +168,10 @@ dbFileConnection <- R6Class(
       super$initialize(driverGenerator, path, provider = provider)
       invisible(self)
     }
-    # CreateCommand=function(){
-    #   return(sqlCommand$new(self))
-    # }
   )
 )
 
-msAccessFileConnection <- R6Class(
+msAccessFileConnection <- R6::R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,

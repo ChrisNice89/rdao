@@ -39,7 +39,7 @@ Credentials <- R6Class(
         self$password = password
       }
 
-      private$.validator$makeReadonly("username", "password")
+      make.readonly(self,"username", "password")
       invisible(self$print())
     },
 

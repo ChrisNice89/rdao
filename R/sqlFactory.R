@@ -1,5 +1,5 @@
-#' Class providing methods for creating a builder instance
-#' Factory methodes are the access to the implementation (Builder class)
+#' SqlFactory liefert mehoden zum erstellen eines builders (Entwurfsmuster)
+#'
 #'
 #' @docType class
 #' @importFrom R6 R6Class
@@ -8,34 +8,34 @@
 #'
 #' @section Construction:
 #' ```
-#' f<-factory()
+#' xxxxxxxxxxxxxxxxxxxxxx
 #' ```
 #'
-#' @return Object of \code{\link{R6Class}} with methods for communication with a database (server)
+#' @return Object of \code{\link{R6Class}} xxxxxxxxxxxxxxxxxxxx (x)
 #' @format \code{\link{R6Class}} object.
 #' @examples
-#' f<-sqlFactory$new()
-#' b<-f$mySql(path,dbpassword="")
+#' xxxxxxxxxxxxxxxxxxxxxx
 #'
-#' @field serveraddress Stores address of your lightning server.
-#' @field sessionid Stores id of your current session on the server.
+#'
+#' @field x blabla.
+#' @field y blabla.
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/ORM}
-#'   \item{\code{new()}}{This method creates a instance \code{Factory}.}
-#'   \item{\code{mySql(path,dbpassword="")}}{This method is used to create a builder instance for \code{sqlConnection}.}
-#'   \item{\code{msAccess(path,dbpassword="")}}{This method is used to create a builder instance for \code{sqlConnection}.}}
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/ChrisNice89/rdao}
+#'   \item{\code{new()}}{xxx \code{Factory}.}
+#'   \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
+#'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 #'
 #' @include utils.R
-#' @include zzz.R
+#' @include builder.R
 #' @export
 
 factory<-function(){
   return (sqlFactory$new())
 }
 
-sqlFactory <- R6Class(
+sqlFactory <- R6::R6Class(
   classname = "SqlFactory",
   inherit = NULL,
   portable = TRUE,
@@ -58,9 +58,6 @@ sqlFactory <- R6Class(
 
       dbiDriver<-"odbc::odbc()"
       driver <- "PostgreSQL Driver"
-
-
-
     },
 
     mySql= function(path,dbpassword=""){
