@@ -1,6 +1,6 @@
 ---
 title: "Framework"
-output: rmarkdown::html_vignette
+output: html_document
 vignette: >
   %\VignetteIndexEntry{Framework}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 ## Vorwort
 
-Da ich am 01.10 eine neue Stelle als Java Entwickler bei einer Bank angetreten habe und mich beruflich mit Datenbank Anwendungen und ORM (englisch object-relational mapping) beschäftige, habe ich das Projekt genutzt, um mich dieser Thematik in R anzunehmen.
+Da ich am 01.10 eine neue Stelle als Java Entwickler bei einer Bank angetreten habe und mich beruflich mit Datenbank Anwendungen und ORM (englisch object-relational mapping) beschäftige, habe ich das Projekt genutzt um mich dieser Thematik in R anzunehmen.
 Neben der reinen (Objektorientierten) Programmierung stand dabei die Softwarepaketierung im Fokus. Dafür habe ich das Projekt als eigenständiges Paket umgesetzt und für die weitere Distribution auf Github hochgeladen. 
 
 Die kommentierung von Code habe ich aus Übersichtsgründen weggelassen und dafür mehr Aufwand in die Benennung von (sprechenden) Variablen und grundlegender Paketarchitektur aufgebracht. 
@@ -175,7 +175,7 @@ connection.dbFile$isConnected()
 
 Die SqlConnection Klasse verwendet in seinem Nucleus das R Paket DBI. Im Gegensatz zu diesem erzeugt der Builder aber per default eine geschlossene Verbindung.
 Diese kann explizit per `connect()` geöffnet oder `disconnect()` geschlossen werden. Weitere Details zum Verhalten der Connection Klasse werden im nächsten Abschnitt näher erläutert.
-Die Methoden zum steuern der der Verbindung geben jeweils einen boolean Wert als Indikator zurück.
+Die Methoden zum steuern der Verbindung geben jeweils einen boolean Wert als Indikator zurück.
 
 
 ## Abfragen
@@ -211,8 +211,7 @@ query.premium<-connection.dbFile$createQuery(sql = paste("SELECT * FROM diamonds
 query.premium$sql
 ```
 
-Mit `createQuery()` instanziiert die `SqlConnection` ein SqlCommand. Die Klasse dient als CRUD (Create, Read, Update, Delete) Interface.
-Die aktuelle Implementierung kann SQL Statements nur als Konkatenation verarbeiten. Um SQL-Injection (dt. SQL-Einschleusung) zu unterbinden sowie die Flexibilität zu erhöhen, könnte in einem zukünftigen Release parametrisierte Abfragen implementiert werden. Darauf aufbauend kann das SqlCommand dann um die Möglichkeit des Prepared Statements erweitert werden. Ein Prepared Statement ist eine sogenannte vorbereitete Anweisung für ein Datenbanksystem. Im Gegensatz zu gewöhnlichen Statements enthält es noch keine Parameterwerte. Stattdessen werden dem Datenbanksystem Platzhalter übergeben. Soll ein Statement mit unterschiedlichen Parametern mehrere Male (z. B. innerhalb einer Schleife) auf dem Datenbanksystem ausgeführt werden, können Prepared Statements einen Geschwindigkeitsvorteil bringen, da das Statement schon vorübersetzt im Datenbanksystem vorliegt und nur noch mit den neuen Parametern ausgeführt werden muss.
+Darauf aufbauend kann das SqlCommand dann um die Möglichkeit des Prepared Statements erweitert werden. Ein Prepared Statement ist eine sogenannte vorbereitete Anweisung für ein Datenbanksystem. Im Gegensatz zu gewöhnlichen Statements enthält es noch keine Parameterwerte. Stattdessen werden dem Datenbanksystem Platzhalter übergeben. Soll ein Statement mit unterschiedlichen Parametern mehrere Male (z. B. innerhalb einer Schleife) auf dem Datenbanksystem ausgeführt werden, können Prepared Statements einen Geschwindigkeitsvorteil bringen, da das Statement schon vorübersetzt im Datenbanksystem vorliegt und nur noch mit den neuen Parametern ausgeführt werden muss.
 
 ## Ergebniss einer Abfrage
 
