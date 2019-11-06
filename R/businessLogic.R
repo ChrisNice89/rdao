@@ -109,26 +109,10 @@ businessLogic <- R6::R6Class(
     }
 
     },
-    loadDiamonds=function(){
-      createDiamonds = function(dataframe) {
-        listOfDiamonds = list()
-        for (r in 1:nrow(dataframe)) {
-          row = dataframe[r, ]
-          listOfDiamonds[[r]] <- diamond$new(
-            row$carat,
-            row$cut,
-            row$color,
-            row$clarity,
-            row$depth,
-            row$table,
-            row$price,
-            row$x,
-            row$y,
-            row$z)
-        }
-        return(listOfDiamonds)
-      }
-      return(createDiamonds(self$loadAll()$data))
+
+    load=function(obj){
+      Ibusiness<-self$loadAll()$Override(obj)
+      return(Ibusiness)
     },
 
     loadBestQuality = function() {
@@ -182,43 +166,9 @@ diamond <- R6::R6Class(
   classname = "Diamond",
   inherit =NULL,
   portable = TRUE,
-  private = list(.validator = NULL),
+  private = list(),
   public = list(
-    carat=NULL,
-    cut=NULL,
-    color=NULL,
-    clarity=NULL,
-    depth=NULL,
-    table=NULL,
-    price=NULL,
-    x=NULL,
-    y=NULL,
-    z=NULL,
-
-    initialize = function(carat,
-                          cut,
-                          color,
-                          clarity,
-                          depth,
-                          table,
-                          price,
-                          x,
-                          y,
-                          z) {
-
-      self$carat<-carat
-      self$cut<-cut
-      self$color<-color
-      self$clarity<-clarity
-      self$depth<-depth
-      self$table<-table
-      self$price<-price
-      self$x<- x
-      self$y<-y
-      self$z<-z
-      #private$.validator <- Validator$new(self)
-
-
+    initialize = function(){
     }
   )
 )

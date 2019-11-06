@@ -1,6 +1,6 @@
 ---
 title: "Framework"
-output: html_document
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Framework}
   %\VignetteEngine{knitr::rmarkdown}

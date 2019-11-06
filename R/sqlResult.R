@@ -34,7 +34,7 @@
 
 sqlResult <- R6::R6Class(
   classname = "SqlResult",
-  inherit = NULL,
+  inherit = sqlInterface,
   portable = TRUE,
   private = list(
     .validator = NULL,
@@ -62,6 +62,10 @@ sqlResult <- R6::R6Class(
       }
       self$data<-private$.df
       private$.validator$makeReadonly("data")
+    },
+
+    Override=function(businessobject){
+      super$implement(businessobject,self$data)
     }
   )
 )
