@@ -72,9 +72,9 @@ sqlResult <- R6::R6Class(
 
       entities<-list()
       f<-super$implement()
-
+      df<-private$.df
       for(r in 1:nrow(private$.df)){
-        entities[[r]]<-f$new(index=r)
+        entities[[r]]<-f$new(index=r,df)
       }
 
       super$remove()
