@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 843, *Zeilen Test code:* 0
+*Zeilen R code:* 884, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-06 04:50:17 )
+0.1.0 ( 2019-11-07 19:46:51 )
 
 **Beschreibung**
 
@@ -116,32 +116,85 @@ Anwendung
     ## <Validator> for parent class: <SqlConnection> created
     ## <SqlConnection>> for provider: <dbFile> created
 
-### Abfrage erstellen
+### Generics
 
     # Abfrage erstellen
-    qry<-cnn$createQuery(sql = "Select * FROM diamonds")
+    library(rdao)
+    f<-connectionFactory()
+
+    ## <Validator> for parent class: <SqlFactory> created
+    ## <SqlFactory> created
+
+    b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+
+    ## <Validator> for parent class: <Builder> created
+    ## <Builder> for provider: <dbFile> created
+
+    cnn<-b$build()
+
+    ## <Validator> for parent class: <SqlConnection> created
+    ## <SqlConnection>> for provider: <dbFile> created
+
+    result<-cnn$createQuery(sql = "Select carat,color FROM diamonds LIMIT 10")$fetch()
 
     ## <Validator> for parent class: <SqlCommand> created
-    ## <SqlCommand> :: <Select * FROM diamonds>
-    ## for provider: <dbFile> created
-
-    #Abfrage ausführen
-    result<-qry$fetch()
-
+    ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
+    ## for provider: <dbFile> created 
     ## <Validator> for parent class: <SqlResult> created
-    ## <SqlCommand> :: <Select * FROM diamonds>
+    ## [1] "R6ClassGenerator"
+    ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
     ## for provider: <dbFile> ausgeführt
 
-    class(result)
+    ## disconnected
 
-    ## [1] "SqlResult" "R6"
+    result2<-cnn$createQuery(sql = "Select carat,color,price FROM diamonds LIMIT 10")$fetch()
 
-    head(result$data)
+    ## <Validator> for parent class: <SqlCommand> created
+    ## <SqlCommand> :: <Select carat,color,price FROM diamonds LIMIT 10>
+    ## for provider: <dbFile> created 
+    ## <Validator> for parent class: <SqlResult> created
+    ## [1] "R6ClassGenerator"
+    ## <SqlCommand> :: <Select carat,color,price FROM diamonds LIMIT 10>
+    ## for provider: <dbFile> ausgeführt
 
-    ##   carat       cut color clarity depth table price    x    y    z
-    ## 1  0.23     Ideal     E     SI2  61.5    55   326 3.95 3.98 2.43
-    ## 2  0.21   Premium     E     SI1  59.8    61   326 3.89 3.84 2.31
-    ## 3  0.23      Good     E     VS1  56.9    65   327 4.05 4.07 2.31
-    ## 4  0.29   Premium     I     VS2  62.4    58   334 4.20 4.23 2.63
-    ## 5  0.31      Good     J     SI2  63.3    58   335 4.34 4.35 2.75
-    ## 6  0.24 Very Good     J    VVS2  62.8    57   336 3.94 3.96 2.48
+    ## disconnected
+
+    d<-result$getRecord(1)
+    d2<-result2$getRecord(1)
+
+    # d$ 
+    # shows fields carat,color
+    d$print()
+
+    ##   carat color
+    ## 1  0.23     E
+
+    # d2$ 
+    # shows fields carat,color,price
+    d2$print()
+
+    ##   carat color price
+    ## 1  0.23     E   326
+
+    d$setCarat(0.24)
+    d$getCarat()
+
+    ## [1] 0.24
+
+    result$test(1)
+
+    ## 0.24 E
+
+    ## 0.23 E
+
+    d<-result$getRecord(2)
+    d$print()
+
+    ##   carat color
+    ## 2  0.21     E
+
+    d$index<-1
+    d$print()
+
+    ##   carat color
+    ## 1  0.24     E
