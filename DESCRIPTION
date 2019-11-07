@@ -30,6 +30,7 @@ LazyData: true
 Collate: 
     'HashMap.R'
     'utils.R'
+    'sqlInterface.R'
     'sqlResult.R'
     'sqlCommand.R'
     'sqlConnection.R'
@@ -40,6 +41,5 @@ Collate:
     'data.R'
     'package_rdao.R'
     'sqlFactory.R'
-    'sqlInterface.R'
     'zzz.R'
 VignetteBuilder: knitr

@@ -29,7 +29,7 @@
 #'
 #' @include utils.R
 #'
-#'
+
 sqlInterface <- R6::R6Class(
   classname = "Abstarkt SqlResult Interface",
   inherit = NULL,

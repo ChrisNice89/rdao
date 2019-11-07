@@ -30,7 +30,7 @@
 #'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 #'
 #' @include utils.R
-#'
+#' @include sqlInterface.R
 
 sqlResult <- R6::R6Class(
   classname = "SqlResult",
