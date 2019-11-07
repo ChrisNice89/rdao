@@ -57,7 +57,7 @@ sqlInterface <- R6::R6Class(
         invisible(self)
       }, overwrite = TRUE)
 
-      obj$set("public", "getRecord", function()
+      obj$set("public", "print", function()
         private$shared$df[self$index,], overwrite = TRUE)
       print(class(obj))
 
