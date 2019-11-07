@@ -41,7 +41,8 @@ sqlInterface <- R6::R6Class(
   ),
 
   private = list(
-    .fields<-NULL,
+    .fields=NULL,
+
     implement = function() {
       fields<-private$.fields
       obj<-generics
