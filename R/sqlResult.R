@@ -71,13 +71,13 @@ sqlResult <- R6::R6Class(
     loadGeneric=function(){
 
       entities<-list()
-      f<-super$implement(colnames(private$.df))
+      f<-super$implement()
 
       for(r in 1:nrow(private$.df)){
         entities[[r]]<-f$new(index=r)
       }
 
-      super$remove(colnames(private$.df))
+      super$remove()
       private$.generics<-entities
 
     },
