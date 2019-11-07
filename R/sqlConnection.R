@@ -104,7 +104,7 @@ sqlConnection <- R6::R6Class(
       }
 
       if (disconnectAfter) {
-        self$disconnect()
+        on.exit(self$disconnect())
       }
       query$print("ausgeführt")
       return(result)
@@ -120,7 +120,8 @@ sqlConnection <- R6::R6Class(
 
     disconnect = function() {
       if (self$isConnected()) {
-        DBI::dbDisconnect(private$.connection)
+       DBI::dbDisconnect(private$.connection)
+        message("disconnected")
       }
       return(!self$isConnected())
     },

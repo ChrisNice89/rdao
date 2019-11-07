@@ -39,8 +39,9 @@ sqlResult <- R6::R6Class(
   private = list(
     .validator = NULL,
     .df=NULL,
-    .connection=NULL
-  ),
+    .connection=NULL,
+    .generics=NULL
+    ),
 
   public = list(
     data = NULL,
@@ -61,22 +62,34 @@ sqlResult <- R6::R6Class(
         private$.validator$throwError("Keine gültige Verbindung","initialize()")
       }
 
+      super$initialize(colnames(private$.df))
       self$data<-private$.df
+      self$loadGenerics()
       private$.validator$makeReadonly("data")
     },
 
-    override=function(businessobject){
+    loadGeneric=function(){
 
-      super$implement(businessobject,private$.df)
       entities<-list()
+      f<-super$implement(colnames(private$.df))
 
       for(r in 1:nrow(private$.df)){
-        if((r%%10000)==0){
-          print("is executing...")
-        }
-        entities[[r]]<-businessobject$new(index=r,private$.df)
+        entities[[r]]<-f$new(index=r)
       }
-      return(entities)
+
+      super$remove(colnames(private$.df))
+      private$.generics<-entities
+
+    },
+
+    getRecord=function(i){
+      return(private$.generics[[i]])
+    },
+
+    test=function(i){
+      message(paste(private$.generics[[i]]$getRecord(),collapse = " "))
+      message(paste(private$.df[i,],collapse = " "))
     }
   )
 )
+

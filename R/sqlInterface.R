@@ -35,48 +35,79 @@ sqlInterface <- R6::R6Class(
   inherit = NULL,
   portable = TRUE,
   public = list(
-    initialize = function() {
-
+    initialize = function(fields) {
+      private$.fields<-fields
     }
   ),
+
   private = list(
-    implement = function(businessObject, df) {
+    implement = function() {
+      fields<-private$.fields
+      obj<-generics
 
-      businessObject$set("private", "shared", new.env(), overwrite = TRUE)
-      businessObject$set("private", ".df", NULL, overwrite = TRUE)
-      businessObject$set("public", "index", NULL, overwrite = TRUE)
+      obj$set("private", "shared", new.env(), overwrite = TRUE)
+      #obj$set("private", ".df", NULL, overwrite = TRUE)
+      obj$set("public", "index", NULL, overwrite = TRUE)
 
-      businessObject$set("public", "initialize", function(index, df) {
+      obj$set("public", "initialize", function(index,df) {
         private$shared$df<-df
-        #private$.df <- df
         self$index <- index
         invisible(self)
       }, overwrite = TRUE)
 
-      businessObject$set("public", "getRecord", function()
+      obj$set("public", "getRecord", function()
         private$shared$df[self$index,], overwrite = TRUE)
+      print(class(obj))
 
-      #Create setter und getter
-      for (c in colnames(df)) {
+       #Create setter und getter
+      for (c in fields) {
         mthd_name <- c
         mthd_set <-
           glue::glue("function(x) private$shared$df[self$index,]${mthd_name} <-x")
         mthd_get <-
           glue::glue("function() private$shared$df[self$index,]${mthd_name}")
-        #obj$set("private", glue::glue("private$.{mthd_name}"), c, overwrite = TRUE)
 
         mthd_name <- tools::toTitleCase(c)
-        businessObject$set("public",
+        obj$set("public",
                            paste("get", mthd_name, sep = ""),
                            eval(parse(text = mthd_get)),
                            overwrite = TRUE)
-        businessObject$set("public",
+        obj$set("public",
                            paste("set", mthd_name, sep = ""),
                            eval(parse(text = mthd_set)),
                            overwrite = TRUE)
       }
-      return(businessObject)
+      return(obj)
+    },
+
+    remove=function(){
+      fields<-private$.fields
+
+      for (c in tools::toTitleCase(fields)) {
+        mthd_name <- c
+        mthd_set <-
+          glue::glue("generics$public_methods$set{mthd_name}<-NULL")
+        mthd_get <-
+          glue::glue("generics$public_methods$get{mthd_name}<-NULL")
+
+        eval(parse(text = mthd_get))
+        eval(parse(text = mthd_set))
+      }
     }
   )
 )
+
+generics <- R6::R6Class(
+  classname = "Generics",
+  inherit =NULL,
+  portable = TRUE,
+  private = list(),
+  public = list(
+    initialize = function(){
+    }
+  )
+)
+
+
+
 
