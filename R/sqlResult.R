@@ -62,8 +62,8 @@ sqlResult <- R6::R6Class(
         private$.validator$throwError("Keine gültige Verbindung","initialize()")
       }
 
-      super$initialize(colnames(private$.df))
       self$data<-private$.df
+      super$initialize(colnames(private$.df))
       self$loadGenerics()
       private$.validator$makeReadonly("data")
     },
