@@ -68,7 +68,7 @@ sqlResult <- R6::R6Class(
       private$.validator$makeReadonly("data")
     },
 
-    loadGeneric=function(){
+    loadGenerics=function(){
 
       entities<-list()
       f<-super$implement()

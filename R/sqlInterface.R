@@ -36,7 +36,6 @@ sqlInterface <- R6::R6Class(
   portable = TRUE,
   public = list(
     initialize = function(fields) {
-
       private$.fields<-fields
     }
   ),
