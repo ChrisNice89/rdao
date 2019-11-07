@@ -87,7 +87,7 @@ sqlResult <- R6::R6Class(
     },
 
     test=function(i){
-      message(paste(private$.generics[[i]]$getRecord(),collapse = " "))
+      message(paste(private$.generics[[i]]$print(),collapse = " "))
       message(paste(private$.df[i,],collapse = " "))
     }
   )
