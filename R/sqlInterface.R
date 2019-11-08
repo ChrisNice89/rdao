@@ -75,8 +75,8 @@ sqlInterface <- R6::R6Class(
         invisible(self)
       }, overwrite = TRUE)
 
-      obj$set("public", "print", function()
-        private$e$df[private$index,], overwrite = TRUE)
+      # obj$set("public", "print", function()
+      #   private$e$df[private$index,], overwrite = TRUE)
 
       for (c in fields) {
         mthd_name <- c
