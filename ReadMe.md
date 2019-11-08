@@ -174,3 +174,19 @@ Anwendung
     ##   carat color
     ## 3  0.23     E
     ## 4  0.29     I
+
+    result2<-cnn$createQuery(sql = "Select * FROM diamonds LIMIT 10")$fetch()
+
+    ## <Validator> for parent class: <SqlCommand> created
+    ## <SqlCommand> :: <Select * FROM diamonds LIMIT 10>
+    ## for provider: <dbFile> created 
+    ## <Validator> for parent class: <SqlResult> created
+    ## <SqlCommand> :: <Select * FROM diamonds LIMIT 10>
+    ## for provider: <dbFile> ausgeführt
+
+    ## <SqlConnection>> for provider: <dbFile> Disconnect
+
+    result2$getRecords(1)
+
+    ##   carat   cut color clarity depth table price    x    y    z
+    ## 1  0.23 Ideal     E     SI2  61.5    55   326 3.95 3.98 2.43

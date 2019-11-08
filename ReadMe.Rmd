@@ -167,4 +167,9 @@ result$getRecords(c(1,2))
 result$delete(c(1,2))
 result$countRows()
 result$getRecords(c(1,2))
+
+
+result2<-cnn$createQuery(sql = "Select * FROM diamonds LIMIT 10")$fetch()
+result2$getRecords(1)
+
 ```
