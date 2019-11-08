@@ -30,7 +30,7 @@ Packet Info
 
 **Version**
 
-0.1.0 ( 2019-11-08 01:43:36 )
+0.1.0 ( 2019-11-08 01:46:32 )
 
 **Beschreibung**
 
@@ -157,14 +157,14 @@ Anwendung
     ## 2  0.21     E
 
     result$setCarat(0.66)
-    result$row(index = 2)$setCarat(0.99)
+    result$row(2)$setCarat(0.99)
     result$getRecords(c(1,2))
 
     ##   carat color
-    ## 1  0.99     E
-    ## 2  0.21     E
+    ## 1  0.66     E
+    ## 2  0.99     E
 
-    result$delete(rows = c(1,2))
+    result$delete(c(1,2))
     result$countRows()
 
     ## [1] 8
