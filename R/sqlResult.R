@@ -84,7 +84,7 @@ sqlResult<- R6::R6Class(
 
       super$setIndex(i)
       invisible(self)
-    }
+    },
 
     update=function(){
 
