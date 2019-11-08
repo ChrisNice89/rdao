@@ -68,6 +68,7 @@ sqlInterface <- R6::R6Class(
       obj$set("private", "e", new.env(), overwrite = TRUE)
       obj$set("private", "index", NULL, overwrite = TRUE)
       obj$set("private", "setIndex", function(i) private$index <- i, overwrite = TRUE)
+      obj$set("private", "getIndex", function(i) private$index, overwrite = TRUE)
 
       obj$set("public", "initialize", function(df) {
         private$e$df<-df
