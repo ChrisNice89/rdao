@@ -32,7 +32,7 @@
 
 sqlConnection <- R6::R6Class(
   classname = "Abstrakt SqlConnection",
-  inherit = NULL,
+  inherit = sqlInterface,
   portable = TRUE,
   private = list(
     .validator = NULL,
@@ -77,16 +77,14 @@ sqlConnection <- R6::R6Class(
         switch(query$type,
                "fetch" = {
                  if (self$connect()) {
-                   df <- DBI::dbGetQuery(conn = private$.connection,
+                   dbi.result <- DBI::dbGetQuery(conn = private$.connection,
                                          statement = query$sql)
-                   result <-
-                     sqlResult$new(self, df)
                  }
                },
 
                "exec" = {
                  if (self$connect()) {
-                   result <-
+                   dbi.result <-
                      DBI::dbExecute(conn = private$.connection,
                                     statement = query$sql)
                  }
@@ -106,6 +104,11 @@ sqlConnection <- R6::R6Class(
       if (disconnectAfter) {
         on.exit(self$disconnect())
       }
+
+      if (is.data.frame(dbi.result)) {
+        result<-super$sqlResult(connection =self ,data = dbi.result)
+      }
+
       query$print("ausgeführt")
       return(result)
     },
@@ -120,7 +123,7 @@ sqlConnection <- R6::R6Class(
 
     disconnect = function() {
       if (self$isConnected()) {
-       DBI::dbDisconnect(private$.connection)
+        DBI::dbDisconnect(private$.connection)
         message("disconnected")
       }
       return(!self$isConnected())

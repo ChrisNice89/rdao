@@ -35,39 +35,56 @@ sqlInterface <- R6::R6Class(
   inherit = NULL,
   portable = TRUE,
   public = list(
-    initialize = function(fields) {
-      private$.fields<-fields
+    initialize = function() {
     }
   ),
 
   private = list(
-    .fields=NULL,
+    remove=function(fields){
+      print("remove")
+      for (c in tools::toTitleCase(fields)) {
+        mthd_name <- c
+        mthd_set <-
+          glue::glue("generics$public_methods$set{mthd_name}<-NULL")
+        mthd_get <-
+          glue::glue("generics$public_methods$get{mthd_name}<-NULL")
 
-    implement = function() {
-      fields<-private$.fields
+        eval(parse(text = mthd_get))
+        eval(parse(text = mthd_set))
+      }
+    },
+
+    sqlResult = function(connection,dataframe) {
+
+      if (!private$.validator$isTrustedConnection(connection)) {
+        if (!is.data.frame(dataframe)) {
+
+        }
+      }
+
+      fields<-colnames(dataframe)
       obj<-generics
 
-      obj$set("private", "shared", new.env(), overwrite = TRUE)
-      #obj$set("private", ".df", NULL, overwrite = TRUE)
-      obj$set("public", "index", NULL, overwrite = TRUE)
+      obj$set("private", "access", function() private$e, overwrite = TRUE)
+      obj$set("private", "e", new.env(), overwrite = TRUE)
+      obj$set("private", "index", NULL, overwrite = TRUE)
 
-      obj$set("public", "initialize", function(index,df) {
-        private$shared$df<-df
-        self$index <- index
+      obj$set("public", "initialize", function(df) {
+        private$e$df<-df
+        private$index <- 1
         invisible(self)
       }, overwrite = TRUE)
 
       obj$set("public", "print", function()
-        private$shared$df[self$index,], overwrite = TRUE)
-      print(class(obj))
+        private$e$df[private$index,], overwrite = TRUE)
 
-       #Create setter und getter
+      #Create setter und getter
       for (c in fields) {
         mthd_name <- c
         mthd_set <-
-          glue::glue("function(x) private$shared$df[self$index,]${mthd_name} <-x")
+          glue::glue("function(value) private$e$df[private$index,]${mthd_name} <-value")
         mthd_get <-
-          glue::glue("function() private$shared$df[self$index,]${mthd_name}")
+          glue::glue("function() private$e$df[private$index,]${mthd_name}")
 
         mthd_name <- tools::toTitleCase(c)
         obj$set("public",
@@ -79,22 +96,8 @@ sqlInterface <- R6::R6Class(
                            eval(parse(text = mthd_set)),
                            overwrite = TRUE)
       }
-      return(obj)
-    },
-
-    remove=function(){
-      fields<-private$.fields
-
-      for (c in tools::toTitleCase(fields)) {
-        mthd_name <- c
-        mthd_set <-
-          glue::glue("generics$public_methods$set{mthd_name}<-NULL")
-        mthd_get <-
-          glue::glue("generics$public_methods$get{mthd_name}<-NULL")
-
-        eval(parse(text = mthd_get))
-        eval(parse(text = mthd_set))
-      }
+      on.exit(private$remove(fields))
+      return(sqlResult$new(connection ,dataframe))
     }
   )
 )

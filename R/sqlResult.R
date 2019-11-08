@@ -32,28 +32,23 @@
 #' @include utils.R
 #' @include sqlInterface.R
 
-sqlResult <- R6::R6Class(
+sqlResult<- R6::R6Class(
   classname = "SqlResult",
-  inherit = sqlInterface,
+  inherit = generics,
   portable = TRUE,
   private = list(
     .validator = NULL,
-    .df=NULL,
-    .connection=NULL,
-    .generics=NULL
+    .connection=NULL
     ),
 
   public = list(
-    data = NULL,
-    rows=function(){nrow(self$data)},
-    columns=NULL,
-
     initialize = function(connection, data) {
       private$.validator <- Validator$new(self)
 
        if (private$.validator$isTrustedConnection(connection)) {
         if (is.data.frame(data)) {
-          private$.df <- data
+          print("hier")
+          super$initialize(data)
           private$.connection <- connection
         }else {
           private$.validator$throwWarning("Kein Dataframe","initialize()")
@@ -61,34 +56,37 @@ sqlResult <- R6::R6Class(
       }else{
         private$.validator$throwError("Keine gültige Verbindung","initialize()")
       }
-
-      self$data<-private$.df
-      super$initialize(colnames(private$.df))
-      self$loadGenerics()
-      private$.validator$makeReadonly("data")
     },
 
-    loadGenerics=function(){
+    getRecords=function(i){
+      return(super$access()$df[i,])
+    },
 
-      entities<-list()
-      f<-super$implement()
-      df<-private$.df
-      for(r in 1:nrow(private$.df)){
-        entities[[r]]<-f$new(index=r,df)
-      }
+    row=function(index){
+      super$index<-index
+      invisible(self)
+    },
 
-      super$remove()
-      private$.generics<-entities
+    countRows=function(){
+      return(nrow(super$access()$df))
+    },
+
+    countColumns=function(){
+      return(ncol(super$access()$df))
+    },
+
+    update=function(){
 
     },
 
-    getRecord=function(i){
-      return(private$.generics[[i]])
+    delete=function(rows){
+      e<-super$access()
+      e$df <- e$df[-rows, ]
+      invisible(self)
     },
 
-    test=function(i){
-      message(paste(private$.generics[[i]]$print(),collapse = " "))
-      message(paste(private$.df[i,],collapse = " "))
+    add=function(){
+
     }
   )
 )
