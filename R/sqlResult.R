@@ -38,7 +38,8 @@ sqlResult<- R6::R6Class(
   portable = TRUE,
   private = list(
     .validator = NULL,
-    .connection=NULL
+    .connection=NULL,
+    .eod=FALSE
     ),
 
   public = list(
@@ -61,11 +62,6 @@ sqlResult<- R6::R6Class(
       return(super$access()$df[i,])
     },
 
-    row=function(index){
-      super$setIndex(index)
-      invisible(self)
-    },
-
     countRows=function(){
       return(nrow(super$access()$df))
     },
@@ -73,6 +69,22 @@ sqlResult<- R6::R6Class(
     countColumns=function(){
       return(ncol(super$access()$df))
     },
+
+    read=function(){
+      on.exit(self$row(super$setIndex() +1)
+      return(private$.eod)
+    },
+
+    row=function(i){
+      if(i>self$countRows()){
+        private$.eod<-TRUE
+      }else{
+        private$.eod<-FALSE
+      }
+
+      super$setIndex(i)
+      invisible(self)
+    }
 
     update=function(){
 
