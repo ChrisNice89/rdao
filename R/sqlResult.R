@@ -73,14 +73,14 @@ sqlResult<- R6::R6Class(
 
     read=function(){
       on.exit(self$row(super$getIndex()+1))
-      return(!private$.eod)
+      return(private$.eod)
     },
 
     row=function(i){
       if(i>self$countRows()){
-        private$.eod<-TRUE
-      }else{
         private$.eod<-FALSE
+      }else{
+        private$.eod<-TRUE
       }
 
       super$setIndex(i)
