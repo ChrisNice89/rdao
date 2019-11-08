@@ -62,7 +62,7 @@ sqlResult<- R6::R6Class(
     },
 
     row=function(index){
-      super$index<-index
+      super$setIndex(index)
       invisible(self)
     },
 
