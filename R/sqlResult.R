@@ -47,7 +47,6 @@ sqlResult<- R6::R6Class(
 
        if (private$.validator$isTrustedConnection(connection)) {
         if (is.data.frame(data)) {
-          print("hier")
           super$initialize(data)
           private$.connection <- connection
         }else {

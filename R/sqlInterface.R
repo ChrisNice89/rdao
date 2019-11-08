@@ -41,7 +41,6 @@ sqlInterface <- R6::R6Class(
 
   private = list(
     remove=function(fields){
-      print("remove")
       for (c in tools::toTitleCase(fields)) {
         mthd_name <- c
         mthd_set <-
@@ -68,6 +67,7 @@ sqlInterface <- R6::R6Class(
       obj$set("private", "access", function() private$e, overwrite = TRUE)
       obj$set("private", "e", new.env(), overwrite = TRUE)
       obj$set("private", "index", NULL, overwrite = TRUE)
+      obj$set("private", "setIndex", function(i) private$index <- i, overwrite = TRUE)
 
       obj$set("public", "initialize", function(df) {
         private$e$df<-df
@@ -78,7 +78,6 @@ sqlInterface <- R6::R6Class(
       obj$set("public", "print", function()
         private$e$df[private$index,], overwrite = TRUE)
 
-      #Create setter und getter
       for (c in fields) {
         mthd_name <- c
         mthd_set <-

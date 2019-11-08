@@ -125,7 +125,15 @@ sqlConnection <- R6::R6Class(
     disconnect = function() {
       if (self$isConnected()) {
         DBI::dbDisconnect(private$.connection)
-        message("disconnected")
+
+        msg <- paste("<", class(self)[1], ">", sep = "")
+
+        if (!private$.validator$isNullString(self$provider)) {
+          msg <-
+            paste(msg, "> for provider: <", self$provider, ">", sep = "")
+        }
+
+        message(msg, " Disconnect")
       }
       return(!self$isConnected())
     },
