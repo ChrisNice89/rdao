@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 884, *Zeilen Test code:* 0
+*Zeilen R code:* 885, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-07 19:46:51 )
+0.1.0 ( 2019-11-08 01:30:54 )
 
 **Beschreibung**
 
@@ -141,60 +141,38 @@ Anwendung
     ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
     ## for provider: <dbFile> created 
     ## <Validator> for parent class: <SqlResult> created
-    ## [1] "R6ClassGenerator"
+    ## [1] "hier"
+    ## [1] "remove"
     ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
     ## for provider: <dbFile> ausgeführt
 
     ## disconnected
 
-    result2<-cnn$createQuery(sql = "Select carat,color,price FROM diamonds LIMIT 10")$fetch()
+    result$countRows()
 
-    ## <Validator> for parent class: <SqlCommand> created
-    ## <SqlCommand> :: <Select carat,color,price FROM diamonds LIMIT 10>
-    ## for provider: <dbFile> created 
-    ## <Validator> for parent class: <SqlResult> created
-    ## [1] "R6ClassGenerator"
-    ## <SqlCommand> :: <Select carat,color,price FROM diamonds LIMIT 10>
-    ## for provider: <dbFile> ausgeführt
+    ## [1] 10
 
-    ## disconnected
-
-    d<-result$getRecord(1)
-    d2<-result2$getRecord(1)
-
-    # d$ 
-    # shows fields carat,color
-    d$print()
+    result$getRecords(c(1,2))
 
     ##   carat color
     ## 1  0.23     E
-
-    # d2$ 
-    # shows fields carat,color,price
-    d2$print()
-
-    ##   carat color price
-    ## 1  0.23     E   326
-
-    d$setCarat(0.24)
-    d$getCarat()
-
-    ## [1] 0.24
-
-    result$test(1)
-
-    ## 0.24 E
-
-    ## 0.23 E
-
-    d<-result$getRecord(2)
-    d$print()
-
-    ##   carat color
     ## 2  0.21     E
 
-    d$index<-1
-    d$print()
+    result$setCarat(0.66)
+    result$row(index = 2)$setCarat(0.99)
+    result$getRecords(c(1,2))
 
     ##   carat color
-    ## 1  0.24     E
+    ## 1  0.99     E
+    ## 2  0.21     E
+
+    result$delete(rows = c(1,2))
+    result$countRows()
+
+    ## [1] 8
+
+    result$getRecords(c(1,2))
+
+    ##   carat color
+    ## 3  0.23     E
+    ## 4  0.29     I
