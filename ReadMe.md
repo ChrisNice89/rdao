@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 889, *Zeilen Test code:* 0
+*Zeilen R code:* 887, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-08 01:46:32 )
+0.1.0 ( 2019-11-08 01:56:09 )
 
 **Beschreibung**
 
@@ -175,18 +175,67 @@ Anwendung
     ## 3  0.23     E
     ## 4  0.29     I
 
-    result2<-cnn$createQuery(sql = "Select * FROM diamonds LIMIT 10")$fetch()
+    print(result)
+
+    ## <SqlResult>
+    ##   Inherits from: <Generics>
+    ##   Public:
+    ##     add: function () 
+    ##     clone: function (deep = FALSE) 
+    ##     countColumns: function () 
+    ##     countRows: function () 
+    ##     delete: function (rows) 
+    ##     getCarat: function () 
+    ##     getColor: function () 
+    ##     getRecords: function (i) 
+    ##     initialize: function (connection, data) 
+    ##     row: function (index) 
+    ##     setCarat: function (value) 
+    ##     setColor: function (value) 
+    ##     update: function () 
+    ##   Private:
+    ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .validator: Validator, R6
+    ##     access: function () 
+    ##     e: environment
+    ##     index: 2
+    ##     setIndex: function (i)
+
+    result2<-cnn$createQuery(sql = "Select cut, price, depth FROM diamonds LIMIT 10")$fetch()
 
     ## <Validator> for parent class: <SqlCommand> created
-    ## <SqlCommand> :: <Select * FROM diamonds LIMIT 10>
+    ## <SqlCommand> :: <Select cut, price, depth FROM diamonds LIMIT 10>
     ## for provider: <dbFile> created 
     ## <Validator> for parent class: <SqlResult> created
-    ## <SqlCommand> :: <Select * FROM diamonds LIMIT 10>
+    ## <SqlCommand> :: <Select cut, price, depth FROM diamonds LIMIT 10>
     ## for provider: <dbFile> ausgeführt
 
     ## <SqlConnection>> for provider: <dbFile> Disconnect
 
-    result2$getRecords(1)
+    print(result2)
 
-    ##   carat   cut color clarity depth table price    x    y    z
-    ## 1  0.23 Ideal     E     SI2  61.5    55   326 3.95 3.98 2.43
+    ## <SqlResult>
+    ##   Inherits from: <Generics>
+    ##   Public:
+    ##     add: function () 
+    ##     clone: function (deep = FALSE) 
+    ##     countColumns: function () 
+    ##     countRows: function () 
+    ##     delete: function (rows) 
+    ##     getCut: function () 
+    ##     getDepth: function () 
+    ##     getPrice: function () 
+    ##     getRecords: function (i) 
+    ##     initialize: function (connection, data) 
+    ##     row: function (index) 
+    ##     setCut: function (value) 
+    ##     setDepth: function (value) 
+    ##     setPrice: function (value) 
+    ##     update: function () 
+    ##   Private:
+    ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .validator: Validator, R6
+    ##     access: function () 
+    ##     e: environment
+    ##     index: 1
+    ##     setIndex: function (i)
