@@ -159,25 +159,12 @@ b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
 cnn<-b$build()
 
 result<-cnn$createQuery(sql = "Select carat,color FROM diamonds LIMIT 10")$fetch()
-result2<-cnn$createQuery(sql = "Select carat,color,price FROM diamonds LIMIT 10")$fetch()
-
-d<-result$getRecord(1)
-d2<-result2$getRecord(1)
-
-# d$ 
-# shows fields carat,color
-d$print()
-
-# d2$ 
-# shows fields carat,color,price
-d2$print()
-
-d$setCarat(0.24)
-d$getCarat()
-result$test(1)
-
-d<-result$getRecord(2)
-d$print()
-d$index<-1
-d$print()
+result$countRows()
+result$getRecords(c(1,2))
+result$setCarat(0.66)
+result$row(index = 2)$setCarat(0.99)
+result$getRecord(c(1,2))
+result$delete(rows = c(1,2))
+result$countRows()
+result$getRecord(c(1,2))
 ```

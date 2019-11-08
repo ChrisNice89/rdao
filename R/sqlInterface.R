@@ -28,7 +28,7 @@
 #'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 #'
 #' @include utils.R
-#'
+#' @include sqlResult.R
 
 sqlInterface <- R6::R6Class(
   classname = "Abstarkt SqlResult Interface",

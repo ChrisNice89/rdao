@@ -27,6 +27,7 @@
 #'   \item{\code{xx(yy,yy="")}}{xx \code{zz}.}
 #'   \item{\code{zz(yy,yy="")}}{xx \code{zz}.}}
 #'
+#' @include sqlInterface.R
 #' @include utils.R
 #' @include sqlCommand.R
 
