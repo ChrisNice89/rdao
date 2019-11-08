@@ -170,6 +170,8 @@ result$getRecords(c(1,2))
 print(result)
 
 result2<-cnn$createQuery(sql = "Select cut, price, depth FROM diamonds LIMIT 10")$fetch()
+# Generic
+print(result)
 print(result2)
 
 ```

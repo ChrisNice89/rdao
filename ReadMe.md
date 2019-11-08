@@ -212,6 +212,33 @@ Anwendung
 
     ## <SqlConnection>> for provider: <dbFile> Disconnect
 
+    # Generic
+    print(result)
+
+    ## <SqlResult>
+    ##   Inherits from: <Generics>
+    ##   Public:
+    ##     add: function () 
+    ##     clone: function (deep = FALSE) 
+    ##     countColumns: function () 
+    ##     countRows: function () 
+    ##     delete: function (rows) 
+    ##     getCarat: function () 
+    ##     getColor: function () 
+    ##     getRecords: function (i) 
+    ##     initialize: function (connection, data) 
+    ##     row: function (index) 
+    ##     setCarat: function (value) 
+    ##     setColor: function (value) 
+    ##     update: function () 
+    ##   Private:
+    ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .validator: Validator, R6
+    ##     access: function () 
+    ##     e: environment
+    ##     index: 2
+    ##     setIndex: function (i)
+
     print(result2)
 
     ## <SqlResult>
