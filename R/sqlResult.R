@@ -58,7 +58,8 @@ sqlResult<- R6::R6Class(
       }
     },
 
-    getRecords=function(i){
+    getRecords=function(){
+      i<-super$getIndex()
       return(super$access()$df[i,])
     },
 
@@ -72,7 +73,7 @@ sqlResult<- R6::R6Class(
 
     read=function(){
       on.exit(self$row(super$getIndex()+1))
-      return(private$.eod)
+      return(!private$.eod)
     },
 
     row=function(i){
