@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 885, *Zeilen Test code:* 0
+*Zeilen R code:* 889, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-08 01:30:54 )
+0.1.0 ( 2019-11-08 01:43:36 )
 
 **Beschreibung**
 
@@ -141,12 +141,10 @@ Anwendung
     ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
     ## for provider: <dbFile> created 
     ## <Validator> for parent class: <SqlResult> created
-    ## [1] "hier"
-    ## [1] "remove"
     ## <SqlCommand> :: <Select carat,color FROM diamonds LIMIT 10>
     ## for provider: <dbFile> ausgeführt
 
-    ## disconnected
+    ## <SqlConnection>> for provider: <dbFile> Disconnect
 
     result$countRows()
 
