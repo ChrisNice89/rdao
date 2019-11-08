@@ -71,7 +71,7 @@ sqlResult<- R6::R6Class(
     },
 
     read=function(){
-      on.exit(self$row(super$setIndex() +1)
+      on.exit(self$row(super$getIndex()+1)
       return(private$.eod)
     },
 
