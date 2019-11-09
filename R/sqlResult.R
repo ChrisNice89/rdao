@@ -126,8 +126,6 @@ make_functor <- function(obj) {
 `$<-.functor` <- function(x, name, value) {
   obj <- attr(x, "obj", exact = TRUE)
   obj[[name]] <- value
-  # This function requires obj to be a reference object.
-  # It could work with non-ref objects by adding `attr(x, "obj") <- obj` here.
   x
 }
 

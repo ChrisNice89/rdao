@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 887, *Zeilen Test code:* 0
+*Zeilen R code:* 925, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-08 01:56:09 )
+0.1.0 ( 2019-11-09 18:57:33 )
 
 **Beschreibung**
 
@@ -150,30 +150,50 @@ Anwendung
 
     ## [1] 10
 
-    result$getRecords(c(1,2))
+    m<-result$toMatrix()
+    m(1)
 
     ##   carat color
     ## 1  0.23     E
+
+    m(2)
+
+    ##   carat color
     ## 2  0.21     E
 
+    m(,1:2)
+
+    ##    carat color
+    ## 1   0.23     E
+    ## 2   0.21     E
+    ## 3   0.23     E
+    ## 4   0.29     I
+    ## 5   0.31     J
+    ## 6   0.24     J
+    ## 7   0.24     I
+    ## 8   0.26     H
+    ## 9   0.22     E
+    ## 10  0.23     H
+
+    result$getRecords()
+
+    ## NULL
+
     result$setCarat(0.66)
-    result$row(2)$setCarat(0.99)
-    result$getRecords(c(1,2))
+    result$row(1)$setCarat(0.99)
+    m(,1:2)
 
-    ##   carat color
-    ## 1  0.66     E
-    ## 2  0.99     E
-
-    result$delete(c(1,2))
-    result$countRows()
-
-    ## [1] 8
-
-    result$getRecords(c(1,2))
-
-    ##   carat color
-    ## 3  0.23     E
-    ## 4  0.29     I
+    ##    carat color
+    ## 1   0.99     E
+    ## 2   0.21     E
+    ## 3   0.23     E
+    ## 4   0.29     I
+    ## 5   0.31     J
+    ## 6   0.24     J
+    ## 7   0.24     I
+    ## 8   0.26     H
+    ## 9   0.22     E
+    ## 10  0.23     H
 
     print(result)
 
@@ -187,19 +207,22 @@ Anwendung
     ##     delete: function (rows) 
     ##     getCarat: function () 
     ##     getColor: function () 
-    ##     getRecords: function (i) 
+    ##     getRecords: function () 
     ##     initialize: function (connection, data) 
-    ##     row: function (index) 
+    ##     read: function () 
+    ##     row: function (i) 
     ##     setCarat: function (value) 
     ##     setColor: function (value) 
+    ##     toMatrix: function () 
     ##     update: function () 
     ##   Private:
     ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .eod: FALSE
+    ##     .shared: environment
     ##     .validator: Validator, R6
-    ##     access: function () 
     ##     e: environment
-    ##     index: 2
-    ##     setIndex: function (i)
+    ##     getPointer: function () 
+    ##     matrixAccess: function (i, j)
 
     result2<-cnn$createQuery(sql = "Select cut, price, depth FROM diamonds LIMIT 10")$fetch()
 
@@ -225,19 +248,22 @@ Anwendung
     ##     delete: function (rows) 
     ##     getCarat: function () 
     ##     getColor: function () 
-    ##     getRecords: function (i) 
+    ##     getRecords: function () 
     ##     initialize: function (connection, data) 
-    ##     row: function (index) 
+    ##     read: function () 
+    ##     row: function (i) 
     ##     setCarat: function (value) 
     ##     setColor: function (value) 
+    ##     toMatrix: function () 
     ##     update: function () 
     ##   Private:
     ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .eod: FALSE
+    ##     .shared: environment
     ##     .validator: Validator, R6
-    ##     access: function () 
     ##     e: environment
-    ##     index: 2
-    ##     setIndex: function (i)
+    ##     getPointer: function () 
+    ##     matrixAccess: function (i, j)
 
     print(result2)
 
@@ -252,17 +278,20 @@ Anwendung
     ##     getCut: function () 
     ##     getDepth: function () 
     ##     getPrice: function () 
-    ##     getRecords: function (i) 
+    ##     getRecords: function () 
     ##     initialize: function (connection, data) 
-    ##     row: function (index) 
+    ##     read: function () 
+    ##     row: function (i) 
     ##     setCut: function (value) 
     ##     setDepth: function (value) 
     ##     setPrice: function (value) 
+    ##     toMatrix: function () 
     ##     update: function () 
     ##   Private:
     ##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6
+    ##     .eod: FALSE
+    ##     .shared: environment
     ##     .validator: Validator, R6
-    ##     access: function () 
     ##     e: environment
-    ##     index: 1
-    ##     setIndex: function (i)
+    ##     getPointer: function () 
+    ##     matrixAccess: function (i, j)
