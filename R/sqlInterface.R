@@ -36,14 +36,14 @@ sqlInterface <- R6::R6Class(
   portable = TRUE,
   public = list(
     initialize = function() {
+
     }
   ),
 
   private = list(
-
-    remove=function(class,fields){
-      class$private_fields<-NULL
-      class$private_methods<-NULL
+    remove = function(class, fields) {
+      class$private_fields <- NULL
+      class$private_methods <- NULL
 
       for (c in tools::toTitleCase(fields)) {
         mthd_name <- c
@@ -57,24 +57,27 @@ sqlInterface <- R6::R6Class(
       }
     },
 
-    sqlResult = function(connection,dataframe) {
-
+    sqlResult = function(connection, dataframe) {
       if (!private$.validator$isTrustedConnection(connection)) {
         if (!is.data.frame(dataframe)) {
 
         }
       }
 
-      obj<-generics
-      fields<-colnames(dataframe)
+      obj <- generics
+      fields <- colnames(dataframe)
 
-      obj$set("private", "getPointer", function() private$e, overwrite = TRUE)
+      obj$set("private", "getPointer", function()
+        private$e, overwrite = TRUE)
       obj$set("private", "e", new.env(), overwrite = TRUE)
-      obj$set("private", "matrixAccess", function(i,j) private$e$df[i,j], overwrite = TRUE)
-      obj$set("private", "functor", function(obj) {structure(function(i,j) {obj$matrixAccess(i,j)},class = "functor",obj = obj)}, overwrite = TRUE)
+      obj$set("private", "matrixAccess", function(i, j) {
+        private$e$index <- i
+        private$e$df[i, j]
+      }
+      , overwrite = TRUE)
 
       obj$set("public", "initialize", function(df) {
-        private$e$df<-df
+        private$e$df <- df
         private$e$index <- 1
         invisible(self)
       }, overwrite = TRUE)
@@ -100,50 +103,26 @@ sqlInterface <- R6::R6Class(
                 overwrite = TRUE)
       }
 
-      on.exit(private$remove(obj,fields))
-      return(sqlResult$new(connection ,dataframe))
-      }
+      on.exit(private$remove(obj, fields))
+      return(sqlResult$new(connection , dataframe))
+    }
   )
 )
 
 generics <- R6::R6Class(
   classname = "Generics",
-  inherit =NULL,
+  inherit = NULL,
   portable = TRUE,
-  private = list(
-  ),
+  private = list(),
   public = list(
-    initialize = function(){
+    initialize = function() {
     }
   )
 )
 
-# This takes an object with a $call() method
-# make_functor <- function(obj) {
-#   structure(
-#     function(...) {
-#       obj$call(...)
-#     },
-#     class = "functor",
-#     obj = obj
-#   )
-# }
-#
-# `$.functor` <- function(x, name) {
-#   attr(x, "obj", exact = TRUE)[[name]]
-# }
-#
-# `$<-.functor` <- function(x, name, value) {
-#   obj <- attr(x, "obj", exact = TRUE)
-#   obj[[name]] <- value
-#   # This function requires obj to be a reference object.
-#   # It could work with non-ref objects by adding `attr(x, "obj") <- obj` here.
-#   x
-# }
-#
-# `[[.functor` <- `$.functor`
-# `[[<-.functor` <- `$<-.functor`
-#
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`
+
 
 `$.functor` <- function(x, name) {
   attr(x, "obj", exact = TRUE)[[name]]
@@ -157,5 +136,4 @@ generics <- R6::R6Class(
 
 `[[.functor` <- `$.functor`
 `[[<-.functor` <- `$<-.functor`
-
 

@@ -62,7 +62,7 @@ sqlResult<- R6::R6Class(
 
     getRecords=function(){
       i<-private$.shared$index
-      return(private$.shared$df$df[i,])
+      return(private$.shared$df[i,])
     },
 
     countRows=function(){
@@ -91,7 +91,17 @@ sqlResult<- R6::R6Class(
     },
 
     toMatrix=function(){
-      return(super$functor(self))
+
+      functor <- function(obj) {
+          structure(
+            function(i,j) {
+              obj$matrixAccess(i,j)
+            },
+            class = "functor",
+            obj = obj
+          )
+        }
+      return(functor(super))
     },
 
     update=function(){
