@@ -105,7 +105,6 @@ sqlResult<- R6::R6Class(
     },
 
     update=function(){
-
     },
 
     delete=function(rows){
@@ -114,7 +113,24 @@ sqlResult<- R6::R6Class(
     },
 
     add=function(){
-
     }
   )
 )
+
+
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`
+
+
+`$.functor` <- function(x, name) {
+  attr(x, "obj", exact = TRUE)[[name]]
+}
+
+`$<-.functor` <- function(x, name, value) {
+  obj <- attr(x, "obj", exact = TRUE)
+  obj[[name]] <- value
+  x
+}
+
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`
