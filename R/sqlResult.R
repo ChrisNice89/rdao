@@ -117,20 +117,20 @@ sqlResult<- R6::R6Class(
   )
 )
 
-
+#' @export
 `[[.functor` <- `$.functor`
 `[[<-.functor` <- `$<-.functor`
 
-
+#' @export
 `$.functor` <- function(x, name) {
   attr(x, "obj", exact = TRUE)[[name]]
 }
-
+#' @export
 `$<-.functor` <- function(x, name, value) {
   obj <- attr(x, "obj", exact = TRUE)
   obj[[name]] <- value
   x
 }
-
+#' @export
 `[[.functor` <- `$.functor`
 `[[<-.functor` <- `$<-.functor`
