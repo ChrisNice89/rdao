@@ -39,7 +39,8 @@ sqlResult<- R6::R6Class(
   private = list(
     .validator = NULL,
     .connection=NULL,
-    .eod=FALSE
+    .eod=FALSE,
+    .shared=NULL
     ),
 
   public = list(
@@ -49,6 +50,7 @@ sqlResult<- R6::R6Class(
        if (private$.validator$isTrustedConnection(connection)) {
         if (is.data.frame(data)) {
           super$initialize(data)
+          private$.shared<-super$getPointer()
           private$.connection <- connection
         }else {
           private$.validator$throwWarning("Kein Dataframe","initialize()")
@@ -59,32 +61,37 @@ sqlResult<- R6::R6Class(
     },
 
     getRecords=function(){
-      i<-super$getIndex()
-      return(super$access()$df[i,])
+      i<-private$.shared$index
+      return(private$.shared$df$df[i,])
     },
 
     countRows=function(){
-      return(nrow(super$access()$df))
+      return(nrow(private$.shared$df))
     },
 
     countColumns=function(){
-      return(ncol(super$access()$df))
+      return(ncol(private$.shared$df))
     },
 
     read=function(){
-      on.exit(self$row(super$getIndex()+1))
-      return(private$.eod)
+      i<-private$.shared$index
+      on.exit(self$row(i+1))
+      return(!private$.eod)
     },
 
     row=function(i){
       if(i>self$countRows()){
-        private$.eod<-FALSE
-      }else{
         private$.eod<-TRUE
+        private$.shared$index<-1
+      }else{
+        private$.eod<-FALSE
+        private$.shared$index<-i
       }
-
-      super$setIndex(i)
       invisible(self)
+    },
+
+    toMatrix=function(){
+      return(make_functor(super))
     },
 
     update=function(){
@@ -92,8 +99,7 @@ sqlResult<- R6::R6Class(
     },
 
     delete=function(rows){
-      e<-super$access()
-      e$df <- e$df[-rows, ]
+      private$.shared$df <- super$getPointer()$df[-rows, ]
       invisible(self)
     },
 
@@ -103,3 +109,27 @@ sqlResult<- R6::R6Class(
   )
 )
 
+make_functor <- function(obj) {
+  structure(
+    function(i,j) {
+      obj$matrixAccess(i,j)
+    },
+    class = "functor",
+    obj = obj
+  )
+}
+
+`$.functor` <- function(x, name) {
+  attr(x, "obj", exact = TRUE)[[name]]
+}
+
+`$<-.functor` <- function(x, name, value) {
+  obj <- attr(x, "obj", exact = TRUE)
+  obj[[name]] <- value
+  # This function requires obj to be a reference object.
+  # It could work with non-ref objects by adding `attr(x, "obj") <- obj` here.
+  x
+}
+
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`

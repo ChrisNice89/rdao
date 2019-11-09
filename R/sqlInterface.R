@@ -40,13 +40,17 @@ sqlInterface <- R6::R6Class(
   ),
 
   private = list(
-    remove=function(fields){
+
+    remove=function(class,fields){
+      class$private_fields<-NULL
+      class$private_methods<-NULL
+
       for (c in tools::toTitleCase(fields)) {
         mthd_name <- c
         mthd_set <-
-          glue::glue("generics$public_methods$set{mthd_name}<-NULL")
+          glue::glue("class$public_methods$set{mthd_name}<-NULL")
         mthd_get <-
-          glue::glue("generics$public_methods$get{mthd_name}<-NULL")
+          glue::glue("class$public_methods$get{mthd_name}<-NULL")
 
         eval(parse(text = mthd_get))
         eval(parse(text = mthd_set))
@@ -61,44 +65,43 @@ sqlInterface <- R6::R6Class(
         }
       }
 
-      fields<-colnames(dataframe)
       obj<-generics
+      fields<-colnames(dataframe)
 
-      obj$set("private", "access", function() private$e, overwrite = TRUE)
+      obj$set("private", "getPointer", function() private$e, overwrite = TRUE)
       obj$set("private", "e", new.env(), overwrite = TRUE)
-      obj$set("private", "index", NULL, overwrite = TRUE)
-      obj$set("private", "setIndex", function(i) private$index <- i, overwrite = TRUE)
-      obj$set("private", "getIndex", function() private$index, overwrite = TRUE)
+      obj$set("private", "matrixAccess", function(i,j) private$e$df[i,j], overwrite = TRUE)
 
       obj$set("public", "initialize", function(df) {
         private$e$df<-df
-        private$index <- 1
+        private$e$index <- 1
         invisible(self)
       }, overwrite = TRUE)
 
-      # obj$set("public", "print", function()
-      #   private$e$df[private$index,], overwrite = TRUE)
+      # vGetterSetter<-Vectorize(private$implementGetterSetter,vectorize.args =c("class","name"))
+      # vGetterSetter(obj,fields)
 
-      for (c in fields) {
-        mthd_name <- c
+      for (f in fields) {
+        mthd_name <- f
         mthd_set <-
-          glue::glue("function(value) private$e$df[private$index,]${mthd_name} <-value")
+          glue::glue("function(value) private$e$df[private$e$index,]${mthd_name} <-value")
         mthd_get <-
-          glue::glue("function() private$e$df[private$index,]${mthd_name}")
+          glue::glue("function() private$e$df[private$e$index,]${mthd_name}")
 
-        mthd_name <- tools::toTitleCase(c)
+        mthd_name <- tools::toTitleCase(f)
         obj$set("public",
-                           paste("get", mthd_name, sep = ""),
-                           eval(parse(text = mthd_get)),
-                           overwrite = TRUE)
+                paste("get", mthd_name, sep = ""),
+                eval(parse(text = mthd_get)),
+                overwrite = TRUE)
         obj$set("public",
-                           paste("set", mthd_name, sep = ""),
-                           eval(parse(text = mthd_set)),
-                           overwrite = TRUE)
+                paste("set", mthd_name, sep = ""),
+                eval(parse(text = mthd_set)),
+                overwrite = TRUE)
       }
-      on.exit(private$remove(fields))
+
+      on.exit(private$remove(obj,fields))
       return(sqlResult$new(connection ,dataframe))
-    }
+      }
   )
 )
 
@@ -106,13 +109,40 @@ generics <- R6::R6Class(
   classname = "Generics",
   inherit =NULL,
   portable = TRUE,
-  private = list(),
+  private = list(
+  ),
   public = list(
     initialize = function(){
     }
   )
 )
 
+# This takes an object with a $call() method
+# make_functor <- function(obj) {
+#   structure(
+#     function(...) {
+#       obj$call(...)
+#     },
+#     class = "functor",
+#     obj = obj
+#   )
+# }
+#
+# `$.functor` <- function(x, name) {
+#   attr(x, "obj", exact = TRUE)[[name]]
+# }
+#
+# `$<-.functor` <- function(x, name, value) {
+#   obj <- attr(x, "obj", exact = TRUE)
+#   obj[[name]] <- value
+#   # This function requires obj to be a reference object.
+#   # It could work with non-ref objects by adding `attr(x, "obj") <- obj` here.
+#   x
+# }
+#
+# `[[.functor` <- `$.functor`
+# `[[<-.functor` <- `$<-.functor`
+#
 
 
 
