@@ -91,6 +91,16 @@ sqlResult<- R6::R6Class(
     },
 
     toMatrix=function(){
+      make_functor <- function(obj) {
+        structure(
+          function(i,j) {
+            obj$matrixAccess(i,j)
+          },
+          class = "functor",
+          obj = obj
+        )
+      }
+
       return(make_functor(super))
     },
 
@@ -108,26 +118,3 @@ sqlResult<- R6::R6Class(
     }
   )
 )
-
-make_functor <- function(obj) {
-  structure(
-    function(i,j) {
-      obj$matrixAccess(i,j)
-    },
-    class = "functor",
-    obj = obj
-  )
-}
-
-`$.functor` <- function(x, name) {
-  attr(x, "obj", exact = TRUE)[[name]]
-}
-
-`$<-.functor` <- function(x, name, value) {
-  obj <- attr(x, "obj", exact = TRUE)
-  obj[[name]] <- value
-  x
-}
-
-`[[.functor` <- `$.functor`
-`[[<-.functor` <- `$<-.functor`
