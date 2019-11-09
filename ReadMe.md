@@ -30,7 +30,7 @@ Packet Info
 
 **Version**
 
-0.1.0 ( 2019-11-09 18:57:33 )
+0.1.0 ( 2019-11-09 21:56:08 )
 
 **Beschreibung**
 
@@ -174,10 +174,6 @@ Anwendung
     ## 8   0.26     H
     ## 9   0.22     E
     ## 10  0.23     H
-
-    result$getRecords()
-
-    ## NULL
 
     result$setCarat(0.66)
     result$row(1)$setCarat(0.99)

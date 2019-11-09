@@ -91,17 +91,7 @@ sqlResult<- R6::R6Class(
     },
 
     toMatrix=function(){
-      make_functor <- function(obj) {
-        structure(
-          function(i,j) {
-            obj$matrixAccess(i,j)
-          },
-          class = "functor",
-          obj = obj
-        )
-      }
-
-      return(make_functor(super))
+      return(super$functor(self))
     },
 
     update=function(){

@@ -71,6 +71,7 @@ sqlInterface <- R6::R6Class(
       obj$set("private", "getPointer", function() private$e, overwrite = TRUE)
       obj$set("private", "e", new.env(), overwrite = TRUE)
       obj$set("private", "matrixAccess", function(i,j) private$e$df[i,j], overwrite = TRUE)
+      obj$set("private", "functor", function(obj) {structure(function(i,j) {obj$matrixAccess(i,j)},class = "functor",obj = obj)}, overwrite = TRUE)
 
       obj$set("public", "initialize", function(df) {
         private$e$df<-df
@@ -144,5 +145,17 @@ generics <- R6::R6Class(
 # `[[<-.functor` <- `$<-.functor`
 #
 
+`$.functor` <- function(x, name) {
+  attr(x, "obj", exact = TRUE)[[name]]
+}
+
+`$<-.functor` <- function(x, name, value) {
+  obj <- attr(x, "obj", exact = TRUE)
+  obj[[name]] <- value
+  x
+}
+
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`
 
 
