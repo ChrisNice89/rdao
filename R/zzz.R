@@ -47,10 +47,6 @@
     )
   }
 
-  `[[.functor` <- `$.functor`
-  `[[<-.functor` <- `$<-.functor`
-
-
   `$.functor` <- function(x, name) {
     attr(x, "obj", exact = TRUE)[[name]]
   }
