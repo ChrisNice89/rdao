@@ -82,9 +82,6 @@ sqlInterface <- R6::R6Class(
         invisible(self)
       }, overwrite = TRUE)
 
-      # vGetterSetter<-Vectorize(private$implementGetterSetter,vectorize.args =c("class","name"))
-      # vGetterSetter(obj,fields)
-
       for (f in fields) {
         mthd_name <- f
         mthd_set <-
@@ -120,3 +117,15 @@ generics <- R6::R6Class(
   )
 )
 
+`$.functor` <- function(x, name) {
+  attr(x, "obj", exact = TRUE)[[name]]
+}
+
+`$<-.functor` <- function(x, name, value) {
+  obj <- attr(x, "obj", exact = TRUE)
+  obj[[name]] <- value
+  x
+}
+
+`[[.functor` <- `$.functor`
+`[[<-.functor` <- `$<-.functor`
