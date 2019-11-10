@@ -37,6 +37,15 @@
   packages<- c("R6","DBI","ODCB")
   #installer(packages)
 
+  functor <- function(obj) {
+    structure(
+      function(i,j) {
+        obj$matrixAccess(i,j)
+      },
+      class = "functor",
+      obj = obj
+    )
+  }
 
   `[[.functor` <- `$.functor`
   `[[<-.functor` <- `$<-.functor`
