@@ -37,5 +37,23 @@
   packages<- c("R6","DBI","ODCB")
   #installer(packages)
 
+
+  `[[.functor` <- `$.functor`
+  `[[<-.functor` <- `$<-.functor`
+
+
+  `$.functor` <- function(x, name) {
+    attr(x, "obj", exact = TRUE)[[name]]
+  }
+
+  `$<-.functor` <- function(x, name, value) {
+    obj <- attr(x, "obj", exact = TRUE)
+    obj[[name]] <- value
+    x
+  }
+
+  `[[.functor` <- `$.functor`
+  `[[<-.functor` <- `$<-.functor`
+
   invisible()
 }
