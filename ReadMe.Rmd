@@ -162,9 +162,9 @@ result<-cnn$createQuery(sql = "Select carat,color FROM diamonds LIMIT 10")$fetch
 result$countRows()
 
 m<-result$toMatrix()
-m(1)
+m(i = 1,j=1)
 m(2)
-m(,1:2)
+m(1,1:2)
 
 result$setCarat(0.66)
 result$row(1)$setCarat(0.99)

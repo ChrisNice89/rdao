@@ -70,7 +70,7 @@ sqlInterface <- R6::R6Class(
       obj$set("private", "getPointer", function()
         private$e, overwrite = TRUE)
       obj$set("private", "e", new.env(), overwrite = TRUE)
-      obj$set("private", "matrixAccess", function(i=NULL, j=NULL) {
+      obj$set("private", "matrixAccess", function(i=NA, j=NA) {
         private$e$index <- i
         private$e$df[i, j]
       }

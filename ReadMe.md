@@ -23,14 +23,14 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao">
 <img src="http://cranlogs.r-pkg.org/badges/rdao">
 
-*Zeilen R code:* 925, *Zeilen Test code:* 0
+*Zeilen R code:* 929, *Zeilen Test code:* 0
 
 Packet Info
 -----------
 
 **Version**
 
-0.1.0 ( 2019-11-09 21:56:08 )
+0.1.0 ( 2019-11-10 14:42:31 )
 
 **Beschreibung**
 
@@ -151,45 +151,25 @@ Anwendung
     ## [1] 10
 
     m<-result$toMatrix()
-    m(1)
+    m(i = 1,j=1)
 
-    ##   carat color
-    ## 1  0.23     E
+    ## [1] 0.23
 
     m(2)
 
+    ## data frame with 0 columns and 1 row
+
+    m(1,1:2)
+
     ##   carat color
-    ## 2  0.21     E
-
-    m(,1:2)
-
-    ##    carat color
-    ## 1   0.23     E
-    ## 2   0.21     E
-    ## 3   0.23     E
-    ## 4   0.29     I
-    ## 5   0.31     J
-    ## 6   0.24     J
-    ## 7   0.24     I
-    ## 8   0.26     H
-    ## 9   0.22     E
-    ## 10  0.23     H
+    ## 1  0.23     E
 
     result$setCarat(0.66)
     result$row(1)$setCarat(0.99)
     m(,1:2)
 
-    ##    carat color
-    ## 1   0.99     E
-    ## 2   0.21     E
-    ## 3   0.23     E
-    ## 4   0.29     I
-    ## 5   0.31     J
-    ## 6   0.24     J
-    ## 7   0.24     I
-    ## 8   0.26     H
-    ## 9   0.22     E
-    ## 10  0.23     H
+    ## [1] carat color
+    ## <0 rows> (or 0-length row.names)
 
     print(result)
 
@@ -218,7 +198,7 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i, j)
+    ##     matrixAccess: function (i = NULL, j = NULL)
 
     result2<-cnn$createQuery(sql = "Select cut, price, depth FROM diamonds LIMIT 10")$fetch()
 
@@ -259,7 +239,7 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i, j)
+    ##     matrixAccess: function (i = NULL, j = NULL)
 
     print(result2)
 
@@ -290,4 +270,4 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i, j)
+    ##     matrixAccess: function (i = NULL, j = NULL)
