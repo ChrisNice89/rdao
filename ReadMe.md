@@ -30,7 +30,7 @@ Packet Info
 
 **Version**
 
-0.1.0 ( 2019-11-10 14:42:31 )
+0.1.0 ( 2019-11-10 14:45:06 )
 
 **Beschreibung**
 
@@ -198,7 +198,7 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i = NULL, j = NULL)
+    ##     matrixAccess: function (i = NA, j = NA)
 
     result2<-cnn$createQuery(sql = "Select cut, price, depth FROM diamonds LIMIT 10")$fetch()
 
@@ -239,7 +239,7 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i = NULL, j = NULL)
+    ##     matrixAccess: function (i = NA, j = NA)
 
     print(result2)
 
@@ -270,4 +270,4 @@ Anwendung
     ##     .validator: Validator, R6
     ##     e: environment
     ##     getPointer: function () 
-    ##     matrixAccess: function (i = NULL, j = NULL)
+    ##     matrixAccess: function (i = NA, j = NA)

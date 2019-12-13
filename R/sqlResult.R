@@ -94,7 +94,7 @@ sqlResult<- R6::R6Class(
 
       functor <- function(obj) {
           structure(
-            function(i=NULL,j=NULL) {
+            function(i=NA,j=NA) {
               obj$matrixAccess(i,j)
             },
             class = "functor",
@@ -105,6 +105,16 @@ sqlResult<- R6::R6Class(
     },
 
     update=function(){
+      # querys<-list()
+      # for(i in 1:nrow(private$.shared$df)) {
+      #   querys[[i]]<-sqlUpdateQuery$new(private$.connection,table = "diamonds",df = private$.shared$df[i,])
+      #   cat(querys[[i]]$sql,"\n","\n")
+      # }
+
+      # first row 4 example
+      df <- private$.shared$df[1,]
+      qry<-sqlUpdateQuery$new(private$.connection,table = "diamonds",df = df)
+      print(qry$execute())
     },
 
     delete=function(rows){

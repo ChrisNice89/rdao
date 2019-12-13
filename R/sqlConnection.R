@@ -40,12 +40,29 @@ sqlConnection <- R6::R6Class(
     .connection = NULL,
     .driver = NULL,
     .credentials = list(),
-
     .dbiConnect = function(driverGenerator, ...) {
       if (is.function(driverGenerator)) {
         DBI::dbConnect(driverGenerator(), ...)
       } else {
         private$.validator$throwError("Driver generator ist ungültig", "connect()")
+      }
+    },
+
+    getTables = function(disconnect=TRUE) {
+      if(self$connect()){
+        if (disconnect) {
+          on.exit(self$disconnect())
+        }
+        return(DBI::dbListTables(private$.connection))
+      }
+    },
+
+    getFields=function(tablename,disconnect=TRUE){
+      if(self$connect()){
+        if (disconnect) {
+          on.exit(self$disconnect())
+        }
+        return(DBI::dbListFields(private$.connection,tablename))
       }
     },
 
@@ -71,7 +88,7 @@ sqlConnection <- R6::R6Class(
                           sql = sql))
     },
 
-    execute = function(query, disconnectAfter = TRUE) {
+    execute = function(query, disconnectAfter = TRUE,df=NA) {
       prc <- "execute()"
 
       if (inherits(query, "SqlCommand")) {
@@ -80,7 +97,8 @@ sqlConnection <- R6::R6Class(
                  if (self$connect()) {
                    dbi.result <- DBI::dbGetQuery(conn = private$.connection,
                                          statement = query$sql)
-                 }
+
+                   }
                },
 
                "exec" = {
@@ -88,8 +106,19 @@ sqlConnection <- R6::R6Class(
                    dbi.result <-
                      DBI::dbExecute(conn = private$.connection,
                                     statement = query$sql)
+
+                   }
+               },
+
+               "bulk" = {
+                 if (self$connect()) {
+                   DBI::dbBegin(private$.connection)
+                   #DBI::dbSendStatement(private$.connection, query$sql, df)
+                   dbi.result <- DBI::Execute(private$.connection, query$sql, df)
+                   DBI::dbCommit(private$.connection)
                  }
                },
+
                {
                  msg <-
                    paste("Commantype: <",
@@ -98,8 +127,9 @@ sqlConnection <- R6::R6Class(
                          sep = "")
                  private$.validator$throwError(msg, prc)
                })
-      } else {
-        private$.validator$throwError("Command ist vom falschen Datentyp", prc)
+
+        } else {
+          private$.validator$throwError("Command ist vom falschen Datentyp", prc)
       }
 
       if (disconnectAfter) {
@@ -107,7 +137,7 @@ sqlConnection <- R6::R6Class(
       }
 
       if (is.data.frame(dbi.result)) {
-        result<-super$sqlResult(connection =self ,data = dbi.result)
+        result<-super$interface1(connection =self , dbi.result)
       }
 
       query$print("ausgeführt")
@@ -148,10 +178,6 @@ sqlConnection <- R6::R6Class(
       } else {
         return(FALSE)
       }
-    },
-
-    getTables = function() {
-      return(dbListTables(private$.connection))
     },
 
     print = function() {

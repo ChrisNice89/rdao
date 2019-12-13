@@ -57,7 +57,11 @@ sqlInterface <- R6::R6Class(
       }
     },
 
-    sqlResult = function(connection, dataframe) {
+    interface2 = function(connection, dbi.result) {
+
+    },
+
+    interface1 = function(connection, dataframe) {
       if (!private$.validator$isTrustedConnection(connection)) {
         if (!is.data.frame(dataframe)) {
 

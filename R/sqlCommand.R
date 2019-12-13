@@ -40,7 +40,24 @@ sqlCommand <- R6::R6Class(
     .connection = NULL,
     validator=function(){
       return(private$.validator)
+    },
+
+    fetch  = function(disconnect = TRUE) {
+      self$type <- "fetch"
+      return(private$.connection$execute(self,disconnect))
+    },
+
+    execute = function(disconnect = TRUE) {
+      self$type <- "exec"
+      return(private$.connection$execute(self,disconnect))
+    },
+
+    executeBulk = function(df,disconnect=TRUE) {
+      self$type <- "bulk"
+      print(colnames(df))
+      return(private$.connection$execute(self,disconnect,df))
     }
+
   ),
 
   public = list(
@@ -68,16 +85,6 @@ sqlCommand <- R6::R6Class(
       invisible(self$print("created"))
     },
 
-    fetch  = function(disconnect = TRUE) {
-      self$type <- "fetch"
-      return(private$.connection$execute(self,disconnect))
-    },
-
-    execute = function(disconnect = TRUE) {
-      self$type <- "exec"
-      return(private$.connection$execute(self,disconnect))
-    },
-
     print = function(status="") {
       msg <- paste("<", class(self)[1], ">", sep = "")
 
@@ -95,6 +102,7 @@ sqlCommand <- R6::R6Class(
 
 # Konkrete interface Klassen
 # Ermöglicht das implementieren von "views" und "stored procedure" auf dem Frontend
+
 sqlQuery <- R6::R6Class(
   classname = "SqlCommand",
   inherit = sqlCommand,
@@ -103,8 +111,73 @@ sqlQuery <- R6::R6Class(
     initialize = function(connection, sql) {
       super$initialize(connection, sql)
       invisible(self)
+    },
+
+    fetch  = function(disconnect = TRUE) {
+      return(super$fetch(disconnect))
+    },
+
+    execute = function(disconnect = TRUE) {
+      return(super$execute(disconnect))
     }
   )
 )
 
+sqlUpdateQuery <- R6::R6Class(
+  classname = "SqlCommand",
+  inherit = sqlCommand,
+  portable = TRUE,
+  private=list(
+    .df=NA
+  ),
+  public = list(
+    initialize = function(connection, table,df) {
+
+      fields<-colnames(df)
+      params<-paste0(":",fields)
+      kvp<-paste(fields,params,sep="=")
+      # update.query <- paste0("UPDATE ",
+      #                   table,
+      #                   " SET ", paste(kvp,collapse = ","),
+      #                   " WHERE ",
+      #                   paste("ID", ":ID",sep = "="),";")
+
+      update.query <- paste0("UPDATE ",
+                        table,
+                        " SET ", paste(kvp,collapse = ","),";")
+
+      private$.df<-df
+      super$initialize(connection, update.query)
+      invisible(self)
+    },
+
+    execute = function(disconnect = TRUE) {
+      return(super$executeBulk(private$.df,disconnect))
+    }
+  )
+)
+
+# sqlInsertQuery <- R6::R6Class(
+#   classname = "SqlCommand",
+#   inherit = sqlCommand,
+#   portable = TRUE,
+#   public = list(
+#     initialize = function(connection, table,id,field,value) {
+#       # Build the INSERT/UPDATE query
+#       updatequery <- paste0("INSERT INTO ",
+#                             table,
+#                             "(", paste(col_names$Field, collapse = ", "), ") ", # column names
+#                             "VALUES",
+#                             "('", paste(values, collapse = "', '"), "') ", # new records
+#                             "ON DUPLICATE KEY UPDATE ",
+#                             paste(col_names$Field[-pri], values[-pri], sep = " = '", collapse = "', "), # everything minus primary keys
+#                             "';")
+#
+#       # Show full query for clarity
+#       cat("Performing query", i, "of", nrow(x), ":\n", myquery, "\n\n")
+#
+#
+#       super$initialize(connection, sql)
+#       invisible(self)
+#     },
 
