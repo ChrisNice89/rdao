@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576856601712.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9B395DDB",
+    "lastKnownWriteTime" : 1573419873,
+    "last_content_update" : 1573419873,
+    "path" : "~/Dev/R/rdao/R/sqlResult.R",
+    "project_path" : "R/sqlResult.R",
+    "properties" : {
+        "cursorPosition" : "4,2",
+        "scrollLine" : "33"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

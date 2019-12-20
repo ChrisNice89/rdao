@@ -49,6 +49,7 @@ sqlCommand <- R6::R6Class(
 
     execute = function(disconnect = TRUE) {
       self$type <- "exec"
+      print("hier")
       return(private$.connection$execute(self,disconnect))
     },
 

@@ -1,0 +1,93 @@
+# helper
+installer <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg))
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+packages<- c("devtools", "roxygen2","R6","rmarkdown","pryr","DBI")
+installer(packages)
+
+
+library(roxygen2)
+setwd("~/Dev/R/rdao")
+document()
+#
+# # vignettes
+# devtools::install_github("hadley/pkgdown")
+library(pkgdown)
+build_site()
+# #build vignette
+# use_vignette("Test")
+rmarkdown::render("vignettes/Test.Rmd",output_file = "Test.html",output_dir = "docs/articles")
+rdao::diamonds
+remove.packages("rdao")
+
+devtools::install_github("Chrisnice89/rdao")
+library(rdao)
+f<-connectionFactory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+cnn<-b$build()
+cnn$isConnected()
+
+qry<-cnn$createQuery(sql = "Select * FROM diamonds")
+result<-qry$execute()
+
+result<-cnn$createCommand(sql = "Select * FROM diamonds")
+cnn$isConnected()
+
+
+f<-factory()
+b<-f$msAccess(path = "/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db",dbpassword = "SesameOpen")
+b$build()
+
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+b$addCredentials(username = NULL,password = "SesameOpen")
+b$addCredentials(username = "Admin",password = "SesameOpen")
+c<-b$credentials
+c$username
+c$username<-"New name"
+
+
+f<-connectionFactory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+cnn<-b$build()
+cmd<-cnn$createQuery(sql = "Select * FROM diamonds")
+result<-cmd$fetch()
+
+
+getOption("devtools.name")
+
+# create database
+df<- as.data.frame(rdao::diamonds,row.names = NULL)
+# add autoincrement field "ID" to the front
+df <- data.frame(ID = seq.int(nrow(df)), df)
+cnn <- dbConnect(RSQLite::SQLite(),"test.db")
+dbListTables(cnn)
+dbWriteTable(cnn, "diamonds",  df)
+dbListTables(cnn)
+# Fetch all query results into a data frame:
+
+df<- dbGetQuery(cnn, 'SELECT * FROM diamonds')
+rs <- dbSendQuery(cnn, 'SELECT * FROM diamonds')
+
+while (!dbHasCompleted(rs)) {
+  df <- dbFetch(rs, n = 10)
+  print(df)
+}
+dbClearResult(rs)
+dbDisconnect(cnn)
+dbDisconnect(cnn)
+dbWriteTable(cnn, "diamonds",  df)
+dbDisconnect(cnn)
+
+
+rows<-paste(as.vector(df[,1]))
+rows
+
+
+hm<-HashMap$new("rows")
+hm$put(key = rows,value = as.vector(df[,1]))
+hm$get("1000")
+
+l

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576856598496.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "758B4CF4",
+    "lastKnownWriteTime" : 1573420100,
+    "last_content_update" : 1576857523705,
+    "path" : "~/Dev/R/rdao/R/sqlInterface.R",
+    "project_path" : "R/sqlInterface.R",
+    "properties" : {
+        "cursorPosition" : "135,0",
+        "scrollLine" : "61"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

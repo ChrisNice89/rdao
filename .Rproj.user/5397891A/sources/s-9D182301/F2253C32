@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576856582013.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4070573986",
+    "id" : "F2253C32",
+    "lastKnownWriteTime" : 1572627584,
+    "last_content_update" : 1572627584,
+    "path" : "~/Dev/R/rdao/R/package_rdao.R",
+    "project_path" : "R/package_rdao.R",
+    "properties" : {
+        "cursorPosition" : "0,7",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

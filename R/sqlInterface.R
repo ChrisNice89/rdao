@@ -67,7 +67,7 @@ sqlInterface <- R6::R6Class(
 
         }
       }
-
+      print("hier")
       obj <- generics
       fields <- colnames(dataframe)
 

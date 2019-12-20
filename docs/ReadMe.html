@@ -126,10 +126,10 @@
 <li>
 <a href="#data-access-object-dao-framework-for-r">Data Access Object (DAO) framework for R</a>
 <ul>
-<li><a href="#package-info">Package Info</a></li>
-<li><a href="#documentation">Documentation</a></li>
-<li><a href="#classes">Classes</a></li>
-<li><a href="#usage">Usage</a></li>
+<li><a href="#packet-info">Packet Info</a></li>
+<li><a href="#dokumentation">Dokumentation</a></li>
+<li><a href="#klassen">Klassen</a></li>
+<li><a href="#anwendung">Anwendung</a></li>
 </ul>
 </li>
 </ul>
@@ -137,39 +137,40 @@
 
 <p><strong>Status</strong></p>
 <p><a href="http://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP."></a> <a href="https://travis-ci.org/chrisnice89/rdao"> <img src="https://api.travis-ci.org/chrisnice89/rdao.svg?branch=master"></a><a></a> <a href="https://cran.r-project.org/package=rdao"> <img src="http://www.r-pkg.org/badges/version/rdao"></a> <a href="https://cran.r-project.org/web/checks/check_results_reshape.html"><img src="https://cranchecks.info/badges/summary/reshape" alt="cran checks"></a> <a href="https://codecov.io/gh/chrisnice89/rdao"> <img src="https://codecov.io/gh/chrisnice89/rdao/branch/master/graph/badge.svg" alt="Codecov"></a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/rdao"><img src="http://cranlogs.r-pkg.org/badges/rdao"></p>
-<p><em>lines of R code:</em> 556, <em>lines of test code:</em> 0</p>
-<div id="package-info" class="section level2">
+<p><em>Zeilen R code:</em> 929, <em>Zeilen Test code:</em> 0</p>
+<div id="packet-info" class="section level2">
 <h2 class="hasAnchor">
-<a href="#package-info" class="anchor"></a>Package Info</h2>
+<a href="#packet-info" class="anchor"></a>Packet Info</h2>
 <p><strong>Version</strong></p>
-<p>0.1.0 ( 2019-11-04 05:42:01 )</p>
-<p><strong>Description</strong></p>
-<p>A object-oriented (R6 classes) framework around database actions that provides classes for simple CRUD actions (methods around SQL verbs) … and many more. A data access object (DAO) is an object that provides an abstract interface to some type of database or other persistence mechanism. By mapping application calls to the persistence layer, the DAO provides some specific data operations without exposing details of the database.</p>
-<p><strong>License</strong></p>
+<p>0.1.0 ( 2019-11-10 14:45:06 )</p>
+<p><strong>Beschreibung</strong></p>
+<p>Data Access Object (DAO, englisch fuer Datenzugriffsobjekt) ist ein Entwurfsmuster, das den Zugriff auf unterschiedliche Arten von Datenquellen (z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. Ziel des OOP-Paradigmas soll eine verbesserte Wartbarkeit und Wiederverwendbarkeit des statischen Quellcodes sein.</p>
+<p><strong>Lizenz</strong></p>
 <p>All rights reserved by the respective owner <br>Christoph Nitz</p>
 <p><strong>Installation</strong></p>
-<p>Latest development version from Github:</p>
+<p>Aktuelle Entwicklerversion auf Github:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"chrisnice89/rdao"</span>)</a></code></pre></div>
 <hr>
 </div>
-<div id="documentation" class="section level2">
+<div id="dokumentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>See the <a href="docs/articles/Framework.html">Framework</a> article for usage examples.</p>
+<a href="#dokumentation" class="anchor"></a>Dokumentation</h2>
+<p>Für weiterführende Informationen und konkrete Anwendungen: <a href="file:///rdao/vignettes/Framework.html">Framework</a></p>
 </div>
-<div id="classes" class="section level2">
+<div id="klassen" class="section level2">
 <h2 class="hasAnchor">
-<a href="#classes" class="anchor"></a>Classes</h2>
-<p><strong>SqlFactory</strong> : Factory.</p>
-<p><strong>SqlCommand</strong> : A representation of a database within R. The object allows to get information about the database and objects stored in it (tables and such), to retrieve objects from it, and to manipulate it via queries and convenience methods.</p>
-<p><strong>SqlConnection</strong> : The heart and work horse of all Sql objects and responsible for the actual information flow between R and the database with methods for connect, disconnect, reconnect, querying, and manipulating the database.</p>
-<p><strong>SqlTable</strong> : A representation of a database table with particular methods to interact with tables - create, delete, append, copy, retrieve, filter, peak, and update.</p>
+<a href="#klassen" class="anchor"></a>Klassen</h2>
+<p><strong>SqlConnection</strong> : Steuert Verbindung und ist Basis des SqlCommands</p>
+<p><strong>SqlCommand</strong> : Interface für CRUD Operationen</p>
+<p><strong>SqlResult</strong> : Ergebnis einer Abfrage</p>
+<p><strong>IDiamonds</strong> : Interface zur Geschäftslogik (exemplarisch)</p>
+<p><strong>Diamond</strong> : Business entity (exemplarisch)</p>
 <hr>
 </div>
-<div id="usage" class="section level2">
+<div id="anwendung" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p><strong>loading packages</strong></p>
+<a href="#anwendung" class="anchor"></a>Anwendung</h2>
+<p><strong>Laden benötigter Pakete</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># packages</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(RSQLite)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(R6)</a>
@@ -177,52 +178,189 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">## This package ist created,developed and copyrighted by Christoph Nitz.</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">## Interested parties may contact &lt;Christoph.Nitz89@gmail.com&gt;</span></a></code></pre></div>
-<div id="creating-new-connection-object" class="section level3">
+<div id="erstellen-einer-neuen-verbindung" class="section level3">
 <h3 class="hasAnchor">
-<a href="#creating-new-connection-object" class="anchor"></a>Creating New Connection Object</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># creating factory</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">f&lt;-<span class="kw">factory</span>()</a>
+<a href="#erstellen-einer-neuen-verbindung" class="anchor"></a>Erstellen einer neuen Verbindung</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># erstellen einer factory</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">f&lt;-<span class="kw"><a href="reference/connectionFactory.html">connectionFactory</a></span>()</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlFactory&gt; created</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">## &lt;SqlFactory&gt; created</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">b&lt;-f<span class="op">$</span><span class="kw">dbFile</span>(<span class="st">"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">## &lt;Validator&gt; for parent class: &lt;Builder&gt; created</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">## &lt;Builder&gt;&gt; for provider: &lt;dbFile&gt; created</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co"># some optional arguments for db access if required</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">b<span class="op">$</span><span class="kw">addCredentials</span>(<span class="dt">username =</span> <span class="st">"Admin"</span>,<span class="dt">password =</span> <span class="st">"SesameOpen"</span>)</a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">## &lt;Validator&gt; for parent class: &lt;Credentials&gt; created</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">## &lt;Credentials&gt; for User: &lt;Admin&gt; created</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co"># create connection and get interface</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19">cnn&lt;-b<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/utils/PkgUtils.html">build</a></span>()</a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlConnection&gt; created</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">## &lt;SqlConnection&gt;&gt; for provider: &lt;dbFile&gt; created</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24">qry&lt;-cnn<span class="op">$</span><span class="kw">createQuery</span>(<span class="dt">sql =</span> <span class="st">"Select * FROM diamonds"</span>)</a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlCommand&gt; created</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlCommand&gt; created</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">## &lt;SqlCommand&gt; :: &lt;Select * FROM diamonds&gt;</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">## for provider: &lt;dbFile&gt; created</span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31">result&lt;-qry<span class="op">$</span><span class="kw">execute</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># Auswahl der Datenquelle und erforderliche Arguemnte übergeben</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">b&lt;-f<span class="op">$</span><span class="kw">dbFile</span>(<span class="st">"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">## &lt;Validator&gt; for parent class: &lt;Builder&gt; created</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">## &lt;Builder&gt; for provider: &lt;dbFile&gt; created</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co"># Optionale Verbindungsparameter einstellen</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">b<span class="op">$</span><span class="kw">addCredentials</span>(<span class="dt">username =</span> <span class="st">"Admin"</span>,<span class="dt">password =</span> <span class="st">"SesameOpen"</span>)</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">## &lt;Validator&gt; for parent class: &lt;Credentials&gt; created</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">## &lt;Credentials&gt; for User: &lt;Admin&gt; created</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co"># Verbindung erstellen</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">cnn&lt;-b<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/utils/PkgUtils.html">build</a></span>()</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlConnection&gt; created</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">## &lt;SqlConnection&gt;&gt; for provider: &lt;dbFile&gt; created</span></a></code></pre></div>
 </div>
-<div id="get-connection-infos" class="section level3">
+<div id="generics" class="section level3">
 <h3 class="hasAnchor">
-<a href="#get-connection-infos" class="anchor"></a>Get Connection Infos</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># connection infos</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># some code</span></a></code></pre></div>
-</div>
-<div id="creating-new-command-object" class="section level3">
-<h3 class="hasAnchor">
-<a href="#creating-new-command-object" class="anchor"></a>Creating New Command Object</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># create command</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># some code</span></a></code></pre></div>
+<a href="#generics" class="anchor"></a>Generics</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Abfrage erstellen</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rdao)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">f&lt;-<span class="kw"><a href="reference/connectionFactory.html">connectionFactory</a></span>()</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlFactory&gt; created</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">## &lt;SqlFactory&gt; created</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">b&lt;-f<span class="op">$</span><span class="kw">dbFile</span>(<span class="st">"/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db"</span>)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">## &lt;Validator&gt; for parent class: &lt;Builder&gt; created</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">## &lt;Builder&gt; for provider: &lt;dbFile&gt; created</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">cnn&lt;-b<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/utils/PkgUtils.html">build</a></span>()</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlConnection&gt; created</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">## &lt;SqlConnection&gt;&gt; for provider: &lt;dbFile&gt; created</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">result&lt;-cnn<span class="op">$</span><span class="kw">createQuery</span>(<span class="dt">sql =</span> <span class="st">"Select carat,color FROM diamonds LIMIT 10"</span>)<span class="op">$</span><span class="kw">fetch</span>()</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlCommand&gt; created</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">## &lt;SqlCommand&gt; :: &lt;Select carat,color FROM diamonds LIMIT 10&gt;</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">## for provider: &lt;dbFile&gt; created </span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlResult&gt; created</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">## &lt;SqlCommand&gt; :: &lt;Select carat,color FROM diamonds LIMIT 10&gt;</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">## for provider: &lt;dbFile&gt; ausgeführt</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">## &lt;SqlConnection&gt;&gt; for provider: &lt;dbFile&gt; Disconnect</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">result<span class="op">$</span><span class="kw">countRows</span>()</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">## [1] 10</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33">m&lt;-result<span class="op">$</span><span class="kw">toMatrix</span>()</a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="kw">m</span>(<span class="dt">i =</span> <span class="dv">1</span>,<span class="dt">j=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">## [1] 0.23</span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="kw">m</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">## data frame with 0 columns and 1 row</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="kw">m</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">##   carat color</span></a>
+<a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">## 1  0.23     E</span></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47">result<span class="op">$</span><span class="kw">setCarat</span>(<span class="fl">0.66</span>)</a>
+<a class="sourceLine" id="cb4-48" data-line-number="48">result<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/row.html">row</a></span>(<span class="dv">1</span>)<span class="op">$</span><span class="kw">setCarat</span>(<span class="fl">0.99</span>)</a>
+<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="kw">m</span>(,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-50" data-line-number="50"></a>
+<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">## [1] carat color</span></a>
+<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">## &lt;0 rows&gt; (or 0-length row.names)</span></a>
+<a class="sourceLine" id="cb4-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(result)</a>
+<a class="sourceLine" id="cb4-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">## &lt;SqlResult&gt;</span></a>
+<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">##   Inherits from: &lt;Generics&gt;</span></a>
+<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">##   Public:</span></a>
+<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">##     add: function () </span></a>
+<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">##     clone: function (deep = FALSE) </span></a>
+<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">##     countColumns: function () </span></a>
+<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">##     countRows: function () </span></a>
+<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">##     delete: function (rows) </span></a>
+<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">##     getCarat: function () </span></a>
+<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">##     getColor: function () </span></a>
+<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">##     getRecords: function () </span></a>
+<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">##     initialize: function (connection, data) </span></a>
+<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">##     read: function () </span></a>
+<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">##     row: function (i) </span></a>
+<a class="sourceLine" id="cb4-70" data-line-number="70"><span class="co">##     setCarat: function (value) </span></a>
+<a class="sourceLine" id="cb4-71" data-line-number="71"><span class="co">##     setColor: function (value) </span></a>
+<a class="sourceLine" id="cb4-72" data-line-number="72"><span class="co">##     toMatrix: function () </span></a>
+<a class="sourceLine" id="cb4-73" data-line-number="73"><span class="co">##     update: function () </span></a>
+<a class="sourceLine" id="cb4-74" data-line-number="74"><span class="co">##   Private:</span></a>
+<a class="sourceLine" id="cb4-75" data-line-number="75"><span class="co">##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6</span></a>
+<a class="sourceLine" id="cb4-76" data-line-number="76"><span class="co">##     .eod: FALSE</span></a>
+<a class="sourceLine" id="cb4-77" data-line-number="77"><span class="co">##     .shared: environment</span></a>
+<a class="sourceLine" id="cb4-78" data-line-number="78"><span class="co">##     .validator: Validator, R6</span></a>
+<a class="sourceLine" id="cb4-79" data-line-number="79"><span class="co">##     e: environment</span></a>
+<a class="sourceLine" id="cb4-80" data-line-number="80"><span class="co">##     getPointer: function () </span></a>
+<a class="sourceLine" id="cb4-81" data-line-number="81"><span class="co">##     matrixAccess: function (i = NA, j = NA)</span></a>
+<a class="sourceLine" id="cb4-82" data-line-number="82"></a>
+<a class="sourceLine" id="cb4-83" data-line-number="83">result2&lt;-cnn<span class="op">$</span><span class="kw">createQuery</span>(<span class="dt">sql =</span> <span class="st">"Select cut, price, depth FROM diamonds LIMIT 10"</span>)<span class="op">$</span><span class="kw">fetch</span>()</a>
+<a class="sourceLine" id="cb4-84" data-line-number="84"></a>
+<a class="sourceLine" id="cb4-85" data-line-number="85"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlCommand&gt; created</span></a>
+<a class="sourceLine" id="cb4-86" data-line-number="86"><span class="co">## &lt;SqlCommand&gt; :: &lt;Select cut, price, depth FROM diamonds LIMIT 10&gt;</span></a>
+<a class="sourceLine" id="cb4-87" data-line-number="87"><span class="co">## for provider: &lt;dbFile&gt; created </span></a>
+<a class="sourceLine" id="cb4-88" data-line-number="88"><span class="co">## &lt;Validator&gt; for parent class: &lt;SqlResult&gt; created</span></a>
+<a class="sourceLine" id="cb4-89" data-line-number="89"><span class="co">## &lt;SqlCommand&gt; :: &lt;Select cut, price, depth FROM diamonds LIMIT 10&gt;</span></a>
+<a class="sourceLine" id="cb4-90" data-line-number="90"><span class="co">## for provider: &lt;dbFile&gt; ausgeführt</span></a>
+<a class="sourceLine" id="cb4-91" data-line-number="91"></a>
+<a class="sourceLine" id="cb4-92" data-line-number="92"><span class="co">## &lt;SqlConnection&gt;&gt; for provider: &lt;dbFile&gt; Disconnect</span></a>
+<a class="sourceLine" id="cb4-93" data-line-number="93"></a>
+<a class="sourceLine" id="cb4-94" data-line-number="94"><span class="co"># Generic</span></a>
+<a class="sourceLine" id="cb4-95" data-line-number="95"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(result)</a>
+<a class="sourceLine" id="cb4-96" data-line-number="96"></a>
+<a class="sourceLine" id="cb4-97" data-line-number="97"><span class="co">## &lt;SqlResult&gt;</span></a>
+<a class="sourceLine" id="cb4-98" data-line-number="98"><span class="co">##   Inherits from: &lt;Generics&gt;</span></a>
+<a class="sourceLine" id="cb4-99" data-line-number="99"><span class="co">##   Public:</span></a>
+<a class="sourceLine" id="cb4-100" data-line-number="100"><span class="co">##     add: function () </span></a>
+<a class="sourceLine" id="cb4-101" data-line-number="101"><span class="co">##     clone: function (deep = FALSE) </span></a>
+<a class="sourceLine" id="cb4-102" data-line-number="102"><span class="co">##     countColumns: function () </span></a>
+<a class="sourceLine" id="cb4-103" data-line-number="103"><span class="co">##     countRows: function () </span></a>
+<a class="sourceLine" id="cb4-104" data-line-number="104"><span class="co">##     delete: function (rows) </span></a>
+<a class="sourceLine" id="cb4-105" data-line-number="105"><span class="co">##     getCarat: function () </span></a>
+<a class="sourceLine" id="cb4-106" data-line-number="106"><span class="co">##     getColor: function () </span></a>
+<a class="sourceLine" id="cb4-107" data-line-number="107"><span class="co">##     getRecords: function () </span></a>
+<a class="sourceLine" id="cb4-108" data-line-number="108"><span class="co">##     initialize: function (connection, data) </span></a>
+<a class="sourceLine" id="cb4-109" data-line-number="109"><span class="co">##     read: function () </span></a>
+<a class="sourceLine" id="cb4-110" data-line-number="110"><span class="co">##     row: function (i) </span></a>
+<a class="sourceLine" id="cb4-111" data-line-number="111"><span class="co">##     setCarat: function (value) </span></a>
+<a class="sourceLine" id="cb4-112" data-line-number="112"><span class="co">##     setColor: function (value) </span></a>
+<a class="sourceLine" id="cb4-113" data-line-number="113"><span class="co">##     toMatrix: function () </span></a>
+<a class="sourceLine" id="cb4-114" data-line-number="114"><span class="co">##     update: function () </span></a>
+<a class="sourceLine" id="cb4-115" data-line-number="115"><span class="co">##   Private:</span></a>
+<a class="sourceLine" id="cb4-116" data-line-number="116"><span class="co">##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6</span></a>
+<a class="sourceLine" id="cb4-117" data-line-number="117"><span class="co">##     .eod: FALSE</span></a>
+<a class="sourceLine" id="cb4-118" data-line-number="118"><span class="co">##     .shared: environment</span></a>
+<a class="sourceLine" id="cb4-119" data-line-number="119"><span class="co">##     .validator: Validator, R6</span></a>
+<a class="sourceLine" id="cb4-120" data-line-number="120"><span class="co">##     e: environment</span></a>
+<a class="sourceLine" id="cb4-121" data-line-number="121"><span class="co">##     getPointer: function () </span></a>
+<a class="sourceLine" id="cb4-122" data-line-number="122"><span class="co">##     matrixAccess: function (i = NA, j = NA)</span></a>
+<a class="sourceLine" id="cb4-123" data-line-number="123"></a>
+<a class="sourceLine" id="cb4-124" data-line-number="124"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(result2)</a>
+<a class="sourceLine" id="cb4-125" data-line-number="125"></a>
+<a class="sourceLine" id="cb4-126" data-line-number="126"><span class="co">## &lt;SqlResult&gt;</span></a>
+<a class="sourceLine" id="cb4-127" data-line-number="127"><span class="co">##   Inherits from: &lt;Generics&gt;</span></a>
+<a class="sourceLine" id="cb4-128" data-line-number="128"><span class="co">##   Public:</span></a>
+<a class="sourceLine" id="cb4-129" data-line-number="129"><span class="co">##     add: function () </span></a>
+<a class="sourceLine" id="cb4-130" data-line-number="130"><span class="co">##     clone: function (deep = FALSE) </span></a>
+<a class="sourceLine" id="cb4-131" data-line-number="131"><span class="co">##     countColumns: function () </span></a>
+<a class="sourceLine" id="cb4-132" data-line-number="132"><span class="co">##     countRows: function () </span></a>
+<a class="sourceLine" id="cb4-133" data-line-number="133"><span class="co">##     delete: function (rows) </span></a>
+<a class="sourceLine" id="cb4-134" data-line-number="134"><span class="co">##     getCut: function () </span></a>
+<a class="sourceLine" id="cb4-135" data-line-number="135"><span class="co">##     getDepth: function () </span></a>
+<a class="sourceLine" id="cb4-136" data-line-number="136"><span class="co">##     getPrice: function () </span></a>
+<a class="sourceLine" id="cb4-137" data-line-number="137"><span class="co">##     getRecords: function () </span></a>
+<a class="sourceLine" id="cb4-138" data-line-number="138"><span class="co">##     initialize: function (connection, data) </span></a>
+<a class="sourceLine" id="cb4-139" data-line-number="139"><span class="co">##     read: function () </span></a>
+<a class="sourceLine" id="cb4-140" data-line-number="140"><span class="co">##     row: function (i) </span></a>
+<a class="sourceLine" id="cb4-141" data-line-number="141"><span class="co">##     setCut: function (value) </span></a>
+<a class="sourceLine" id="cb4-142" data-line-number="142"><span class="co">##     setDepth: function (value) </span></a>
+<a class="sourceLine" id="cb4-143" data-line-number="143"><span class="co">##     setPrice: function (value) </span></a>
+<a class="sourceLine" id="cb4-144" data-line-number="144"><span class="co">##     toMatrix: function () </span></a>
+<a class="sourceLine" id="cb4-145" data-line-number="145"><span class="co">##     update: function () </span></a>
+<a class="sourceLine" id="cb4-146" data-line-number="146"><span class="co">##   Private:</span></a>
+<a class="sourceLine" id="cb4-147" data-line-number="147"><span class="co">##     .connection: SqlConnection, Abstrakt SqlConnection, Abstarkt SqlResult Interface, R6</span></a>
+<a class="sourceLine" id="cb4-148" data-line-number="148"><span class="co">##     .eod: FALSE</span></a>
+<a class="sourceLine" id="cb4-149" data-line-number="149"><span class="co">##     .shared: environment</span></a>
+<a class="sourceLine" id="cb4-150" data-line-number="150"><span class="co">##     .validator: Validator, R6</span></a>
+<a class="sourceLine" id="cb4-151" data-line-number="151"><span class="co">##     e: environment</span></a>
+<a class="sourceLine" id="cb4-152" data-line-number="152"><span class="co">##     getPointer: function () </span></a>
+<a class="sourceLine" id="cb4-153" data-line-number="153"><span class="co">##     matrixAccess: function (i = NA, j = NA)</span></a></code></pre></div>
 </div>
 </div>
 </div>

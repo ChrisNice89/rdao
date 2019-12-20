@@ -1,0 +1,10 @@
+#library(rdao)
+f<-connectionFactory()
+b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/Diamonds.db")
+cnn<-b$build()
+cnn$isConnected()
+
+
+qry<-cnn$createQuery(sql = "Select * FROM diamonds")
+result<-qry$execute()
+

@@ -95,9 +95,7 @@ sqlConnection <- R6::R6Class(
         switch(query$type,
                "fetch" = {
                  if (self$connect()) {
-                   dbi.result <- DBI::dbGetQuery(conn = private$.connection,
-                                         statement = query$sql)
-
+                   dbi.result <- DBI::dbGetQuery(conn = private$.connection,statement = query$sql)
                    }
                },
 
@@ -114,7 +112,8 @@ sqlConnection <- R6::R6Class(
                  if (self$connect()) {
                    DBI::dbBegin(private$.connection)
                    #DBI::dbSendStatement(private$.connection, query$sql, df)
-                   dbi.result <- DBI::Execute(private$.connection, query$sql, df)
+                   #dbi.result <- DBI::Execute(private$.connection, query$sql, df)
+                   dbi.result <- DBI::dbSendStatement(private$.connection, query$sql, df)
                    DBI::dbCommit(private$.connection)
                  }
                },

@@ -1,0 +1,59 @@
+library(R6)
+aClass <- R6Class(
+  classname = "aClass",
+  inherit = NULL,
+  portable = TRUE,
+
+  private = list(.x = function(x) print("aClass")),
+
+  public = list(
+    name = NULL,
+    number=NULL,
+    somemore=NULL,
+    initialize = function(x) {
+
+      invisible(self)
+    }
+  )
+)
+
+bClass <- R6Class(
+  classname = "bClass",
+  inherit = aClass,
+  portable = TRUE,
+
+  private = list(
+    .x = function(x) {
+      print("bClass")}),
+
+  public = list(
+    name = NULL,
+
+    initialize = function(x) {
+      print(x)
+      invisible(self)
+    }
+  )
+)
+cClass <- R6Class(
+  classname = "cClass",
+  inherit = bClass,
+  portable = TRUE,
+  private = list(.x = NULL),
+  public = list(
+    initialize = function(x) {
+
+      print(class(get(".x",envir=super)))
+      ls(parent.env(self))
+      invisible(self)
+    }
+  )
+)
+
+a <- aClass$new("aname")
+b <- bClass$new("bname")
+
+
+c<- cClass$new("cname")
+
+
