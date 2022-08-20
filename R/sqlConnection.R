@@ -215,10 +215,9 @@ msAccess.Connection <- R6::R6Class(
     path="",
     initialize = function(driverGenerator,
                           connectionstring, path) {
-
-      super$initialize(driverGenerator, connectionstring,provider = self)
-      self$<-path
+      super$initialize(driverGenerator, path,provider = self)
       invisible(self)
     }
   )
 )
+
