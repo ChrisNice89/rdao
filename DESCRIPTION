@@ -29,6 +29,7 @@ Encoding: UTF-8
 LazyData: true
 Collate: 
     'HashMap.R'
+    'Test Skript final.R'
     'utils.R'
     'sqlInterface.R'
     'sqlResult.R'

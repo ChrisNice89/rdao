@@ -75,11 +75,9 @@ sqlConnection <- R6::R6Class(
     provider = "",
 
     initialize = function(..., provider) {
-      private$.validator <- Validator$new(self)
+      private$.validator <- Validator$new(provider)
       private$.credentials$params <- list(...)
       self$provider <- provider
-      private$.validator$makeReadonly("provider")
-
       invisible(self$print())
     },
 
@@ -197,27 +195,29 @@ sqlConnection <- R6::R6Class(
 # Konstruktoren bieten schwache Typsicherheit für die aufrufende Klasse.
 # Ermöglichen das bauen von Verbindungen (DBI) die heterogene Parameter (je nach Datenprovider) benötigen
 
-dbFileConnection <- R6::R6Class(
+dbFile.Connection <- R6::R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(driverGenerator, path, provider = provider) {
-      super$initialize(driverGenerator, path, provider = provider)
+    initialize = function(driverGenerator, path) {
+      super$initialize(driverGenerator, path,provider = self)
       invisible(self)
     }
   )
 )
 
-msAccessFileConnection <- R6::R6Class(
+msAccess.Connection <- R6::R6Class(
   classname = "SqlConnection",
   inherit = sqlConnection,
   portable = TRUE,
   public = list(
-    initialize = function(provider = provider,
-                          driverGenerator,
-                          connectionstring) {
-      super$initialize(driverGenerator, connectionstring, provider = provider)
+    path="",
+    initialize = function(driverGenerator,
+                          connectionstring, path) {
+
+      super$initialize(driverGenerator, connectionstring,provider = self)
+      self$<-path
       invisible(self)
     }
   )

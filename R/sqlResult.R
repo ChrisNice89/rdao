@@ -91,7 +91,6 @@ sqlResult<- R6::R6Class(
     },
 
     toMatrix=function(){
-
       functor <- function(obj) {
           structure(
             function(i=NA,j=NA) {

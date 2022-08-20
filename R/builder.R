@@ -31,36 +31,41 @@
 #' @include credentials.R
 #' @include sqlConnection.R
 
-Builder <- R6::R6Class(
-  classname = "Builder",
+Connection.Builder <- R6::R6Class(
+  classname = "ConnectionBuilder",
   inherit = NULL,
   portable = TRUE,
   # parent_env   = asNamespace("rdao"),
   cloneable    = FALSE,
-  private = list(.validator = NULL,
-                 .dbpassword = ""),
+
+  private = list(
+    .validator = NULL,
+    .factory=NULL
+    ),
 
   public = list(
-    builderProvider = "",
-    driver = "",
-    path = "",
-    dsn = "",
-    database = "",
-    server = "",
-    host = "",
-    port = 0,
     credentials = NULL,
 
-    initialize = function(provider) {
-      private$.validator <- Validator$new(self)
+    initialize = function(factory) {
+      private$.validator <- Validator$new(factory)
+      private$.factory <- factory
 
-      self$builderProvider <- provider
-      private$.validator$makeReadonly("builderProvider")
+      switch(
+        class(private$.factory)[1],
+             dbFile = {
+               private$.factory$driver <-  RSQLite::SQLite
+             },
+
+             msAccess={
+               private$.factory$driver <-  odbc::odbc
+             }
+      )
+
+      private$.validator$makeReadonly("driver")
       invisible(self$print())
     },
 
-    addCredentials = function(username = "",
-                              password = "") {
+    addCredentials = function(username = "",password = "") {
       private$.validator$makeReadwrite("credentials")
       self$credentials <-Credentials$new(username = username, password = password)
       private$.validator$makeReadonly("credentials")
@@ -70,6 +75,17 @@ Builder <- R6::R6Class(
     #actual implementation
     build = function() {
       prc <- "build()"
+
+      switch(class(private$.factory)[1],
+             dbFile = {
+               return (dbFileConnection$new(private$.factory$driver,private$.factory$path))
+             },
+
+             msAccess={
+
+             }
+
+      )
 
       if (!private$.validator$isNullString(self$path)) {
         if (!file.exists(self$path)) {
@@ -115,6 +131,44 @@ Builder <- R6::R6Class(
           private$.validator$throwError(msg, prc)
         }
       )
+    }
+  ),
+
+  print = function() {
+    msg <- paste("<", class(self)[1], ">", sep = "")
+
+    # if (private$.validator$isCharacter(self$builderProvider) ) {
+    #   msg <-paste(msg, " for provider: <", self$builderProvider, ">", sep = "")
+    # }
+
+    cat(msg, " created", "\n", sep = "")
+    invisible(self)
+  }
+)
+
+dBFile <- R6::R6Class(
+  classname = "ConnectionBuilder",
+  inherit = Connection.Builder,
+  portable = TRUE,
+  # parent_env   = asNamespace("rdao"),
+  cloneable    = FALSE,
+  private = list(.validator = NULL,
+                 .dbpassword = ""),
+
+  public = list(
+    driver = "",
+    path = "",
+    dsn = "",
+    database = "",
+    server = "",
+    host = "",
+    port = 0,
+    credentials = NULL,
+
+    initialize = function(path) {
+      super$initialize(self)
+      self$path<-path
+      invisible(self)
     },
 
     print = function() {
@@ -130,4 +184,3 @@ Builder <- R6::R6Class(
     }
   )
 )
-
