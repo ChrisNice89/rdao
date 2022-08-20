@@ -1,4 +1,4 @@
-#library(rdao)
+library(rdao)
 f<-connectionFactory()
 b<-f$dbFile("/Users/cnitz/Dev/R/rdao/db files external/test.db")
 cnn<-b$build()
